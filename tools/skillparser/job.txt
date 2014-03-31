@@ -1,0 +1,407 @@
+Adobe Creative Suite 
+HTML
+CSS
+C++
+Python
+Geometry algorithms
+C++
+Frameworks such as Qt or boost
+
+PHP
+Python + Django
+and or Ruby on Rails
+Ruby on Rails
+TDD
+SQL
+Lucene
+ElasticSearch
+Nginx
+Unicorn
+Amazon AWS
+Chef
+Git
+Linux
+Scala
+Akka
+Couch
+My SQL
+Java
+Algorithms
+Data Structures
+At least one: Scala, Java, C, C++, C#
+SQL
+Ruby on Rails
+Go!
+Backbone
+jQuery
+PostgreSQL
+Redis
+Rspec/Capybara
+Javascript
+NodeJS
+Single page web app design/frameworks
+Asynchronous APIs
+HTML/CSS
+
+Ruby on Rails
+JSON
+Basics of scalable cloud systems: Linux, security, Amazon EC2, HTTP and RESTful Web services
+Java and APIs
+Information retrieval and search engine
+RESTful JSON
+PHP
+CSS
+jQuery
+JavaScript
+HTML
+MySQL
+Adobe Creative Suite
+Javascript
+Bash Scripting
+Java
+Web development
+SQL
+HTML5
+CSS3
+Javascript
+jQuery
+Backbone.js
+Angular.js
+RESTful web services using JEE/Java/Spring
+JBoss
+AWS
+MySQL
+JSON
+XML
+Portfolio of success coding beautiful products
+Understanding of engineering and fundamental design principles
+NoSQL
+PostgreSQL
+Python
+GIT
+Linux
+SQL
+HTML
+JavaScript
+CSS
+Portfolio
+SQL
+Unix/Linux
+Ruby
+Python
+Ruby on Rails
+Django
+JavaScript
+CSS
+HTML
+CSS
+jQuery
+JavaScript
+SEO
+HTML5
+CSS3
+Javascript
+Fireworks/Photoshop
+Python
+Django
+Erlang
+Clojure
+Solr
+RabbitMQ
+MySQL
+Redis
+ejabberd
+BOSH/XMPP
+Frontend
+Backend
+iOS
+Android
+JavaScript
+jQuery
+jQueryUI
+ExtJS
+Mustache
+D3
+CSS
+HMTL5
+RESTful web
+C++
+Java
+Ojbective-C
+SQL
+NoSQL
+HTTP
+Ruby on Rails
+Backbone
+Elasticsearch
+Ruby on Rails
+MySQL
+Mongo
+Couch
+jQuery
+CoffeeScript
+Amazon Web Services
+RackSpace
+Ruby
+Javascript
+Sass
+Git
+Github
+Heroku
+Trello
+Ruby
+Ruby on Rails
+HTML/CSS
+JavaScript
+SQL
+UI/UX
+HTML/CSS
+HTML5
+CSS3
+Javascript
+jQuery
+Java
+MySQL
+Ruby
+JavaScript
+Java
+iOS SDK
+Machine Learning logic
+Node.js
+Cassandra
+Hadoop
+HTML5
+jQuery
+Ruby
+Ruby on Rails
+OO
+jUnit
+TestNG
+Selenium
+HTTP
+REST
+SOAP
+JBoss
+Unix/Linux
+AWS
+Ruby/Java
+
+JavaScript
+jQuery
+AJAX
+PHP
+MySQL
+CSS
+Objective-C
+JavaScript
+HTML
+CSS
+Ruby on Rails
+C++
+Java
+Perl
+Python
+MySQL
+LAMP
+HTML
+JavaScript
+CSS
+Java
+HTML
+CSS
+JavaScript
+RESTful APIs
+MySQL
+iOS SDK
+Objective-C
+C/C++
+HTML
+CSS
+JavaScript
+JavaScript
+Angular/Backbone/Ember
+HTML5
+CSS3
+GIT
+CSS
+HTML
+Python
+HTML
+CSS
+Javascript
+HTTP
+REST
+Adobe Illustrator/Fireworks
+CSS
+HTML
+Node
+JavaScript
+Lua
+PCB design
+Circuits
+HTML
+CSS
+JavaScript
+SQL
+HTML5
+JavaScript
+CSS3
+PHP
+MySQL
+WebGL
+Node.js
+Ubuntu
+OSX
+C++
+Boost
+Qt
+OpenGL
+Portfolio
+HTML5
+CSS3
+SCSS
+JavaScript
+REST API
+HTML5
+CSS3
+JavaScript
+PostGIS
+Resque
+Ruby
+Objective-C
+
+
+
+
+HTML
+CSS
+Python
+Javascript
+HTML
+jQuery
+MongoDB
+Backbone.js
+Tornado
+Flask
+SCSS/Sass
+Objective C
+Java
+Mobile
+Android
+iOS
+Javascript
+MySQL
+Node.js
+Ruby
+Amazon EC2
+Coffeescript
+Redis
+Memcached
+Chef
+DynamoDB
+Ruby on Rails
+Objective C
+Javascript
+Ruby
+iOS 
+AWS
+Angular.JS
+Ruby on Rails
+
+PHP
+Javascript
+iOS Development
+PHP
+Javascript
+MySQL
+Node.js
+Databases
+Redis
+AWS
+Beanstalkd
+UI/UX Designer
+HTML
+CSS
+Photoshop
+Javascript
+HTML
+CSS
+Backbone.js
+Angular.js
+Responsive Web Design
+Algorithms
+Functional Programming
+Data Structures
+Javascript
+Web Development
+iOS Development
+HTML5
+CSS3
+Javascript
+HTML
+CSS
+jQuery
+Angular.js
+Python
+Erlang
+MySQL
+MongoDB
+Linux
+Unix
+User Experience Design
+iOS Dev
+HTML5
+CSS3
+Ruby on Rails
+UI/UX Designer
+HTML
+CSS
+Photoshop
+Javascript
+jQuery
+Ruby on Rails
+Javascript
+HTML
+CSS
+HTML
+CSS
+HTML
+CSS
+jQuery
+MongoDB
+Node.js
+Ruby on Rails
+Python
+Django
+Ruby
+Ruby on Rails
+ElasticSearch
+Python
+C++
+Java
+Javascript
+Hadoop
+MySQL
+MongoDB
+Node.js
+Mahout
+Adobe Creative Suite
+Adobe Photoshop
+Adobe Illustrator
+Balsamiq
+Objective-C
+Xcode
+Python
+Javascript
+HTML
+CSS
+Coffeescript
+Backbone.js
+HTML5 & CSS3
+Javascript
+HTML
+CSS
+Angular.js
+Objective C
+Cocoa
+Ruby on Rails

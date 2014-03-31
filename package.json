@@ -1,0 +1,27 @@
+{
+  "name": "simplecareers-backend",
+  "private": true,
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "coffee-script": "~1.7.1",
+    "mongoose": "~3.8.8",
+    "mongoose-cachebox": "~1.2.0",
+    "express": "~3.5.1",
+    "baucis": "~0.16.16",
+    "lingo": "0.0.5",
+    "cors": "~2.2.0",
+    "passport": "~0.2.0",
+    "passport-local": "~1.0.0",
+    "mandrill-api": "~1.0.39",
+    "newrelic": "~1.4.0",
+    "bcrypt": "~0.7.7",
+    "passport-local-mongoose": "~0.3.0"
+  }
+}
