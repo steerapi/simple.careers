@@ -9,8 +9,7 @@ options =
   cache: true # start caching
   ttl: 30 # 30 seconds
 
-  
-  
+
 mongooseCachebox mongoose, options
 mongoose.connect config.mongo
 
@@ -22,6 +21,7 @@ db.once "open", ->
   console.log arguments...
 
 baucis = require "baucis"
+swagger = require('baucis-swagger')
 express = require "express"
 Schema = require "./schema"
 en = require('lingo').en
@@ -38,22 +38,24 @@ Askus = Models["Askus"]
 Schema.list.forEach (item)->
   # TODO *IMPORTANT* add ensureAuth to add auth barrier
   baucis.rest(item.toLowerCase()).request (request, response, next) ->
-    return next()
+    ensureAuth(request, response, next)
+    # return next()
 
 # Create the app and listen for API requests
 app = express()
 app.use(express.static(__dirname + '/../frontend/dist'));
+app.use("/pages",express.static(__dirname + '/../frontend/pages'));
 cors = require 'cors'
 app.use cors()
 app.use (req, res, next)->
   res.header('Access-Control-Allow-Credentials', true)
   next()
 
+app.use(express.logger());
 app.use(express.cookieParser());
 app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(express.session({ secret: 'joyce1331' }));
-
 
 passport = require 'passport'
 # Init passport
@@ -66,7 +68,6 @@ passport.use(User.createStrategy());
 passport.serializeUser User.serializeUser()
 passport.deserializeUser User.deserializeUser()
 
-
 docs_handler = express.static(__dirname + "/swagger-ui/")
 app.get /^\/docs(\/.*)?$/, (req, res, next) ->
   if req.url is "/docs" # express static barfs on root url w/o trailing slash
@@ -78,11 +79,12 @@ app.get /^\/docs(\/.*)?$/, (req, res, next) ->
   req.url = req.url.substr("/docs".length)
   docs_handler req, res, next
 
+
 # Setup data docs with Baucis
 app.use "/data/v1/", baucis
   swagger: true
   version: "1.0.0"
-
+  release: "1.0.0"
 
 ensureAuth = (request, response, next) ->
   return next()  if request.isAuthenticated()
@@ -144,10 +146,10 @@ app.get "/auth/v1/verification/:token", (req, res) ->
     if(user)
       user.set "verified", true
       user.save ->
-        res.redirect('http://simple.careers/verified.html');
+        res.redirect('http://simple.careers/pages/verified.html');
         # res.send "Your account is verified. Please download Simple on the App Store."
     else
-      res.redirect('http://simple.careers/denied.html');
+      res.redirect('http://simple.careers/pages/denied.html');
       # res.send "We're sorry. The code does not match."
 
 # app.post "/auth/v1/login", passport.authenticate("local",
@@ -296,9 +298,9 @@ app.get "/auth/v1/reset/:token", (req, res) ->
     if(user)
       user.set "verified", true
       user.save ->
-        res.redirect("http://simple.careers/reset.html?token=#{token}");
+        res.redirect("http://simple.careers/pages/reset.html?token=#{token}");
     else
-      res.redirect("http://simple.careers/resetdenied.html");
+      res.redirect("http://simple.careers/pages/resetdenied.html");
 
 app.post "/auth/v1/setpass", (req, res) ->
   token = req.body.token

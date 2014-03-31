@@ -1,5 +1,5 @@
 list = []
-require("fs").readdirSync("./schema").forEach (file) ->
+require("fs").readdirSync(__dirname).forEach (file) ->
   file = file.split(".")[0]
   list.push file
 list = list.filter (item)->
