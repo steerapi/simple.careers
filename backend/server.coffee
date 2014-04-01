@@ -9,7 +9,6 @@ options =
   cache: true # start caching
   ttl: 30 # 30 seconds
 
-
 mongooseCachebox mongoose, options
 mongoose.connect config.mongo
 

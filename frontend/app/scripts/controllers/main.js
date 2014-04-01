@@ -7,4 +7,10 @@ angular.module('frontendApp')
       'AngularJS',
       'Karma'
     ];
+    $('.single-item').slick({
+      arrows: false,
+      dots: true
+    });
+    
   });
+  
