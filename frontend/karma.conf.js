@@ -33,12 +33,8 @@ module.exports = function(config) {
       'app/bower_components/angular-cookies/angular-cookies.js',
       'app/bower_components/angular-sanitize/angular-sanitize.js',
       'app/bower_components/angular-route/angular-route.js',
-      'app/scripts/*.js',
-      'app/scripts/**/*.js',
       'app/scripts/*.coffee',
       'app/scripts/**/*.coffee',
-      'test/mock/**/*.js',
-      'test/spec/**/*.js',
       'test/mock/**/*.coffee',
       'test/spec/**/*.coffee'
     ],

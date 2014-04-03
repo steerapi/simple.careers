@@ -97,7 +97,7 @@ sendConfirmToken = (to, token, cb)->
     message:
       from_email: "support@simple.careers"
       to: [email: to]
-      subject: "Welcome to Simple - User account verification."
+      subject: "Welcome to Simple Careers - User account verification."
       text: """Hi #{to}, 
 
       Your new user account with the email address #{to} is now set up. 
@@ -105,7 +105,7 @@ sendConfirmToken = (to, token, cb)->
       Please use the link below to activate your account. 
       http://simple.careers/auth/v1/verification/#{token}
 
-      If you have not requested the creation of a Simple account, or if you think this is an unauthorized use of your email address, please contact us at support@simple.careers. 
+      If you have not requested the creation of a Simple Careers account, or if you think this is an unauthorized use of your email address, please contact us at support@simple.careers. 
 
       """
   m.call "/messages/send", params, (res) ->
@@ -253,7 +253,7 @@ sendResetPassword = (to, token, cb)->
     message:
       from_email: "support@simple.careers"
       to: [email: to]
-      subject: "Simple - Password Reset."
+      subject: "Simple Careers - Password Reset."
       text: """Hi #{to}, 
 
       You have request a password reset for your email address #{to}. 
@@ -261,7 +261,7 @@ sendResetPassword = (to, token, cb)->
       Please use the link below to reset your password. 
       http://simple.careers/auth/v1/reset/#{token}
 
-      If you have not requested the password reset of your Simple account, or if you think this is an unauthorized use of your email address, please contact us at support@simple.careers. 
+      If you have not requested the password reset of your Simple Careers account, or if you think this is an unauthorized use of your email address, please contact us at support@simple.careers. 
 
       """
   m.call "/messages/send", params, (res) ->
@@ -277,7 +277,7 @@ sendConfirmResetPassword = (to, cb)->
     message:
       from_email: "support@simple.careers"
       to: [email: to]
-      subject: "Simple - Password Reset."
+      subject: "Simple Careers - Password Reset."
       text: """Hi #{to}, 
 
       Your password has been reset. 
