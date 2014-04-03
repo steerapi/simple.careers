@@ -7,31 +7,81 @@ angular
     'ngSanitize',
     # 'ngRoute',
     # 'ui.router',
-    'ionic'
+    'ionic',
+    'restangular'
   ])
-  .config ($stateProvider, $urlRouterProvider) ->
-    $urlRouterProvider.otherwise "/intro"
-    $stateProvider
-    .state('intro',
-      url: "/intro",
-      views: 
-        {
-          'main': {
-            templateUrl: "/views/intro/intro.html",
-            controller: "IntroCtrl"
+  .config([
+    'RestangularProvider'
+  	'$stateProvider'
+    '$urlRouterProvider'
+  	(RestangularProvider, $stateProvider, $urlRouterProvider, config) ->
+      RestangularProvider.setRestangularFields
+        id: "_id"
+      RestangularProvider.setBaseUrl "http://mobile.fairsey.com/data/v1/"
+        
+      $urlRouterProvider.otherwise "/intro/page"
+      $stateProvider
+      .state('intro',
+        url: "/intro",
+        views: 
+          {
+            'main': {
+              templateUrl: "/views/intro/intro.html",
+              controller: "IntroCtrl"
+            }
           }
-        }
-    )
-    .state('intro.page',
-      url: "/page",
-      views: 
-        {
-          'main.intro': {
-            templateUrl: "/views/intro/intro-page.html",
-            controller: "IntroPageCtrl"
+      )
+      .state('intro.page',
+        url: "/page",
+        views: 
+          {
+            'main.intro': {
+              templateUrl: "/views/intro/intro-page.html",
+              controller: "IntroPageCtrl"
+            }
           }
-        }
-    )
+      )
+      .state('app',
+        url: "/app",
+        views: 
+          {
+            'main': {
+              templateUrl: "/views/app/app.html",
+              controller: "AppCtrl"
+            }
+          }
+      )
+      .state('app.job',
+        url: "/job",
+        views: 
+          {
+            'main.app': {
+              templateUrl: "/views/app/job.html",
+              controller: "AppJobCtrl"
+            }
+          }
+      )
+      .state('app.student',
+        url: "/student",
+        views: 
+          {
+            'main.app': {
+              templateUrl: "/views/app/student.html",
+              controller: "AppStudentCtrl"
+            }
+          }
+      )
+      .state('app.employer',
+        url: "/employer",
+        views: 
+          {
+            'main.app': {
+              templateUrl: "/views/app/employer.html",
+              controller: "AppEmployerCtrl"
+            }
+          }
+      )
+  ])
 
     # $stateProvider.state("tab",
     #   url: "/tab"

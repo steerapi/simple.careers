@@ -17,6 +17,7 @@
     <!-- build:css({.tmp,app}) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
+    
   </head>
   <body ng-app="simplecareersApp">
     <!--[if lt IE 7]>
@@ -28,10 +29,6 @@
                  type="bar-positive" 
                  back-button-type="button-icon" 
                  back-button-icon="ion-arrow-left-c"></ion-nav-bar> -->
-    
-    
-    <!-- Our navigation router with some animations set -->
-
     <div ui-view="main"></div>
     <!-- <div class="container" ng-view=""></div> -->
 
@@ -63,15 +60,24 @@
     <script src="bower_components/angular-animate/angular-animate.js"></script>
     <script src="bower_components/ionic/release/js/ionic.js"></script>
     <script src="bower_components/ionic/release/js/ionic-angular.js"></script>
+    <script src="bower_components/lodash/dist/lodash.compat.js"></script>
+    <script src="bower_components/restangular/dist/restangular.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
+    
+    <!-- <script src="cordova.js"></script> -->
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
+        <script src="scripts/controllers/ctrl.js"></script>
         <script src="scripts/controllers/main.js"></script>
         <script src="scripts/controllers/user.js"></script>
         <script src="scripts/controllers/intro.js"></script>
         <script src="scripts/controllers/intro-page.js"></script>
+        <script src="scripts/controllers/app.js"></script>
+        <script src="scripts/controllers/app-employer.js"></script>
+        <script src="scripts/controllers/app-job.js"></script>
+        <script src="scripts/controllers/app-student.js"></script>
         <!-- endbuild -->
 </body>
 </html>
