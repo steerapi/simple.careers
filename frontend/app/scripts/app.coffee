@@ -228,7 +228,7 @@ window.rAF = window.requestAnimationFrame
     transitionOut: ->
       self = this
       console.log "@x", @x
-      if (@x > -100) and (@x < 100)
+      if (@x > -50) and (@x < 50)
         @el.style[TRANSITION] = "-webkit-transform 0.2s ease-in-out"
         @el.style[ionic.CSS.TRANSFORM] = "translate3d(" + @startX + "px," + (@y) + "px, 0)"
         setTimeout (->
@@ -243,7 +243,7 @@ window.rAF = window.requestAnimationFrame
         @el.style[TRANSITION] = "-webkit-transform " + duration + "s ease-in-out"
         
         console.log "window.innerWidth: ",window.innerWidth
-        if (@x < -100)
+        if (@x < -50)
           @el.style[ionic.CSS.TRANSFORM] = "translate3d(" + (-window.innerWidth * 1.5) + "px," + @y + "px, 0) rotate(" + rotateTo + "rad)"
         else
           @el.style[ionic.CSS.TRANSFORM] = "translate3d(" + (window.innerWidth * 1.5) + "px," + @y + "px, 0) rotate(" + rotateTo + "rad)"
