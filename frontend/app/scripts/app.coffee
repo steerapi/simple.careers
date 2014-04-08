@@ -51,36 +51,46 @@ angular
             }
           }
       )
-      .state('app.job',
-        url: "/job",
-        views: 
-          {
-            'main.app': {
-              templateUrl: "/views/app/job.html",
-              controller: "AppJobCtrl"
-            }
-          }
-      )
-      .state('app.student',
-        url: "/student",
-        views: 
-          {
-            'main.app': {
-              templateUrl: "/views/app/student.html",
-              controller: "AppStudentCtrl"
-            }
-          }
-      )
-      .state('app.employer',
-        url: "/employer",
-        views: 
-          {
-            'main.app': {
-              templateUrl: "/views/app/employer.html",
-              controller: "AppEmployerCtrl"
-            }
-          }
-      )
+      # .state('app.job',
+      #   url: "/job",
+      #   views: 
+      #     {
+      #       'main.app': {
+      #         templateUrl: "/views/app/job.html",
+      #         controller: "AppJobCtrl"
+      #       }
+      #     }
+      # )
+      # .state('app.profile',
+      #   url: "/profile",
+      #   views: 
+      #     {
+      #       'main.app': {
+      #         templateUrl: "/views/app/job.html",
+      #         controller: "AppJobCtrl"
+      #       }
+      #     }
+      # )
+      # .state('app.applied',
+      #   url: "/applied",
+      #   views: 
+      #     {
+      #       'main.app': {
+      #         templateUrl: "/views/app/job.html",
+      #         controller: "AppJobCtrl"
+      #       }
+      #     }
+      # )
+      # .state('app.inbox',
+      #   url: "/inbox",
+      #   views: 
+      #     {
+      #       'main.app': {
+      #         templateUrl: "/views/app/job.html",
+      #         controller: "AppJobCtrl"
+      #       }
+      #     }
+      # )
   ])
 
     # $stateProvider.state("tab",
