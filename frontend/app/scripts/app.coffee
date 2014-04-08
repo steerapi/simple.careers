@@ -108,12 +108,13 @@ window.rAF = window.requestAnimationFrame
       
       # Calculate the top left of a default card, as a translated pos
       topLeft = window.innerHeight / 2 - @maxHeight / 2
-      console.log window.innerHeight, @maxHeight
+      # console.log window.innerHeight, @maxHeight
       cardOffset = Math.min(@cards.length, 3) * 5
       
       # Move each card 5 pixels down to give a nice stacking effect (max of 3 stacked)
+      nextCard.setY nextCard.y-cardOffset
       nextCard.setPopInDuration @cardPopInDuration
-      nextCard.setZIndex @cards.length
+      nextCard.setZIndex @cards.length*10
       return
 
     
@@ -138,7 +139,6 @@ window.rAF = window.requestAnimationFrame
       @bindEvents()
       return
 
-    
     ###
     Set the X position of the card.
     ###
@@ -227,20 +227,27 @@ window.rAF = window.requestAnimationFrame
     ###
     transitionOut: ->
       self = this
-      if @y < 0
+      console.log "@x", @x
+      if (@x > -100) and (@x < 100)
         @el.style[TRANSITION] = "-webkit-transform 0.2s ease-in-out"
-        @el.style[ionic.CSS.TRANSFORM] = "translate3d(" + @x + "," + (@startY) + "px, 0)"
+        @el.style[ionic.CSS.TRANSFORM] = "translate3d(" + @startX + "px," + (@y) + "px, 0)"
         setTimeout (->
           self.el.style[TRANSITION] = "none"
           return
         ), 200
       else
-        
-        # Fly out
+      # Fly out
+        console.log "flyout"
         rotateTo = (@rotationAngle + (@rotationDirection * 0.6)) or (Math.random() * 0.4)
         duration = (if @rotationAngle then 0.2 else 0.5)
         @el.style[TRANSITION] = "-webkit-transform " + duration + "s ease-in-out"
-        @el.style[ionic.CSS.TRANSFORM] = "translate3d(" + @x + "," + (window.innerHeight * 1.5) + "px, 0) rotate(" + rotateTo + "rad)"
+        
+        console.log "window.innerWidth: ",window.innerWidth
+        if (@x < -100)
+          @el.style[ionic.CSS.TRANSFORM] = "translate3d(" + (-window.innerWidth * 1.5) + "px," + @y + "px, 0) rotate(" + rotateTo + "rad)"
+        else
+          @el.style[ionic.CSS.TRANSFORM] = "translate3d(" + (window.innerWidth * 1.5) + "px," + @y + "px, 0) rotate(" + rotateTo + "rad)"
+          
         @onSwipe and @onSwipe()
         
         # Trigger destroy after card has swiped out
@@ -306,10 +313,10 @@ window.rAF = window.requestAnimationFrame
       return
 
     _doDrag: (e) ->
-      o = e.gesture.deltaY / 3
+      o = e.gesture.deltaX / 3
       @rotationAngle = Math.atan(o / @touchDistance) * @rotationDirection
-      @rotationAngle = 0  if e.gesture.deltaY < 0
-      @y = @startY + (e.gesture.deltaY * 0.4)
+      @rotationAngle = 0  if e.gesture.deltaX < 0
+      @x = @startX + (e.gesture.deltaX)
       @el.style[ionic.CSS.TRANSFORM] = "translate3d(" + @x + "px, " + @y + "px, 0) rotate(" + (@rotationAngle or 0) + "rad)"
       return
 

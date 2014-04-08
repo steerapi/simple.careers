@@ -15,7 +15,7 @@
       width: 100%;
       max-width: 280px;
       margin: 0 auto;
-      z-index: 24;      
+      z-index: 0;
       .card-header{
         margin: 0;
         padding-left:130px;
@@ -61,15 +61,21 @@
       .card-badge-content{
         border:none;
         background: none;        
-        margin: 0;
         padding: 10px;
-        overflow-x: scroll;
+        overflow: hidden;
         white-space: nowrap;
-        overflow-y: hidden;
         max-height: 80px;
-        .card-badge{
-          margin-left: 5px;
-          width: 45px;          
+        .card-badge-body{
+          margin: 0 auto;
+          text-align: center;
+          .card-badge:first-child{
+            margin-left: 0px;            
+            width: 45px;          
+          }
+          .card-badge{
+            margin-left: 5px;
+            width: 45px;          
+          }
         }
       }
       .card-footer, .card-info{
