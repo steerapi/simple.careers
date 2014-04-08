@@ -11,61 +11,150 @@
           <!-- <h1 class="title">Job</h1>
         </ion-header-bar> -->
         
-        <ion-content has-tabs="true" on-refresh="onRefresh()" class="card-wrapper">
+        <ion-content has-tabs="true" on-refresh="onRefresh()" class="card-wrapper" has-bouncing="false">
+        
+      <swipe-cards>
+        <swipe-card on-destroy="cardDestroyed($index)" on-swipe="cardSwiped($index)">
+        
+        <div class="flip-container" ng-class="{'flip':flip}" ng-click="flip=!flip">
+        	<div class="flipper">
+        		<div class="front">
+
         <div class="card-inset">
         <div class="card-background">
-        <div class="item item-avatar card-header">
-          <img src="images/dyn.png">
-          <!-- <h2>Marty McFly</h2>
-          <p>November 05, 1955</p> -->
-          <div class="tab-item card-location">
-            <i class="icon ion-location"></i>
-            NH
+          <div class="item item-avatar card-header">
+            <img src="images/dyn.png">
+            <!-- <h2>Marty McFly</h2>
+            <p>November 05, 1955</p> -->
+            <div class="tab-item card-location">
+              <i class="icon ion-location"></i>
+              NH
+            </div>
+          </div>
+
+          <div class="item item-body card-content">
+            <div class="card-title-wrapper">
+            <img class="full-image" src="./images/dyn-engineer.gif">
+            <span class="card-title">Software Engineer<span>
+            </div>
+            <!-- <p>
+              This is a "Facebook" styled Card. The header is created from a Thumbnail List item,
+              the content is from a card-body consisting of an image and paragraph text. The footer
+              consists of a Tab Bar, icons aligned left, within the card-footer.
+            </p>
+            <p>
+              <a href="#" class="subdued">1 Like</a>
+              <a href="#" class="subdued">5 Comments</a>
+            </p> -->
+          </div>
+          <div class="item item-body card-badge-content">
+            <!-- <ion-scroll direction="x"> -->
+              
+                <img class="card-badge" src="./images/badges/C.png">
+                <img class="card-badge" src="./images/badges/Java.png">
+                <img class="card-badge" src="./images/badges/Python.png">
+                <img class="card-badge" src="./images/badges/C.png">
+                <img class="card-badge" src="./images/badges/Java.png">
+                <img class="card-badge" src="./images/badges/Python.png">
+                <img class="card-badge" src="./images/badges/C.png">
+                <img class="card-badge" src="./images/badges/Java.png">
+                <img class="card-badge" src="./images/badges/Python.png">
+            <!-- </ion-scroll> -->
+            
+            <!-- <img class="card-badge" src="images/badges/C.png">
+            <img class="card-badge" src="images/badges/Java.png">
+            <img class="card-badge" src="images/badges/Python.png">
+            <img class="card-badge" src="images/badges/C.png">
+            <img class="card-badge" src="images/badges/Java.png">
+            <img class="card-badge" src="images/badges/Python.png"> -->
+          </div>
+
+          <div class="item tabs tabs-secondary tabs-icon-left card-info">
+            <span class="tab-item">
+              <i class="icon ion-ios7-pie"></i>
+              ENGR
+            </span>
+            <span class="tab-item">
+              <i class="icon ion-ios7-timer"></i>
+              Full-Time
+            </span>
+            <!-- <a class="tab-item" href="#">
+              <i class="icon ion-share"></i>
+              3yrs+
+            </a> -->
           </div>
         </div>
-
-        <div class="item item-body card-content">
-          <div class="card-title-wrapper">
-          <img class="full-image" src="./images/dyn-engineer.gif">
-          <span class="card-title">Software Engineer<span>
-          </div>
-          <!-- <p>
-            This is a "Facebook" styled Card. The header is created from a Thumbnail List item,
-            the content is from a card-body consisting of an image and paragraph text. The footer
-            consists of a Tab Bar, icons aligned left, within the card-footer.
-          </p>
-          <p>
-            <a href="#" class="subdued">1 Like</a>
-            <a href="#" class="subdued">5 Comments</a>
-          </p> -->
-        </div>
-        <div class="item item-body card-badge-content">
-          <img class="card-badge" src="./images/badges/C.png">
-          <img class="card-badge" src="./images/badges/Java.png">
-          <img class="card-badge" src="./images/badges/Python.png">
-          <!-- <img class="card-badge" src="images/badges/C.png">
-          <img class="card-badge" src="images/badges/Java.png">
-          <img class="card-badge" src="images/badges/Python.png">
-          <img class="card-badge" src="images/badges/C.png">
-          <img class="card-badge" src="images/badges/Java.png">
-          <img class="card-badge" src="images/badges/Python.png"> -->
         </div>
 
-        <div class="item tabs tabs-secondary tabs-icon-left card-info">
-          <span class="tab-item">
-            <i class="icon ion-ios7-pie"></i>
-            ENGR
-          </span>
-          <span class="tab-item">
-            <i class="icon ion-ios7-timer"></i>
-            Full-Time
-          </span>
-          <!-- <a class="tab-item" href="#">
-            <i class="icon ion-share"></i>
-            3yrs+
-          </a> -->
+        		</div>
+        		<div class="back">
+              
+              
+              <div class="card-inset">
+              <div class="card-background">
+                <div class="item item-avatar card-header">
+                  <img src="images/dyn.png">
+                  <!-- <h2>Marty McFly</h2>
+                  <p>November 05, 1955</p> -->
+                  <div class="tab-item card-location">
+                    <i class="icon ion-location"></i>
+                    NH
+                  </div>
+                </div>
+
+                <div class="item item-body card-content">
+                  <div class="card-title-wrapper">
+                  <img class="full-image" src="./images/dyn-engineer.gif">
+                  <span class="card-title">Software Engineer<span>
+                  </div>
+                  <!-- <p>
+                    This is a "Facebook" styled Card. The header is created from a Thumbnail List item,
+                    the content is from a card-body consisting of an image and paragraph text. The footer
+                    consists of a Tab Bar, icons aligned left, within the card-footer.
+                  </p>
+                  <p>
+                    <a href="#" class="subdued">1 Like</a>
+                    <a href="#" class="subdued">5 Comments</a>
+                  </p> -->
+                </div>
+                <div class="item item-body card-badge-content">
+                  <img class="card-badge" src="./images/badges/C.png">
+                  <img class="card-badge" src="./images/badges/Java.png">
+                  <img class="card-badge" src="./images/badges/Python.png">
+                  <!-- <img class="card-badge" src="images/badges/C.png">
+                  <img class="card-badge" src="images/badges/Java.png">
+                  <img class="card-badge" src="images/badges/Python.png">
+                  <img class="card-badge" src="images/badges/C.png">
+                  <img class="card-badge" src="images/badges/Java.png">
+                  <img class="card-badge" src="images/badges/Python.png"> -->
+                </div>
+
+                <div class="item tabs tabs-secondary tabs-icon-left card-info">
+                  <span class="tab-item">
+                    <i class="icon ion-ios7-pie"></i>
+                    ENGR
+                  </span>
+                  <span class="tab-item">
+                    <i class="icon ion-ios7-timer"></i>
+                    Full-Time
+                  </span>
+                  <!-- <a class="tab-item" href="#">
+                    <i class="icon ion-share"></i>
+                    3yrs+
+                  </a> -->
+                </div>
+              </div>
+              </div>
+              
+        		</div>
+        	</div>
         </div>
         
+
+            
+        </swipe-card>
+      </swipe-cards>
+                
         <!-- <div class="item tabs tabs-secondary tabs-icon-left card-footer">
           <a class="tab-item" href="#">
             <i class="icon ion-thumbsup"></i>
@@ -81,14 +170,8 @@
           </a>
         </div> -->
         
-        </div>
-        </div>
-
-  
         </ion-content>
       </ion-tab>
-      
-      
 
       <ion-tab title="Profile" icon-on="icon ion-ios7-clock" icon-off="icon ion-ios7-clock-outline">
         <header class="bar bar-header bar-positive">
@@ -108,84 +191,5 @@
         </ion-content>
       </ion-tab>
       
-    </ion-tabs>
-    
-<!-- 
-<ion-side-menus>
-  <fade-bar></fade-bar>
-  <ion-side-menu-content>
-  <pane>
-    <header class="bar bar-header bar-positive">
-      <button class="button button-icon" ng-click="openLeft()"><i class="icon ion-navicon"></i></button>
-      <h1 class="title">Slide me</h1>
-    </header>
-    <content has-header="true" padded="true">
-
-      <div class="list card">
-
-        <div class="item item-avatar">
-          <img src="http://ionicframework.com/img/docs/mcfly.jpg">
-          <h2>Marty McFly</h2>
-          <p>November 05, 1955</p>
-        </div>
-
-        <div class="item item-body">
-          <img class="full-image" src="http://ionicframework.com/img/docs/delorean.jpg">
-          <p>
-            This is a "Facebook" styled Card. The header is created from a Thumbnail List item,
-            the content is from a card-body consisting of an image and paragraph text. The footer
-            consists of a Tab Bar, icons aligned left, within the card-footer.
-          </p>
-          <p>
-            <a href="#" class="subdued">1 Like</a>
-            <a href="#" class="subdued">5 Comments</a>
-          </p>
-        </div>
-
-        <div class="item tabs tabs-secondary tabs-icon-left">
-          <a class="tab-item" href="#">
-            <i class="icon ion-thumbsup"></i>
-            Like
-          </a>
-          <a class="tab-item" href="#">
-            <i class="icon ion-chatbox"></i>
-            Comment
-          </a>
-          <a class="tab-item" href="#">
-            <i class="icon ion-share"></i>
-            Share
-          </a>
-        </div>
-
-      </div>
-    </content>
-  </pane>
+</ion-tabs>
   
-  </ion-side-menu-content>
-  
-  <ion-side-menu side="left">
-    <header class="bar bar-header bar-dark" fade-header>
-      <h1 class="title">Left</h1>
-    </header>
-    <content has-header="true">
-      <ul class="list">
-        <a href="#" class="item" ng-repeat="item in list">
-          {{item.text}}
-        </a>
-      </ul>
-    </content>
-  </side-menu>
-  <side-menu side="right">
-    <header class="bar bar-header bar-assertive">
-      <h1 class="title">Right</h1>
-    </header>
-    <content>
-      <ul class="list">
-        <a href="#" class="item" ng-repeat="item in list">
-          {{item.text}}
-        </a>
-      </ul>
-    </content>
-  </ion-side-menu>
-</ion-side-menus> -->
-<!-- <div ui-view="main.app"></div> -->

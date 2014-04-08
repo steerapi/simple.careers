@@ -3,17 +3,19 @@
 .card-wrapper{
   background-color: #d0d5d7;
   .card-inset{
+    padding-bottom:20px;
+    padding-top:20px;
     padding-left:20px;
     padding-right:20px;
     .card-background {
       border-radius: 10px;
       background-color: rgb( 255, 255, 255 );
       box-shadow: 0px 11px 16px 0px rgb( 0, 0, 0 );
+      position: relative;
       width: 100%;
       max-width: 280px;
-      margin: 20px auto;
+      margin: 0 auto;
       z-index: 24;
-      position: relative;
       
       .card-header{
         margin: 0;
@@ -62,6 +64,10 @@
         background: none;        
         margin: 0;
         padding: 10px;
+        overflow-x: scroll;
+        white-space: nowrap;
+        overflow-y: hidden;
+        max-height: 80px;
         .card-badge{
           margin-left: 5px;
           width: 45px;          
