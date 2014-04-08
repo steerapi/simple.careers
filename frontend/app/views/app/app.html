@@ -14,7 +14,7 @@
         <ion-content has-tabs="true" on-refresh="onRefresh()" class="card-wrapper" has-bouncing="false">
         
       <swipe-cards>
-        <swipe-card on-destroy="cardDestroyed($index)" on-swipe="cardSwiped($index)">
+        <swipe-card ng-repeat="card in cards" on-destroy="cardDestroyed($index)" on-swipe="cardSwiped($index)">
         
         <div class="flip-container" ng-class="{'flip':flip}" ng-click="flip=!flip">
         	<div class="flipper">
