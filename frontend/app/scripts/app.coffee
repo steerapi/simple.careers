@@ -244,9 +244,9 @@ window.rAF = window.requestAnimationFrame
         
         console.log "window.innerWidth: ",window.innerWidth
         if (@x < -50)
-          @el.style[ionic.CSS.TRANSFORM] = "translate3d(" + (-window.innerWidth * 1.5) + "px," + @y + "px, 0) rotate(" + rotateTo + "rad)"
+          @el.style[ionic.CSS.TRANSFORM] = "translate3d(" + (-window.innerWidth * 3) + "px," + @y + "px, 0) rotate(" + rotateTo + "rad)"
         else
-          @el.style[ionic.CSS.TRANSFORM] = "translate3d(" + (window.innerWidth * 1.5) + "px," + @y + "px, 0) rotate(" + rotateTo + "rad)"
+          @el.style[ionic.CSS.TRANSFORM] = "translate3d(" + (window.innerWidth * 3) + "px," + @y + "px, 0) rotate(" + rotateTo + "rad)"
           
         @onSwipe and @onSwipe()
         
