@@ -11,7 +11,7 @@
           <!-- <h1 class="title">Job</h1>
         </ion-header-bar> -->
         
-        <ion-content has-tabs="true" on-refresh="onRefresh()" class="card-wrapper" has-bouncing="false" scroll="false">
+        <ion-content has-tabs="true" on-refresh="onRefresh()" class="card-wrapper" has-bouncing="false" scroll="false" padding="false" has-header="true">
         
       <swipe-cards>
         <swipe-card ng-repeat="card in cards track by card._id" on-destroy="cardDestroyed($index)" on-swipe="cardSwiped($index)">
@@ -66,7 +66,7 @@
             <img class="card-badge" src="images/badges/Python.png"> -->
           </div>
 
-          <div class="item tabs tabs-secondary tabs-icon-left card-info">
+          <!-- <div class="item tabs tabs-secondary tabs-icon-left card-info">
             <span class="tab-item">
               <i class="icon ion-ios7-pie"></i>
               ENGR
@@ -74,12 +74,12 @@
             <span class="tab-item">
               <i class="icon ion-ios7-timer"></i>
               Full-Time
-            </span>
+            </span> -->
             <!-- <a class="tab-item" href="#">
               <i class="icon ion-share"></i>
               3yrs+
             </a> -->
-          </div>
+          <!-- </div> -->
         </div>
         </div>
 
