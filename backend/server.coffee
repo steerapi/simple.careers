@@ -33,7 +33,9 @@ Schema.list.forEach (item)->
 User = Models["User"]
 Askus = Models["Askus"]
 
-# Create the API routes
+
+# Create the   API routes
+console.log Schema.list
 Schema.list.forEach (item)->
   # TODO *IMPORTANT* add ensureAuth to add auth barrier
   baucis.rest(item.toLowerCase()).request (request, response, next) ->
@@ -49,7 +51,6 @@ app.use cors()
 app.use (req, res, next)->
   res.header('Access-Control-Allow-Credentials', true)
   next()
-
 app.use(express.logger());
 app.use(express.cookieParser());
 app.use(express.bodyParser());
@@ -83,9 +84,10 @@ app.get /^\/docs(\/.*)?$/, (req, res, next) ->
 app.use "/data/v1/", baucis
   swagger: true
   version: "1.0.0"
-  release: "1.0.0"
+  # release: "1.0.0"
 
 ensureAuth = (request, response, next) ->
+  console.log "ensureAuth"
   return next()  if request.isAuthenticated()
   response.send 401
 
