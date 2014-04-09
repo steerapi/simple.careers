@@ -228,7 +228,7 @@ window.rAF = window.requestAnimationFrame
     transitionOut: ->
       self = this
       # console.log "@x", @x
-      if (@x > -50) and (@x < 50)
+      if (@y > -50) and (@y < 50)
         @el.style[TRANSITION] = "-webkit-transform 0.2s ease-in-out"
         @el.style[ionic.CSS.TRANSFORM] = "translate3d(" + @startX + "px," + (@startY) + "px, 0)"
         setTimeout (->
@@ -243,10 +243,10 @@ window.rAF = window.requestAnimationFrame
         @el.style[TRANSITION] = "-webkit-transform " + duration + "s ease-in-out"
         
         # console.log "window.innerWidth: ",window.innerWidth
-        if (@x < -50)
-          @el.style[ionic.CSS.TRANSFORM] = "translate3d(" + (-window.innerWidth * 3) + "px," + @y + "px, 0) rotate(" + rotateTo + "rad)"
+        if (@y < -50)
+          @el.style[ionic.CSS.TRANSFORM] = "translate3d(" + @x + "px," + -(window.innerHeight * 1.5) + "px, 0) rotate(" + rotateTo + "rad)"
         else
-          @el.style[ionic.CSS.TRANSFORM] = "translate3d(" + (window.innerWidth * 1.5) + "px," + @y + "px, 0) rotate(" + rotateTo + "rad)"
+          @el.style[ionic.CSS.TRANSFORM] = "translate3d(" + @x + "px," + (window.innerHeight * 1.5) + "px, 0) rotate(" + rotateTo + "rad)"
           
         @onSwipe and @onSwipe()
         
@@ -313,9 +313,9 @@ window.rAF = window.requestAnimationFrame
       return
 
     _doDrag: (e) ->
-      o = e.gesture.deltaX / 3
+      o = e.gesture.deltaY / 3
       @rotationAngle = Math.atan(o / @touchDistance) * @rotationDirection
-      @rotationAngle = 0  if e.gesture.deltaX < 0
+      @rotationAngle = 0  if e.gesture.deltaY < 0
       @x = @startX + (e.gesture.deltaX)
       @y = @startY + (e.gesture.deltaY)
       @el.style[ionic.CSS.TRANSFORM] = "translate3d(" + @x + "px, " + @y + "px, 0) rotate(" + (@rotationAngle or 0) + "rad)"

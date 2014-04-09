@@ -12,12 +12,24 @@ body {
   overflow: auto;
 }
 
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+//  70% {
+//    -webkit-transform: scale(0.5,0.5);
+//  }
+  100% {
+    opacity: 1;
+  }
+}
+
 @-webkit-keyframes bounceIn {
   0% {
     -webkit-transform: scale(0,0);
   }
 //  70% {
-//    -webkit-transform: scale(0.5,0.5);
+//    -webkit-transform: scale(1.2,1.2);
 //  }
   100% {
     -webkit-transform: scale(1,1);
@@ -25,10 +37,11 @@ body {
 }
 
 .swipe-card.pop-in-start {
-  -webkit-transform: scale(0,0);
+  opacity: 0;
+//  -webkit-transform: scale(1,1);
 }
 .swipe-card.pop-in {
-  -webkit-animation: bounceIn 0.1s ease-out;
+  -webkit-animation: fadeIn 0.2s ease-out;
 }
 
 .back-card-background{

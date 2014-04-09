@@ -19,12 +19,12 @@
     <script>
     
       var xStart, yStart = 0;
- 
+       
       document.addEventListener('touchstart',function(e) {
           xStart = e.touches[0].screenX;
           yStart = e.touches[0].screenY;
       });
- 
+       
       document.addEventListener('touchmove',function(e) {
           var xMovement = Math.abs(e.touches[0].screenX - xStart);
           var yMovement = Math.abs(e.touches[0].screenY - yStart);
@@ -43,8 +43,8 @@
     <link rel="stylesheet" href="libs/add2home/add2home.css">
     <script type="application/javascript" src="libs/add2home/add2home.js"></script>
     
-    <link rel="stylesheet" href="libs/unelastic/unelastic.css">
-    <script type="application/javascript" src="libs/unelastic/unelastic.js"></script>
+    <!-- <link rel="stylesheet" href="libs/unelastic/unelastic.css">
+    <script type="application/javascript" src="libs/unelastic/unelastic.js"></script> -->
     
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css styles/vendor.css -->
