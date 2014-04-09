@@ -11,7 +11,7 @@
           <!-- <h1 class="title">Job</h1>
         </ion-header-bar> -->
         
-        <ion-content has-tabs="true" on-refresh="onRefresh()" class="card-wrapper" has-bouncing="false">
+        <ion-content has-tabs="true" on-refresh="onRefresh()" class="card-wrapper" has-bouncing="false" scroll="false">
         
       <swipe-cards>
         <swipe-card ng-repeat="card in cards track by card._id" on-destroy="cardDestroyed($index)" on-swipe="cardSwiped($index)">
@@ -89,57 +89,7 @@
               
               <div class="card-inset">
               <div class="card-background">
-                <div class="item item-avatar card-header">
-                  <img src="images/dyn.png">
-                  <!-- <h2>Marty McFly</h2>
-                  <p>November 05, 1955</p> -->
-                  <div class="tab-item card-location">
-                    <i class="icon ion-location"></i>
-                    NH
-                  </div>
-                </div>
-
-                <div class="item item-body card-content">
-                  <div class="card-title-wrapper">
-                  <img class="full-image" src="./images/dyn-engineer.gif">
-                  <span class="card-title">Software Engineer<span>
-                  </div>
-                  <!-- <p>
-                    This is a "Facebook" styled Card. The header is created from a Thumbnail List item,
-                    the content is from a card-body consisting of an image and paragraph text. The footer
-                    consists of a Tab Bar, icons aligned left, within the card-footer.
-                  </p>
-                  <p>
-                    <a href="#" class="subdued">1 Like</a>
-                    <a href="#" class="subdued">5 Comments</a>
-                  </p> -->
-                </div>
-                <div class="item item-body card-badge-content">
-                  <img class="card-badge" src="./images/badges/C.png">
-                  <img class="card-badge" src="./images/badges/Java.png">
-                  <img class="card-badge" src="./images/badges/Python.png">
-                  <!-- <img class="card-badge" src="images/badges/C.png">
-                  <img class="card-badge" src="images/badges/Java.png">
-                  <img class="card-badge" src="images/badges/Python.png">
-                  <img class="card-badge" src="images/badges/C.png">
-                  <img class="card-badge" src="images/badges/Java.png">
-                  <img class="card-badge" src="images/badges/Python.png"> -->
-                </div>
-
-                <div class="item tabs tabs-secondary tabs-icon-left card-info">
-                  <span class="tab-item">
-                    <i class="icon ion-ios7-pie"></i>
-                    ENGR
-                  </span>
-                  <span class="tab-item">
-                    <i class="icon ion-ios7-timer"></i>
-                    Full-Time
-                  </span>
-                  <!-- <a class="tab-item" href="#">
-                    <i class="icon ion-share"></i>
-                    3yrs+
-                  </a> -->
-                </div>
+                
               </div>
               </div>
               
