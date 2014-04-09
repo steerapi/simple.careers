@@ -46,11 +46,8 @@ Schema.list.forEach (item)->
 app = express()
 app.use(express.static(__dirname + '/../frontend/dist'));
 app.use("/pages",express.static(__dirname + '/../frontend/pages'));
+
 cors = require 'cors'
-app.use cors()
-app.use (req, res, next)->
-  res.header('Access-Control-Allow-Credentials', true)
-  next()
 app.use(express.logger());
 app.use(express.cookieParser());
 app.use(express.bodyParser());
@@ -80,6 +77,10 @@ app.get /^\/docs(\/.*)?$/, (req, res, next) ->
   docs_handler req, res, next
 
 
+baucis.use cors()
+baucis.use (req, res, next)->
+  res.header('Access-Control-Allow-Credentials', true)
+  next()
 # Setup data docs with Baucis
 app.use "/data/v1/", baucis
   swagger: true
