@@ -37,8 +37,8 @@ Askus = Models["Askus"]
 Schema.list.forEach (item)->
   # TODO *IMPORTANT* add ensureAuth to add auth barrier
   baucis.rest(item.toLowerCase()).request (request, response, next) ->
-    ensureAuth(request, response, next)
-    # return next()
+    # ensureAuth(request, response, next)
+    return next()
 
 # Create the app and listen for API requests
 app = express()
