@@ -112,7 +112,7 @@ window.rAF = window.requestAnimationFrame
       cardOffset = Math.min(@cards.length, 3) * 5
       
       # Move each card 5 pixels down to give a nice stacking effect (max of 3 stacked)
-      nextCard.setY nextCard.y-cardOffset
+      # nextCard.setY nextCard.y-cardOffset
       nextCard.setPopInDuration @cardPopInDuration
       nextCard.setZIndex @cards.length*10
       return
@@ -228,9 +228,9 @@ window.rAF = window.requestAnimationFrame
     transitionOut: ->
       self = this
       console.log "@x", @x
-      if (@x > -50) and (@x < 50)
+      if (@x > -100) and (@x < 100)
         @el.style[TRANSITION] = "-webkit-transform 0.2s ease-in-out"
-        @el.style[ionic.CSS.TRANSFORM] = "translate3d(" + @startX + "px," + (@y) + "px, 0)"
+        @el.style[ionic.CSS.TRANSFORM] = "translate3d(" + @startX + "px," + (@startY) + "px, 0)"
         setTimeout (->
           self.el.style[TRANSITION] = "none"
           return
@@ -239,14 +239,14 @@ window.rAF = window.requestAnimationFrame
       # Fly out
         console.log "flyout"
         rotateTo = (@rotationAngle + (@rotationDirection * 0.6)) or (Math.random() * 0.4)
-        duration = (if @rotationAngle then 0.2 else 0.5)
+        duration = (if @rotationAngle then 0.5 else 1.0)
         @el.style[TRANSITION] = "-webkit-transform " + duration + "s ease-in-out"
         
         console.log "window.innerWidth: ",window.innerWidth
-        if (@x < -50)
+        if (@x < -100)
           @el.style[ionic.CSS.TRANSFORM] = "translate3d(" + (-window.innerWidth * 3) + "px," + @y + "px, 0) rotate(" + rotateTo + "rad)"
         else
-          @el.style[ionic.CSS.TRANSFORM] = "translate3d(" + (window.innerWidth * 3) + "px," + @y + "px, 0) rotate(" + rotateTo + "rad)"
+          @el.style[ionic.CSS.TRANSFORM] = "translate3d(" + (window.innerWidth * 1.5) + "px," + @y + "px, 0) rotate(" + rotateTo + "rad)"
           
         @onSwipe and @onSwipe()
         
@@ -317,6 +317,7 @@ window.rAF = window.requestAnimationFrame
       @rotationAngle = Math.atan(o / @touchDistance) * @rotationDirection
       @rotationAngle = 0  if e.gesture.deltaX < 0
       @x = @startX + (e.gesture.deltaX)
+      @y = @startY + (e.gesture.deltaY)
       @el.style[ionic.CSS.TRANSFORM] = "translate3d(" + @x + "px, " + @y + "px, 0) rotate(" + (@rotationAngle or 0) + "rad)"
       return
 
