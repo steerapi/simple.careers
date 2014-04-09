@@ -8,10 +8,33 @@
     <title>Simple.Careers</title>
     
     <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, user-scalable=no">
+
+    <meta id="extViewportMeta" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    
+
+    <script>
+    document.body.addEventListener('touchmove', function(event) {
+      console.log(event.source);
+      //if (event.source == document.body)
+        event.preventDefault();
+    }, false);
+ 
+    window.onresize = function() {
+      $(document.body).width(window.innerWidth).height(window.innerHeight);
+    }
+ 
+    $(function() {
+      window.onresize();
+    });
+    </script>
+  
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
+  <style>
+    html, body {margin: 0; padding: 0; overflow: hidden}
+  </style>
+      
     <script src="//ajax.googleapis.com/ajax/libs/webfont/1.5.0/webfont.js"></script>
     <script>
       WebFont.load({

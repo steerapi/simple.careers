@@ -1,21 +1,24 @@
 @import "compass/css3";
 
-.back{
-  .card-background {
-//    width: 1000px;
-//    height: 375px;
-  }
+.back-card-background{
+  background-color: rgb( 255, 255, 255 );
+  overflow-x: scroll;
+  overflow-y: hidden;
 }
 .card-wrapper{
   background-color: #d0d5d7;
+  
   .card-inset{
-    padding-bottom:20px;
-    padding-top:20px;
-    padding-left:20px;
-    padding-right:20px;
+    padding-top:30px;
+    padding-left:10px;
+    padding-right:10px;
+    padding-bottom:10px;
     width: 100%;
 //    height: 375px;
     .card-background {
+      max-width: 320px;
+      max-height: 434px;
+      
       border-radius: 10px;
       background-color: rgb( 255, 255, 255 );
       box-shadow: 0px 11px 16px 0px rgba( 0, 0, 0, 0.1 );
