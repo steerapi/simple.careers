@@ -13,15 +13,13 @@
         
         <ion-content has-tabs="true" on-refresh="onRefresh()" class="card-wrapper" has-bouncing="false" scroll="false" padding="false" has-header="true">
         
-        <div class="flip-container" ng-class="{'flip':flip}" ng-click="flip=!flip">
-        	<div class="flipper">
-        		<div class="front">
-              
       <swipe-cards>
       
         <swipe-card ng-repeat="card in cards track by card._id" on-destroy="cardDestroyed($index)" on-swipe="cardSwiped($index)">
         
-
+        <div class="flip-container" ng-class="{'flip':flip}" ng-click="flip=!flip">
+        	<div class="flipper">
+        		<div class="front">
 
         <div class="card-inset">
         <div class="card-background">
@@ -88,64 +86,62 @@
         </div>
         </div>
 
-        		
-        </swipe-card>
-      </swipe-cards>
-      
-  		</div>
-  		<div class="back">
-        
-        
-        <div class="card-inset back-card-inset">
-        <div class="card-background back-card-background">
-          
-          <p>
-            
-            Software Engineer
-            Location: Manchester, NHDepartment: EngineeringType: Full TimeMin. Experience: Experienced
-            Job Summary:
+        		</div>
+        		<div class="back">
+              
+              
+              <div class="card-inset back-card-inset">
+              <div class="card-background back-card-background">
+                
+                <p>
+                  
+                  Software Engineer
+                  Location: Manchester, NHDepartment: EngineeringType: Full TimeMin. Experience: Experienced
+                  Job Summary:
 
-            Dyn is seeking a Software Engineer to become part of a fast paced team which is focused on creating and maintaining world wide scalable infrastructure projects. This individual will be a member of the Engineering organization reporting to a Manager within Platform Engineering. This person will work with other team members and assist the Infrastructure squad with developing service oriented platforms for the processing of requests, the insertion and retrieval of data, and high performance long running processes.
+                  Dyn is seeking a Software Engineer to become part of a fast paced team which is focused on creating and maintaining world wide scalable infrastructure projects. This individual will be a member of the Engineering organization reporting to a Manager within Platform Engineering. This person will work with other team members and assist the Infrastructure squad with developing service oriented platforms for the processing of requests, the insertion and retrieval of data, and high performance long running processes.
 
+ 
 
+                  Duties:
 
-            Duties:
+                  Work within an Agile Scrum environment to accurately estimate and update tasks    
+                  Work well in a team environment to collectively pursue project goals
+                  Help to develop API back ends and processes.
+                  Help to develop data abstraction layers.
+                  Help to develop scalable, clustered services.
+                  Identify errors and collaborate with team members to define solutions to any problems with existing applications and systems
+                  Help in the development of automation for deployment and configuration management
+                  Other duties and responsibilities as assigned.
 
-            Work within an Agile Scrum environment to accurately estimate and update tasks    
-            Work well in a team environment to collectively pursue project goals
-            Help to develop API back ends and processes.
-            Help to develop data abstraction layers.
-            Help to develop scalable, clustered services.
-            Identify errors and collaborate with team members to define solutions to any problems with existing applications and systems
-            Help in the development of automation for deployment and configuration management
-            Other duties and responsibilities as assigned.
+ 
 
+                  Education:
 
+                  Bachelor’s degree in Engineering or Computer Science or equivalent in work  experience and self-study.
 
-            Education:
+ 
 
-            Bachelor’s degree in Engineering or Computer Science or equivalent in work  experience and self-study.
+                  Desired Skills:
 
-
-
-            Desired Skills:
-
-            Proficient in at least one of the following languages: Java, C, C++, or Go.  Proficiency in more is a plus.
-            Demonstrable experience with some concurrent coding techniques such as threading, thread pools, connection pooling, and/or parallel processing across a cluster.
-            Familiarity with REST and experience using RESTful interfaces is a plus.
-            LAMP stack familiarity is required.
-            Proficiency in Python is a plus.
-            Must be a flexible, resourceful, team player that is able to thrive in a fast-paced environment.
-            Must be detail-oriented and organized with good communication skills.
-            
-          </p>
-          
-        </div>
-        </div>
-        
-  		</div>
+                  Proficient in at least one of the following languages: Java, C, C++, or Go.  Proficiency in more is a plus.
+                  Demonstrable experience with some concurrent coding techniques such as threading, thread pools, connection pooling, and/or parallel processing across a cluster.
+                  Familiarity with REST and experience using RESTful interfaces is a plus.
+                  LAMP stack familiarity is required.
+                  Proficiency in Python is a plus.
+                  Must be a flexible, resourceful, team player that is able to thrive in a fast-paced environment.
+                  Must be detail-oriented and organized with good communication skills.
+                  
+                </p>
+                
+              </div>
+              </div>
+              
+        		</div>
         	</div>
         </div>
+        </swipe-card>
+      </swipe-cards>
                 
         <!-- <div class="item tabs tabs-secondary tabs-icon-left card-footer">
           <a class="tab-item" href="#">

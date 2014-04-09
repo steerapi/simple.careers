@@ -243,10 +243,11 @@ window.rAF = window.requestAnimationFrame
         @el.style[TRANSITION] = "-webkit-transform " + duration + "s ease-in-out"
         
         # console.log "window.innerWidth: ",window.innerWidth
+        # console.log "@y", @y
         if (@y < -50)
           @el.style[ionic.CSS.TRANSFORM] = "translate3d(" + @x + "px," + -(window.innerHeight * 1.5) + "px, 0) rotate(" + rotateTo + "rad)"
         else
-          @el.style[ionic.CSS.TRANSFORM] = "translate3d(" + @x + "px," + (window.innerHeight * 1.5) + "px, 0) rotate(" + rotateTo + "rad)"
+          @el.style[ionic.CSS.TRANSFORM] = "translate3d(" + @x + "px," + (window.innerHeight * 3) + "px, 0) rotate(" + rotateTo + "rad)"
           
         @onSwipe and @onSwipe()
         
@@ -254,7 +255,7 @@ window.rAF = window.requestAnimationFrame
         setTimeout (->
           self.onDestroy and self.onDestroy()
           return
-        ), duration * 1000
+        ), duration * 1000/5
       return
 
     
@@ -306,7 +307,7 @@ window.rAF = window.requestAnimationFrame
     _doDragStart: (e) ->
       width = @el.offsetWidth
       point = window.innerWidth / 2 + @rotationDirection * (width / 2)
-      distance = Math.abs(point - e.gesture.touches[0].pageX) # - window.innerWidth/2);
+      distance = Math.abs(point - e.gesture.touches[0].pageY) # - window.innerWidth/2);
       # console.log distance
       @touchDistance = distance * 10
       # console.log "Touch distance", @touchDistance #this.touchDistance, width);
