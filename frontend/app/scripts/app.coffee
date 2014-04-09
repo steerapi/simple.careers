@@ -227,8 +227,8 @@ window.rAF = window.requestAnimationFrame
     ###
     transitionOut: ->
       self = this
-      console.log "@x", @x
-      if (@x > -100) and (@x < 100)
+      # console.log "@x", @x
+      if (@x > -50) and (@x < 50)
         @el.style[TRANSITION] = "-webkit-transform 0.2s ease-in-out"
         @el.style[ionic.CSS.TRANSFORM] = "translate3d(" + @startX + "px," + (@startY) + "px, 0)"
         setTimeout (->
@@ -237,13 +237,13 @@ window.rAF = window.requestAnimationFrame
         ), 200
       else
       # Fly out
-        console.log "flyout"
+        # console.log "flyout"
         rotateTo = (@rotationAngle + (@rotationDirection * 0.6)) or (Math.random() * 0.4)
         duration = (if @rotationAngle then 0.5 else 1.0)
         @el.style[TRANSITION] = "-webkit-transform " + duration + "s ease-in-out"
         
-        console.log "window.innerWidth: ",window.innerWidth
-        if (@x < -100)
+        # console.log "window.innerWidth: ",window.innerWidth
+        if (@x < -50)
           @el.style[ionic.CSS.TRANSFORM] = "translate3d(" + (-window.innerWidth * 3) + "px," + @y + "px, 0) rotate(" + rotateTo + "rad)"
         else
           @el.style[ionic.CSS.TRANSFORM] = "translate3d(" + (window.innerWidth * 1.5) + "px," + @y + "px, 0) rotate(" + rotateTo + "rad)"
@@ -307,9 +307,9 @@ window.rAF = window.requestAnimationFrame
       width = @el.offsetWidth
       point = window.innerWidth / 2 + @rotationDirection * (width / 2)
       distance = Math.abs(point - e.gesture.touches[0].pageX) # - window.innerWidth/2);
-      console.log distance
+      # console.log distance
       @touchDistance = distance * 10
-      console.log "Touch distance", @touchDistance #this.touchDistance, width);
+      # console.log "Touch distance", @touchDistance #this.touchDistance, width);
       return
 
     _doDrag: (e) ->

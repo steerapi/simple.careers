@@ -1,5 +1,17 @@
 @import "compass/css3";
 
+html {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+body {
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+}
+
 @-webkit-keyframes bounceIn {
   0% {
     -webkit-transform: scale(0,0);
