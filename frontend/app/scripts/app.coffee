@@ -239,7 +239,7 @@ window.rAF = window.requestAnimationFrame
       # Fly out
         # console.log "flyout"
         rotateTo = (@rotationAngle + (@rotationDirection * 0.6)) or (Math.random() * 0.4)
-        duration = (if @rotationAngle then 0.5 else 1.0)
+        duration = (if @rotationAngle then 0.3 else 0.5)
         @el.style[TRANSITION] = "-webkit-transform " + duration + "s ease-in-out"
         
         # console.log "window.innerWidth: ",window.innerWidth
@@ -255,7 +255,7 @@ window.rAF = window.requestAnimationFrame
         setTimeout (->
           self.onDestroy and self.onDestroy()
           return
-        ), duration * 1000/5
+        ), duration * 1000
       return
 
     
@@ -265,6 +265,7 @@ window.rAF = window.requestAnimationFrame
     bindEvents: ->
       self = this
       ionic.onGesture "dragstart", ((e) ->
+        e.preventDefault()
         cx = window.innerWidth / 2
         if e.gesture.touches[0].pageX < cx
           self._transformOriginRight()
@@ -277,6 +278,7 @@ window.rAF = window.requestAnimationFrame
         return
       ), @el
       ionic.onGesture "drag", ((e) ->
+        e.preventDefault()
         window.rAF ->
           self._doDrag e
           return
@@ -284,6 +286,7 @@ window.rAF = window.requestAnimationFrame
         return
       ), @el
       ionic.onGesture "dragend", ((e) ->
+        e.preventDefault()
         window.rAF ->
           self._doDragEnd e
           return
@@ -415,9 +418,9 @@ angular
   	(RestangularProvider, $stateProvider, $urlRouterProvider, config) ->
       RestangularProvider.setRestangularFields
         id: "_id"
-      RestangularProvider.setBaseUrl "http://mobile.fairsey.com/data/v1/"
+      RestangularProvider.setBaseUrl "http://api.simple.careers/data/v1/"
         
-      $urlRouterProvider.otherwise "/intro/page"
+      $urlRouterProvider.otherwise "/app"
       $stateProvider
       .state('intro',
         url: "/intro",

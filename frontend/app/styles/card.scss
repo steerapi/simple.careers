@@ -51,253 +51,256 @@ body {
 }
 .card-wrapper{
   background-color: #d0d5d7;
-  
-  .card-inset{
-    padding-top:30px;
-    padding-left:10px;
-    padding-right:10px;
-    padding-bottom:10px;
+  .scroll{
+    height: 100%;  
+  }
+}
+.card-inset{
+//  padding-top:30px;
+//  padding-left:10px;
+//  padding-right:10px;
+//  padding-bottom:10px;
 //    width: 100%;
 //    height: 375px;
-    .card-background {
-      width: 320px;
-      height: 362px;
-      max-width: 320px;
-      max-height: 362px;
-      
-      border-radius: 10px;
-      background-color: rgb( 255, 255, 255 );
-      box-shadow: 0px 11px 16px 0px rgba( 0, 0, 0, 0.1 );
-      position: relative;
-      width: 100%;
+  .card-background {
+    width: 300px;
+    height: 362px;
+    max-width: 320px;
+    max-height: 362px;
+    
+    border-radius: 10px;
+    background-color: rgb( 255, 255, 255 );
+    box-shadow: 0px 11px 16px 0px rgba( 0, 0, 0, 0.1 );
+    position: relative;
+//    width: 100%;
 //      height: 375px;
 //      max-width: 280px;
-      margin: 0 auto;
-      z-index: 0;
-      .card-header{
-        margin: 0;
-        padding-left:65px;
-        padding-right:60px;
-        background: none;
-        border:none;
-        img:first-child{
-          max-width: 40px;
+    margin: 0 auto;
+    z-index: 0;
+    .card-header{
+      margin: 0;
+      padding-left:65px;
+      padding-right:60px;
+      background: none;
+      border:none;
+      img:first-child{
+        max-width: 40px;
+      }
+      p{
+        margin-bottom: 0;
+      }
+      .card-location{
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding-right: 20px;
+        padding-top: 15px;
+        i{
+          font-size: 24px;
+          padding-right: 3px;
+          display:inline;
         }
-        p{
-          margin-bottom: 0;
-        }
-        .card-location{
+      }
+    }
+    .card-content{
+      border:none;
+      background: none;        
+      padding:0;
+      margin: 0;
+      .card-title-wrapper{
+        position: relative;
+        .card-title{
           position: absolute;
-          top: 0;
-          right: 0;
-          padding-right: 20px;
-          padding-top: 15px;
-          i{
-            font-size: 24px;
-            padding-right: 3px;
-            display:inline;
-          }
-        }
-      }
-      .card-content{
-        border:none;
-        background: none;        
-        padding:0;
-        margin: 0;
-        .card-title-wrapper{
-          position: relative;
-          .card-title{
-            position: absolute;
-            bottom: 0px;
-            text-align: center;
-            width: 100%;
-            color: white;
-            padding:10px;
-            font-weight: 600;
-            height: 50px;
-            line-height: 30px;
-
-            background: -moz-linear-gradient(top,  rgba(0,0,0,0) 0%, rgba(0,0,0,0.4) 100%); /* FF3.6+ */
-            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.4))); /* Chrome,Safari4+ */
-            background: -webkit-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.4) 100%); /* Chrome10+,Safari5.1+ */
-            background: -o-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.4) 100%); /* Opera 11.10+ */
-            background: -ms-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.4) 100%); /* IE10+ */
-            background: linear-gradient(to bottom,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.4) 100%); /* W3C */
-            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#66000000',GradientType=0 ); /* IE6-9 */
-
-          }          
-        }
-      }
-      .card-badge-content{
-        border:none;
-        background: none;        
-        padding: 10px;
-        overflow: hidden;
-        white-space: nowrap;
-        max-height: 70px;
-        .card-badge-body{
-          margin: 0 auto;
+          bottom: 0px;
           text-align: center;
-          .card-badge:first-child{
-            margin-left: 0px;            
-            width: 45px;          
-          }
-          .card-badge{
-            margin-left: 5px;
-            width: 45px;          
-          }
+          width: 100%;
+          color: white;
+          padding:10px;
+          font-weight: 600;
+          height: 50px;
+          line-height: 30px;
+
+          background: -moz-linear-gradient(top,  rgba(0,0,0,0) 0%, rgba(0,0,0,0.4) 100%); /* FF3.6+ */
+          background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.4))); /* Chrome,Safari4+ */
+          background: -webkit-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.4) 100%); /* Chrome10+,Safari5.1+ */
+          background: -o-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.4) 100%); /* Opera 11.10+ */
+          background: -ms-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.4) 100%); /* IE10+ */
+          background: linear-gradient(to bottom,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.4) 100%); /* W3C */
+          filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#66000000',GradientType=0 ); /* IE6-9 */
+
+        }          
+      }
+    }
+    .card-badge-content{
+      border:none;
+      background: none;        
+      padding: 10px;
+      overflow: hidden;
+      white-space: nowrap;
+      max-height: 70px;
+      .card-badge-body{
+        margin: 0 auto;
+        text-align: center;
+        .card-badge:first-child{
+          margin-left: 0px;            
+          width: 45px;          
+        }
+        .card-badge{
+          margin-left: 5px;
+          width: 45px;          
         }
       }
-      .card-footer, .card-info{
-        padding:0;
-        margin: 0;
-        border-left:none;
-        border-right:none;
-        border-bottom:none;
-        border-top: solid 1px #ddd !important;
-        background: none;
-      }
-      .card-info{
-        height: 55px;
+    }
+    .card-footer, .card-info{
+      padding:0;
+      margin: 0;
+      border-left:none;
+      border-right:none;
+      border-bottom:none;
+      border-top: solid 1px #ddd !important;
+      background: none;
+    }
+    .card-info{
+      height: 55px;
 //        .tab-item:first-child{
 //          border-right: solid 0px #ddd;   
 //        }
 
-        .tab-item{
-          border-right: solid 1px #ddd;            
+      .tab-item{
+        border-right: solid 1px #ddd;            
 //          border-left: solid 1px #ddd;          
-        }
-        .tab-item:last-child{
-          border-right: solid 0px #ddd;
-        }
+      }
+      .tab-item:last-child{
+        border-right: solid 0px #ddd;
       }
     }
   }
-  
-  .title {
-    position: absolute;
-    left: 21px;
-    top: 416px;
-    width: 496px;
-    height: 101px;
-    z-index: 47;
-  }
-  .title-name {
-    font-size: 36px;
-    font-family: "Source Sans Pro";
-//    color: rgb( 255, 255, 255 );
-    line-height: 1;
-    text-align: center;
-//    position: absolute;
-//    left: 112.981px;
-    top: 42.12px;
-    width: 100%;
-    height: 35px;
-    z-index: 46;
-  }
-  .title-background {
-    background-image: url("images/title-background.png");
-    opacity: 0.4;
-    position: absolute;
-    left: 0px;
-    top: 0px;
-    width: 496px;
-    height: 101px;
-    z-index: 45;
-  }
-  .logo {
-    background-image: url("images/logo.png");
-    position: absolute;
-    left: 55px;
-    top: 37px;
-    width: 183px;
-    height: 77px;
-    z-index: 43;
-  }
-  .badges {
-    position: absolute;
-    left: 0px;
-    top: 515px;
-    width: 559px;
-    height: 170px;
-    z-index: 41;
-  }
-  .shadow-left {
-    background-image: url("images/shadow-left.png");
-    position: absolute;
-    left: 0px;
-    top: 2px;
-    width: 71px;
-    height: 168px;
-    z-index: 40;
-  }
-  .shadow-right {
-    background-image: url("images/shadow-right.png");
-    position: absolute;
-    left: 488px;
-    top: 0px;
-    width: 71px;
-    height: 168px;
-    z-index: 39;
-  }
-  .location-text {
-    font-size: 36px;
-    font-family: "Source Sans Pro";
-    color: rgb( 77, 77, 77 );
-    line-height: 1;
-    text-align: right;
-    position: absolute;
-    left: 426.937px;
-    top: 57.058px;
-    width: 40px;
-    height: 25px;
-    z-index: 31;
-  }
-  .hairlineh {
-    background-color: rgb( 224, 224, 224 );
-    position: absolute;
-    left: 21px;
-    top: 661px;
-    width: 496px;
-    height: 1px;
-    z-index: 30;
-  }
-  .hairlinev {
-    background-color: rgb( 224, 224, 224 );
-    position: absolute;
-    left: 268px;
-    top: 662px;
-    width: 1px;
-    height: 111px;
-    z-index: 29;
-  }
-  .type-text {
-    font-size: 30px;
-    font-family: "Source Sans Pro";
-    color: rgb( 77, 77, 77 );
-    line-height: 1.2;
-    text-align: left;
-    position: absolute;
-    left: 360.938px;
-    top: 701.038px;
-    width: 105px;
-    height: 22px;
-    z-index: 27;
-  }
-  .major-text {
-    font-size: 30px;
-    font-family: "Source Sans Pro";
-    color: rgb( 77, 77, 77 );
-    line-height: 1.2;
-    text-align: left;
-    position: absolute;
-    left: 129.938px;
-    top: 701.038px;
-    width: 64px;
-    height: 21px;
-    z-index: 25;
-  }
-
 }
 
+.title {
+  position: absolute;
+  left: 21px;
+  top: 416px;
+  width: 496px;
+  height: 101px;
+  z-index: 47;
+}
+.title-name {
+  font-size: 36px;
+  font-family: "Source Sans Pro";
+//    color: rgb( 255, 255, 255 );
+  line-height: 1;
+  text-align: center;
+//    position: absolute;
+//    left: 112.981px;
+  top: 42.12px;
+  width: 100%;
+  height: 35px;
+  z-index: 46;
+}
+.title-background {
+  background-image: url("images/title-background.png");
+  opacity: 0.4;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 496px;
+  height: 101px;
+  z-index: 45;
+}
+.logo {
+  background-image: url("images/logo.png");
+  position: absolute;
+  left: 55px;
+  top: 37px;
+  width: 183px;
+  height: 77px;
+  z-index: 43;
+}
+.badges {
+  position: absolute;
+  left: 0px;
+  top: 515px;
+  width: 559px;
+  height: 170px;
+  z-index: 41;
+}
+.shadow-left {
+  background-image: url("images/shadow-left.png");
+  position: absolute;
+  left: 0px;
+  top: 2px;
+  width: 71px;
+  height: 168px;
+  z-index: 40;
+}
+.shadow-right {
+  background-image: url("images/shadow-right.png");
+  position: absolute;
+  left: 488px;
+  top: 0px;
+  width: 71px;
+  height: 168px;
+  z-index: 39;
+}
+.location-text {
+  font-size: 36px;
+  font-family: "Source Sans Pro";
+  color: rgb( 77, 77, 77 );
+  line-height: 1;
+  text-align: right;
+  position: absolute;
+  left: 426.937px;
+  top: 57.058px;
+  width: 40px;
+  height: 25px;
+  z-index: 31;
+}
+.hairlineh {
+  background-color: rgb( 224, 224, 224 );
+  position: absolute;
+  left: 21px;
+  top: 661px;
+  width: 496px;
+  height: 1px;
+  z-index: 30;
+}
+.hairlinev {
+  background-color: rgb( 224, 224, 224 );
+  position: absolute;
+  left: 268px;
+  top: 662px;
+  width: 1px;
+  height: 111px;
+  z-index: 29;
+}
+.type-text {
+  font-size: 30px;
+  font-family: "Source Sans Pro";
+  color: rgb( 77, 77, 77 );
+  line-height: 1.2;
+  text-align: left;
+  position: absolute;
+  left: 360.938px;
+  top: 701.038px;
+  width: 105px;
+  height: 22px;
+  z-index: 27;
+}
+.major-text {
+  font-size: 30px;
+  font-family: "Source Sans Pro";
+  color: rgb( 77, 77, 77 );
+  line-height: 1.2;
+  text-align: left;
+  position: absolute;
+  left: 129.938px;
+  top: 701.038px;
+  width: 64px;
+  height: 21px;
+  z-index: 25;
+}
 
+.apply-btn{
+  
+}

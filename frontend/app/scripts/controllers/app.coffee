@@ -4,14 +4,43 @@ class AppCtrl extends Ctrl
   @$inject: ['$scope', '$stateParams', '$state', "Restangular", "$timeout"]
   constructor: (@scope, @stateParams, @state, @Restangular, @timeout) ->
     super @scope
-    @scope.cards = [{_id:1}]
-    @count = 4
+    @init()
+  init: =>
+    # console.log "init"
+    @count = 0
+    @resource = @Restangular.all "jobs"
+    @resource.getList(
+      skip: @count
+      limit: 1
+    ).then (jobs)=>
+      @scope.jobs = jobs
   cardDestroyed: (index)=>
-    @scope.cards.splice(index, 1);
+    @scope.jobs.splice(index, 1);
   cardSwiped: (index)=>
-    # console.log @scope.cards.length
-    # while @scope.cards.length < 4
-    newCard = {_id:@count++}
-    @scope.cards.push(newCard);
+    @count++
+    @resource = @Restangular.all "jobs"
+    @resource.getList(
+      skip: @count
+      limit: 1
+    ).then (jobs)=>
+      if jobs and jobs.length > 0
+        @scope.jobs.push(jobs[0]);
+    , =>
+      if @count>0
+        @timeout =>
+          @init()
+        , 500  
+      else
+        @scope.nomore = true
+  flipClick: =>
+    # console.log "flipClick"
+    if not @applyClicked 
+      @scope.flip = not @scope.flip
+    @applyClicked = false
+  apply: (event)=>
+    # console.log "apply"
+    event.preventDefault()
+    @applyClicked = true
+    return
     
 angular.module('simplecareersApp').controller('AppCtrl', AppCtrl)

@@ -1,9 +1,23 @@
-<ion-content class="card-wrapper" scroll="false">
+
+<ion-tabs class="tabs-icon-only tabs-positive">
+
+      <ion-tab title="Home" 
+               icon-on="ion-ios7-filing" 
+               icon-off="ion-ios7-filing-outline" 
+               >
+        
+        <!-- <ion-header-bar class="bar-positive"> -->
+          <!-- <button class="button button-clear" ng-click="newTask()">New</button> -->
+          <!-- <h1 class="title">Job</h1>
+        </ion-header-bar> -->
+        
+        <ion-content has-tabs="true" on-refresh="onRefresh()" class="card-wrapper" has-bouncing="false" scroll="false" padding="false" has-header="true">
+        
       <swipe-cards>
       
         <swipe-card ng-repeat="card in jobs track by card._id" on-destroy="cardDestroyed($index)" on-swipe="cardSwiped($index)">
         
-        <div class="flip-container" ng-class="{'flip':flip}" ng-click="flipClick()">
+        <div class="flip-container" ng-class="{'flip':flip}" ng-click="flip=!flip">
         	<div class="flipper">
         		<div class="front">
 
@@ -69,13 +83,8 @@
               3yrs+
             </a>
           </div> -->
-            <!-- <div class="bar bar-footer bar-positive"  ng-click="apply($event)">
-                <button class="button button-clear col-xs-12">Next</button>
-            </div> -->
-            
         </div>
         </div>
-
 
         		</div>
         		<div class="back">
@@ -86,10 +95,8 @@
                 
                 <p>
                 </p>
-                  <!-- <button class="button button-large button-assertive apply-btn">Apply!</button> -->
-                <!-- <div class="bar bar-footer bar-assertive"  ng-click="apply($event)">
-                    <button class="button button-clear col-xs-12">Apply</button>
-                </div> -->
+                  <button class="button button-large button-assertive" ng-click="startApp()">Apply!</button>
+                
               </div>
               </div>
               
@@ -98,6 +105,46 @@
         </div>
         </swipe-card>
       </swipe-cards>
-</ion-content>
+      
+      <div class="next-btn-wrapper">
 
-  
+                <button class="button button-large button-assertive" ng-click="startApp()">Next</button>
+                
+      </div>
+        <!-- <div class="item tabs tabs-secondary tabs-icon-left card-footer">
+          <a class="tab-item" href="#">
+            <i class="icon ion-thumbsup"></i>
+            Like
+          </a>
+          <a class="tab-item" href="#">
+            <i class="icon ion-chatbox"></i>
+            Comment
+          </a>
+          <a class="tab-item" href="#">
+            <i class="icon ion-share"></i>
+            Share
+          </a>
+        </div> -->
+        
+        </ion-content>
+      </ion-tab>
+
+      <ion-tab title="Profile" icon-on="icon ion-ios7-clock" icon-off="icon ion-ios7-clock-outline">
+        <header class="bar bar-header bar-positive">
+          <h1 class="title">Profile</h1>
+        </header>
+        <ion-content has-header="true">
+          <h1>Profile</h1>
+        </ion-content>
+      </ion-tab>
+
+      <ion-tab title="Settings" icon-on="icon ion-ios7-gear" icon-off="icon ion-ios7-gear-outline">
+        <header class="bar bar-header bar-positive">
+          <h1 class="title">Settings</h1>
+        </header>
+        <ion-content has-header="true">
+          <h1>Settings</h1>
+        </ion-content>
+      </ion-tab>
+      
+</ion-tabs>
