@@ -76,16 +76,16 @@ app.get /^\/docs(\/.*)?$/, (req, res, next) ->
   req.url = req.url.substr("/docs".length)
   docs_handler req, res, next
 
-
-baucis.use cors()
-baucis.use (req, res, next)->
-  res.header('Access-Control-Allow-Credentials', true)
-  next()
-# Setup data docs with Baucis
-app.use "/data/v1/", baucis
+bApp = baucis
   swagger: true
   version: "1.0.0"
   # release: "1.0.0"
+bApp.use cors()
+bApp.use (req, res, next)->
+  res.header('Access-Control-Allow-Credentials', true)
+  next()
+# Setup data docs with Baucis
+app.use "/data/v1/", bApp 
 
 ensureAuth = (request, response, next) ->
   console.log "ensureAuth"
