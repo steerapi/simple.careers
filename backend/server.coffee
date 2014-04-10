@@ -19,8 +19,6 @@ db.on "error", ->
 db.once "open", ->
   console.log arguments...
 
-baucis = require "baucis"
-swagger = require('baucis-swagger')
 express = require "express"
 Schema = require "./schema"
 en = require('lingo').en
@@ -34,20 +32,12 @@ User = Models["User"]
 Askus = Models["Askus"]
 
 
-# Create the   API routes
-console.log Schema.list
-Schema.list.forEach (item)->
-  # TODO *IMPORTANT* add ensureAuth to add auth barrier
-  baucis.rest(item.toLowerCase()).request (request, response, next) ->
-    # ensureAuth(request, response, next)
-    return next()
-
 # Create the app and listen for API requests
 app = express()
+app.use(express.basicAuth('simple', 'simple1337'));
 app.use(express.static(__dirname + '/../frontend/dist'));
 app.use("/pages",express.static(__dirname + '/../frontend/pages'));
 
-cors = require 'cors'
 app.use(express.logger());
 app.use(express.cookieParser());
 app.use(express.bodyParser());
@@ -64,28 +54,6 @@ passport.use(User.createStrategy());
 # use static serialize and deserialize of model for passport session support
 passport.serializeUser User.serializeUser()
 passport.deserializeUser User.deserializeUser()
-
-docs_handler = express.static(__dirname + "/swagger-ui/")
-app.get /^\/docs(\/.*)?$/, (req, res, next) ->
-  if req.url is "/docs" # express static barfs on root url w/o trailing slash
-    res.writeHead 302,
-      Location: req.url + "/"
-    res.end()
-    return
-  # take off leading /docs so that connect locates file correctly
-  req.url = req.url.substr("/docs".length)
-  docs_handler req, res, next
-
-bApp = baucis
-  swagger: true
-  version: "1.0.0"
-  # release: "1.0.0"
-bApp.use cors()
-bApp.use (req, res, next)->
-  res.header('Access-Control-Allow-Credentials', true)
-  next()
-# Setup data docs with Baucis
-app.use "/data/v1/", bApp 
 
 ensureAuth = (request, response, next) ->
   console.log "ensureAuth"
