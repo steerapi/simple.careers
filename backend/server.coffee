@@ -8,6 +8,7 @@ mongooseCachebox = require "mongoose-cachebox"
 options =
   cache: true # start caching
   ttl: 30 # 30 seconds
+hat = require('hat')
 
 mongooseCachebox mongoose, options
 mongoose.connect config.mongo
@@ -45,15 +46,58 @@ app.use(express.methodOverride());
 app.use(express.session({ secret: 'joyce1331' }));
 
 passport = require 'passport'
+LinkedInStrategy = require('passport-linkedin').Strategy;
 # Init passport
 app.use(passport.initialize());
 app.use(passport.session());
 
+passport.use new LinkedInStrategy(
+  consumerKey: "77ht645nr4wfov"
+  consumerSecret: "f9uP5fCD1wuWBXJ2"
+  callbackURL: "/auth/linkedin/callback"
+  profileFields: ['id', 'first-name', 'last-name', 'email-address', 'headline', "industry", "skills", "certifications", "educations", "courses", "volunteer", "honors-awards", "recommendations-received", "num-recommenders", "three-current-positions", "three-past-positions", "site-standard-profile-request", "picture-url", "positions", "specialties", "summary"]
+, (token, tokenSecret, profile, done) ->
+  delete profile._raw
+  # delete profile._json
+  User.find
+    "_linkedin.profile.id": profile.id
+  , (err, users) ->
+    obj = 
+      token: hat()
+      _linkedin:
+        profile: profile
+        token: token
+        tokenSecret: tokenSecret
+    if not users or users.length == 0
+      User.create obj
+      , (err, users) ->
+        done err, users[0]
+    else
+      user = users[0]
+      User.update 
+        _id: user._id
+      , obj
+      , (err, num, raw) ->
+        User.findOne
+          _id: user._id
+        , (err, user) ->
+          done err, user
+  return
+)
+
 # use static authenticate method of model in LocalStrategy
-passport.use(User.createStrategy());
+# passport.use(User.createStrategy());
 # use static serialize and deserialize of model for passport session support
-passport.serializeUser User.serializeUser()
-passport.deserializeUser User.deserializeUser()
+# passport.serializeUser User.serializeUser()
+# passport.deserializeUser User.deserializeUser()
+
+passport.serializeUser (user, done) ->
+  done null, user
+  return
+
+passport.deserializeUser (obj, done) ->
+  done null, obj
+  return
 
 ensureAuth = (request, response, next) ->
   console.log "ensureAuth"
@@ -74,7 +118,7 @@ sendConfirmToken = (to, token, cb)->
       Your new user account with the email address #{to} is now set up. 
 
       Please use the link below to activate your account. 
-      http://simple.careers/auth/v1/verification/#{token}
+      http://www.simple.careers/auth/v1/verification/#{token}
 
       If you have not requested the creation of a Simple Careers account, or if you think this is an unauthorized use of your email address, please contact us at support@simple.careers. 
 
@@ -116,10 +160,10 @@ app.get "/auth/v1/verification/:token", (req, res) ->
     if(user)
       user.set "verified", true
       user.save ->
-        res.redirect('http://simple.careers/pages/verified.html');
+        res.redirect('http://www.simple.careers/pages/verified.html');
         # res.send "Your account is verified. Please download Simple on the App Store."
     else
-      res.redirect('http://simple.careers/pages/denied.html');
+      res.redirect('http://www.simple.careers/pages/denied.html');
       # res.send "We're sorry. The code does not match."
 
 # app.post "/auth/v1/login", passport.authenticate("local",
@@ -230,7 +274,7 @@ sendResetPassword = (to, token, cb)->
       You have request a password reset for your email address #{to}. 
 
       Please use the link below to reset your password. 
-      http://simple.careers/auth/v1/reset/#{token}
+      http://www.simple.careers/auth/v1/reset/#{token}
 
       If you have not requested the password reset of your Simple Careers account, or if you think this is an unauthorized use of your email address, please contact us at support@simple.careers. 
 
@@ -268,9 +312,9 @@ app.get "/auth/v1/reset/:token", (req, res) ->
     if(user)
       user.set "verified", true
       user.save ->
-        res.redirect("http://simple.careers/pages/reset.html?token=#{token}");
+        res.redirect("http://www.simple.careers/pages/reset.html?token=#{token}");
     else
-      res.redirect("http://simple.careers/pages/resetdenied.html");
+      res.redirect("http://www.simple.careers/pages/resetdenied.html");
 
 app.post "/auth/v1/setpass", (req, res) ->
   token = req.body.token
@@ -314,6 +358,36 @@ app.configure "development", ->
 
 app.configure "production", ->
   app.use express.errorHandler()
+  return
+
+
+# GET /auth/linkedin
+#   Use passport.authenticate() as route middleware to authenticate the
+#   request.  The first step in LinkedIn authentication will involve
+#   redirecting the user to linkedin.com.  After authorization, LinkedIn will
+#   redirect the user back to this application at /auth/linkedin/callback
+app.get "/auth/linkedin", passport.authenticate("linkedin", { scope: ['r_fullprofile', 'r_emailaddress'] }), (req, res) ->
+# The request will be redirected to LinkedIn for authentication, so this
+# function will not be called.
+
+# GET /auth/linkedin/callback
+#   Use passport.authenticate() as route middleware to authenticate the
+#   request.  If authentication fails, the user will be redirected back to the
+#   login page.  Otherwise, the primary route function function will be called,
+#   which, in this example, will redirect the user to the home page.
+app.get "/auth/linkedin/callback", passport.authenticate("linkedin",
+  failureRedirect: "/auth/linkedin"
+), (req, res) ->
+  user = req.session.passport.user
+  User.findOne _id:user._id, (err,user)->
+    user = JSON.parse JSON.stringify user
+    res.redirect "/?userId=#{user._id}&token=#{user.token}"
+    return
+  return
+
+app.get "/logout", (req, res) ->
+  req.logout()
+  res.redirect "/"
   return
 
 # Listening

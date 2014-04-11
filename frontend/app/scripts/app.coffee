@@ -112,7 +112,7 @@ window.rAF = window.requestAnimationFrame
       cardOffset = Math.min(@cards.length, 3) * 5
       
       # Move each card 5 pixels down to give a nice stacking effect (max of 3 stacked)
-      # nextCard.setY nextCard.y-cardOffset
+      nextCard.setY nextCard.y-cardOffset
       nextCard.setPopInDuration @cardPopInDuration
       nextCard.setZIndex @cards.length*10
       return
@@ -228,7 +228,8 @@ window.rAF = window.requestAnimationFrame
     transitionOut: ->
       self = this
       # console.log "@x", @x
-      if (@y > -50) and (@y < 50)
+      # if (@y > -50) and (@y < 50)
+      if @y < 50
         @el.style[TRANSITION] = "-webkit-transform 0.2s ease-in-out"
         @el.style[ionic.CSS.TRANSFORM] = "translate3d(" + @startX + "px," + (@startY) + "px, 0)"
         setTimeout (->
@@ -420,7 +421,7 @@ angular
         id: "_id"
       RestangularProvider.setBaseUrl "http://api.simple.careers/data/v1/"
         
-      $urlRouterProvider.otherwise "/app"
+      $urlRouterProvider.otherwise "/app/0"
       $stateProvider
       .state('intro',
         url: "/intro",
@@ -449,6 +450,16 @@ angular
             'main': {
               templateUrl: "/views/app/app.html",
               controller: "AppCtrl"
+            }
+          }
+      )
+      .state('app.job',
+        url: "/:jobId",
+        views: 
+          {
+            'main.view': {
+              templateUrl: "/views/app/job.html",
+              controller: "AppJobCtrl"
             }
           }
       )
