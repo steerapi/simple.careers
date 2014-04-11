@@ -35,7 +35,7 @@ Askus = Models["Askus"]
 
 # Create the app and listen for API requests
 app = express()
-app.use(express.basicAuth('simple', 'simple1337'));
+# app.use(express.basicAuth('simple', 'simple1337'));
 app.use(express.static(__dirname + '/../frontend/dist'));
 app.use("/pages",express.static(__dirname + '/../frontend/pages'));
 
