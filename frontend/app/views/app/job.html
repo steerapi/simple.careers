@@ -9,11 +9,13 @@
         <div class="card-inset">
         <div class="card-background">
           <div ng-show="!isValid(job)" class="card-loading-wrapper">
-            <img class="card-loading" src="images/loading.gif"></img>            
+            <img class="card-loading" src="/images/loading.gif"></img>            
           </div>
           <div ng-show="isValid(job)">
           <div class="item item-avatar card-header">
+            <div class="img">
             <img ng-src="{{job.logo.url}}">
+            </div>
             <h2>{{job.companyname}}</h2>
             <p>{{job.companytagline}}</p>
             <!-- <div class="tab-item card-location">
@@ -25,7 +27,9 @@
 
           <div class="item item-body card-content">
             <div class="card-title-wrapper">
-            <img class="full-image" ng-src="{{job.picture.url}}">
+              <div class="card-image">
+            <img  ng-src="{{convert(job.picture)}}" width="300" height="225">
+          </div>
             <span class="card-title">{{job.position}}<span>
             </div>
             <!-- <p>
@@ -46,12 +50,12 @@
                 
             <!-- </ion-scroll> -->
             
-            <!-- <img class="card-badge" src="images/badges/C.png">
-            <img class="card-badge" src="images/badges/Java.png">
-            <img class="card-badge" src="images/badges/Python.png">
-            <img class="card-badge" src="images/badges/C.png">
-            <img class="card-badge" src="images/badges/Java.png">
-            <img class="card-badge" src="images/badges/Python.png"> -->
+            <!-- <img class="card-badge" src="/images/badges/C.png">
+            <img class="card-badge" src="/images/badges/Java.png">
+            <img class="card-badge" src="/images/badges/Python.png">
+            <img class="card-badge" src="/images/badges/C.png">
+            <img class="card-badge" src="/images/badges/Java.png">
+            <img class="card-badge" src="/images/badges/Python.png"> -->
           </div>
 
           <div class="item tabs tabs-secondary tabs-icon-left card-info">
@@ -101,10 +105,16 @@
       </swipe-cards>
 <div class="footer-action">
   <button class="button button-clear btn-wrapper">
-  <img src="images/no-btn.png" class="action-btn"></img>
+  <img src="/images/no-btn.png" class="action-btn"></img>
   </button>
-  <span class="spacer"></span>
+  <span class="spacer">
+    <ul ng-social-buttons
+             showcounts="true">
+    <li class="ng-social-facebook">Facebook</li>
+  </ul>
+    
+  </span>
   <button class="button button-clear btn-wrapper">
-  <img src="images/yes-btn.png" class="action-btn"></img>
+  <img src="/images/yes-btn.png" class="action-btn"></img>
   </button>
 </div>

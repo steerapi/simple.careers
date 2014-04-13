@@ -406,6 +406,7 @@ angular
     'ngCookies',
     'ngResource',
     'ngSanitize',
+    'ngSocial',
     # 'ngRoute',
     # 'ui.router',
     'ionic',
@@ -413,10 +414,13 @@ angular
     'restangular'
   ])
   .config([
+    '$locationProvider'
     'RestangularProvider'
   	'$stateProvider'
     '$urlRouterProvider'
-  	(RestangularProvider, $stateProvider, $urlRouterProvider, config) ->
+  	($locationProvider, RestangularProvider, $stateProvider, $urlRouterProvider, config) ->
+      # $locationProvider.html5Mode(true);
+      
       RestangularProvider.setRestangularFields
         id: "_id"
       RestangularProvider.setBaseUrl "http://api.simple.careers/data/v1/"

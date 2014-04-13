@@ -55,6 +55,9 @@
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/ionic/release/css/ionic.css" />
     <!-- endbower -->
+    <link rel="stylesheet" href="bower_components/angular-social/angular-social.css">
+    
+    <link rel="stylesheet" href="libs/pathmenu.css">
     <!-- endbuild -->
     <!-- build:css({.tmp,app}) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
@@ -91,6 +94,15 @@
     <script src="bower_components/json3/lib/json3.min.js"></script>
     <![endif]-->
 
+  <div id="fb-root"></div>
+  <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=1484996168383259";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));</script>
+
     <!-- build:js scripts/vendor.js -->
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
@@ -105,7 +117,9 @@
     <script src="bower_components/ionic/release/js/ionic-angular.js"></script>
     <script src="bower_components/lodash/dist/lodash.compat.js"></script>
     <script src="bower_components/restangular/dist/restangular.js"></script>
+    <script src="bower_components/angular-social/angular-social.js"></script>
     <!-- endbower -->
+    <script src="libs/pathmenu.js"></script>
     <!-- endbuild -->
     <!-- <script src="libs/ionic/ionic.swipecards.js"></script> -->
     
@@ -124,5 +138,35 @@
         <script src="scripts/controllers/app-job.js"></script>
         <script src="scripts/controllers/app-student.js"></script>
         <!-- endbuild -->
+        
+  <div id="menu1"></div>
+	<script type="text/javascript">
+		$m.addEvent(window, 'load', 
+		function(){
+			var myMenu = new PathMenu(
+			{
+        bezierCurve: {"x0": 40, "y0": 182, "x1": 85, "y1": 190, "x2": 78, "y2": 100,"x3": 70 },
+				elem: document.getElementById('menu1'), 
+				items: [{
+						url: '#photo',
+						backgroundUrl: 'images/menu/photo.png',
+						title: 'Go to photo page'
+					}, {
+						url: '#people',
+						backgroundUrl: 'images/menu/people.png',
+						title: 'Go to people page'
+					}, {
+						url: '#music',
+						backgroundUrl: 'images/menu/music.png',
+						title: 'Music'
+					}],
+					mainButton: {
+					    backgroundUrl: 'images/menu/mainbutton.png',
+					    backButtonBackgroundUrl: 'images/menu/backbutton.png'
+					},
+          expandPattern:PathMenu.ExpandPattern.rightTopFixedArc
+			});
+		});
+	</script>
 </body>
 </html>

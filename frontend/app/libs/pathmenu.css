@@ -1,0 +1,141 @@
+.path .menu,
+.path .menu.back {
+  padding: 0;
+  margin: 0;
+  width: 50px;
+  height: 50px;
+  -webkit-transition: -webkit-transform 800ms ease-in-out;
+  -moz-transition: -moz-transform 800ms ease-in-out;
+  -o-transition: -o-transform 800ms ease-in-out;
+  -ms-transition: -ms-transform 800ms ease-in-out;
+  transition: transform 800ms ease-in-out;
+  -webkit-transform: rotate(0deg) translateZ(0);
+  -moz-transform: rotate(0deg) translateZ(1);
+  -o-transform: rotate(0deg);
+  -ms-transform: rotate(0deg) translateZ(0);
+  transform: rotate(0deg) translateZ(0);
+  /*make sure nobody else tries to hide us.*/
+
+  display: block;
+  visibility: visible;
+}
+.path .item {
+  width: 40px;
+  height: 40px;
+}
+.path .fade-mainbutton {
+  opacity: 0.4;
+}
+.path .item,
+.path .captionlabel {
+  border-width: 0px;
+  
+  /*safari 5 on windows prefers these properties 
+	be defined separately versus in a single line, so make happy.*/
+
+  -webkit-transition-duration: 1000ms;
+  -moz-transition-duration: 1000ms;
+  -o-transition-duration: 1000ms;
+  -ms-transition-duration: 1000ms;
+  transition-duration: 1000ms;
+  -webkit-transition-property: -webkit-transform, left, top, opacity, z-index, visibility;
+  -moz-transition-property: -moz-transform, left, top, opacity, z-index, visibility;
+  -o-transition-property: -o-transform, left, top, opacity, z-index, visibility;
+  -ms-transition-property: -ms-transform, left, top, opacity, z-index, visibility;
+  transition-property: transform, left, top, opacity, z-index, visibility;
+  -webkit-transition-timing-function: cubic-bezier(0.68, 0, 0.265, 1);
+  /* older webkit */
+
+  -webkit-transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  -moz-transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  -o-transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  -ms-transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  display: table;
+  text-align: center;
+}
+/*
+when text is supplied to a menu item
+a span element is used to contain it.
+*/
+.path .item span {
+  display: table-cell;
+  vertical-align: middle;
+}
+.path .item:hover {
+  /*cursor:pointer;*/
+
+}
+.path .captionlabel {
+  background: #4b4845;
+  color: #ffffff;
+  padding: 2px;
+  white-space: nowrap;
+  cursor: default;
+}
+.path .item.showitems,
+.path .item.parent.showitems,
+.path .captionlabel.showlabels {
+  -webkit-transform: rotate(360deg) translateZ(0);
+  -moz-transform: rotate(360deg) translateZ(1);
+  -o-transform: rotate(360deg);
+  -ms-transform: rotate(360deg) translateZ(0);
+  transform: rotate(360deg) translateZ(0);
+}
+.path .item.active {
+  -webkit-transform: rotate(180deg) scale(4) translateZ(0);
+  -moz-transform: rotate(180deg) scale(4) translateZ(0);
+  -o-transform: rotate(180deg) scale(4);
+  -ms-transform: rotate(180deg) scale(4) translateZ(0);
+  transform: rotate(180deg) scale(4) translateZ(0);
+  /*ie8 and below*/
+
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+  opacity: 0;
+}
+.path .item.hideitems,
+.path .item.parent.hideitems,
+.path .captionlabel.hidelabels {
+  -webkit-transform: rotate(-360deg) translateZ(0);
+  -moz-transform: rotate(-360deg) translateZ(1);
+  -o-transform: rotate(-360deg);
+  -ms-transform: rotate(-360deg) translateZ(0);
+  transform: rotate(-360deg) translateZ(0);
+}
+.path .captionlabel.hidelabels {
+  /*ie8 and below*/
+
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+  opacity: 0;
+}
+.path .captionlabel.showlabels {
+  /*ie8 and below*/
+
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+  filter: alpha(opacity=100);
+  opacity: 1;
+}
+.path .menu.rotatein,
+.path .menu.back.rotatein {
+  -webkit-transform: rotate(360deg) translateZ(0);
+  -moz-transform: rotate(360deg) translateZ(0);
+  -o-transform: rotate(360deg);
+  -ms-transform: rotate(360deg) translateZ(0);
+  transform: rotate(360deg) translateZ(0);
+}
+.path .menu.rotateout,
+.path .menu.back.rotateout {
+  -webkit-transform: rotate(-360deg) translateZ(0);
+  -moz-transform: rotate(-360deg) translateZ(0);
+  -o-transform: rotate(-360deg);
+  -ms-transform: rotate(-360deg) translateZ(0);
+  transform: rotate(-360deg) translateZ(0);
+}
+.path.hide-menu,
+.path .hide-menu.item,
+.path.hide-menu .menu,
+.path.hide-menu .menu.back {
+  visibility: hidden;
+}

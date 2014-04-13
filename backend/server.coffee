@@ -36,7 +36,15 @@ Askus = Models["Askus"]
 # Create the app and listen for API requests
 app = express()
 # app.use(express.basicAuth('simple', 'simple1337'));
-app.use(express.static(__dirname + '/../frontend/dist'));
+# app.use(express.static(__dirname + '/../frontend/dist'));
+app.use("/**/bower_components/*",express.static(__dirname + '/../frontend/dist/bower_components'));
+app.use("*fonts*",express.static(__dirname + '/../frontend/dist/fonts'));
+app.use("*images*",express.static(__dirname + '/../frontend/dist/images'));
+app.use("/app/libs",express.static(__dirname + '/../frontend/dist/libs'));
+app.use("*scripts*",express.static(__dirname + '/../frontend/dist/scripts'));
+app.use("*styles*",express.static(__dirname + '/../frontend/dist/styles'));
+app.use("*views*",express.static(__dirname + '/../frontend/dist/views'));
+
 app.use("/pages",express.static(__dirname + '/../frontend/pages'));
 
 app.use(express.logger());
@@ -51,39 +59,7 @@ LinkedInStrategy = require('passport-linkedin').Strategy;
 app.use(passport.initialize());
 app.use(passport.session());
 
-passport.use new LinkedInStrategy(
-  consumerKey: "77ht645nr4wfov"
-  consumerSecret: "f9uP5fCD1wuWBXJ2"
-  callbackURL: "/auth/linkedin/callback"
-  profileFields: ['id', 'first-name', 'last-name', 'email-address', 'headline', "industry", "skills", "certifications", "educations", "courses", "volunteer", "honors-awards", "recommendations-received", "num-recommenders", "three-current-positions", "three-past-positions", "site-standard-profile-request", "picture-url", "positions", "specialties", "summary"]
-, (token, tokenSecret, profile, done) ->
-  delete profile._raw
-  # delete profile._json
-  User.find
-    "_linkedin.profile.id": profile.id
-  , (err, users) ->
-    obj = 
-      token: hat()
-      _linkedin:
-        profile: profile
-        token: token
-        tokenSecret: tokenSecret
-    if not users or users.length == 0
-      User.create obj
-      , (err, users) ->
-        done err, users[0]
-    else
-      user = users[0]
-      User.update 
-        _id: user._id
-      , obj
-      , (err, num, raw) ->
-        User.findOne
-          _id: user._id
-        , (err, user) ->
-          done err, user
-  return
-)
+
 
 # use static authenticate method of model in LocalStrategy
 # passport.use(User.createStrategy());
@@ -361,12 +337,49 @@ app.configure "production", ->
   return
 
 
+passport.use new LinkedInStrategy(
+  consumerKey: "77ht645nr4wfov"
+  consumerSecret: "f9uP5fCD1wuWBXJ2"
+  callbackURL: "/auth/linkedin/callback"
+  profileFields: ['id', 'first-name', 'last-name', 'email-address', 'headline', "industry", "skills", "certifications", "educations", "courses", "volunteer", "honors-awards", "recommendations-received", "num-recommenders", "three-current-positions", "three-past-positions", "site-standard-profile-request", "picture-url", "positions", "specialties", "summary"]
+, (token, tokenSecret, profile, done) ->
+  delete profile._raw
+  # delete profile._json
+  User.find
+    "_linkedin.profile.id": profile.id
+  , (err, users) ->
+    obj = 
+      token: hat()
+      _linkedin:
+        profile: profile
+        token: token
+        tokenSecret: tokenSecret
+    if not users or users.length == 0
+      User.create obj
+      , (err, users) ->
+        done err, users[0]
+    else
+      user = users[0]
+      User.update 
+        _id: user._id
+      , obj
+      , (err, num, raw) ->
+        User.findOne
+          _id: user._id
+        , (err, user) ->
+          done err, user
+  return
+)
+
 # GET /auth/linkedin
 #   Use passport.authenticate() as route middleware to authenticate the
 #   request.  The first step in LinkedIn authentication will involve
 #   redirecting the user to linkedin.com.  After authorization, LinkedIn will
 #   redirect the user back to this application at /auth/linkedin/callback
-app.get "/auth/linkedin", passport.authenticate("linkedin", { scope: ['r_fullprofile', 'r_emailaddress'] }), (req, res) ->
+app.get "/auth/linkedin", (req, res) ->
+  console.log req.query
+  ln = passport.authenticate("linkedin", { scope: ['r_fullprofile', 'r_emailaddress'] })
+  ln(req,res,->)
 # The request will be redirected to LinkedIn for authentication, so this
 # function will not be called.
 
@@ -388,6 +401,12 @@ app.get "/auth/linkedin/callback", passport.authenticate("linkedin",
 app.get "/logout", (req, res) ->
   req.logout()
   res.redirect "/"
+  return
+
+path = require "path"
+app.all "/*", (req, res) ->
+  console.log path.resolve("#{__dirname}/../frontend/dist/index.html")
+  res.sendfile path.resolve("#{__dirname}/../frontend/dist/index.html")
   return
 
 # Listening

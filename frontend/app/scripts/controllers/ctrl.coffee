@@ -21,5 +21,11 @@ class Ctrl
       cb()
       @scope.$emit "notification", 
         message: "done"
-
+  convert: (file)=>
+    return if not file
+    url = file.url
+    return url if /gif/.test file.mimetype
+    if /filepicker/.test url
+      return "#{url}/convert?w=600&h=450"
+    return url
 window.Ctrl = Ctrl

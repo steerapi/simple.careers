@@ -7,6 +7,7 @@ class AppJobCtrl extends Ctrl
     @skip = @state.params.jobId
     @resource = @Restangular.all "jobs"
     @resource.getList(
+      sort: "order"
       skip: @skip
       limit: 1
     ).then (jobs)=>

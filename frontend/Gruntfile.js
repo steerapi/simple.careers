@@ -48,7 +48,17 @@ module.exports = function (grunt) {
       },
       livereload: {
         options: {
-          livereload: '<%= connect.options.livereload %>'
+          livereload: '<%= connect.options.livereload %>',
+          middleware: function (connect) {
+                  return [
+                    modRewrite([
+                      '!\\.html|\\.js|\\.css|\\.png$ /index.html [L]'
+                    ]),
+                    lrSnippet,
+                    mountFolder(connect, '.tmp'),
+                    mountFolder(connect, yeomanConfig.app)
+                  ];
+                }
         },
         files: [
           '<%= yeoman.app %>/{,*/}*.html',
@@ -187,7 +197,7 @@ module.exports = function (grunt) {
         httpFontsPath: '/styles/fonts',
         relativeAssets: false,
         assetCacheBuster: false,
-        raw: 'Sass::Script::Number.precision = 10\n'
+        raw: 'Sass::Script::Number.precision = 10\nrequire "animation"\n'
       },
       dist: {
         options: {

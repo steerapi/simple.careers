@@ -78,6 +78,7 @@ body {
     
     border-radius: 10px;
     background-color: rgb( 255, 255, 255 );
+    border: solid 1px #ddd;
     box-shadow: 0px 11px 16px 0px rgba( 0, 0, 0, 0.1 );
     position: relative;
 //    width: 100%;
@@ -104,9 +105,16 @@ body {
       h2{
         font-size: 20px;
       }
-      img:first-child{
-        max-width: 45px;
-        max-height: 45px;
+      .img{
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        width: 45px;
+        height: 45px;
+        line-height: 45px;
+        img{
+          width: 45px;
+        }
       }
       p{
         margin-bottom: 0;
@@ -132,13 +140,15 @@ body {
       padding:0;
       margin: 0;
       .card-title-wrapper{
-        height: 223px;
+        height: 225px;
         position: relative;
-
+        .card-image{
+          position: relative;
+          text-align: center;
+        }
         .card-title{
           position: absolute;
           bottom: 0px;
-          text-align: center;
           width: 100%;
           color: white;
           padding:10px;
@@ -146,14 +156,15 @@ body {
           font-weight: 600;
           height: 50px;
           line-height: 30px;
+          text-align: center;
 
-          background: -moz-linear-gradient(top,  rgba(0,0,0,0) 0%, rgba(0,0,0,0.4) 100%); /* FF3.6+ */
-          background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.4))); /* Chrome,Safari4+ */
-          background: -webkit-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.4) 100%); /* Chrome10+,Safari5.1+ */
-          background: -o-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.4) 100%); /* Opera 11.10+ */
-          background: -ms-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.4) 100%); /* IE10+ */
-          background: linear-gradient(to bottom,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.4) 100%); /* W3C */
-          filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#66000000',GradientType=0 ); /* IE6-9 */
+          background: -moz-linear-gradient(top,  rgba(0,0,0,0) 0%, rgba(0,0,0,0.5) 100%); /* FF3.6+ */
+          background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.5))); /* Chrome,Safari4+ */
+          background: -webkit-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.5) 100%); /* Chrome10+,Safari5.1+ */
+          background: -o-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.5) 100%); /* Opera 11.10+ */
+          background: -ms-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.5) 100%); /* IE10+ */
+          background: linear-gradient(to bottom,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.5) 100%); /* W3C */
+          filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#88000000',GradientType=0 ); /* IE6-9 */
 
         }          
       }
@@ -190,13 +201,12 @@ body {
     .card-info{
       height: 55px;
 //        .tab-item:first-child{
-//          border-right: solid 0px #ddd;   
+//          border-right: solid 0px #ddd;
 //        }
-
       .tab-item{
         cursor: auto;
-        border-right: solid 1px #ddd;            
-//          border-left: solid 1px #ddd;          
+        border-right: solid 1px #ddd;
+//          border-left: solid 1px #ddd;
       }
       .tab-item:last-child{
         border-right: solid 0px #ddd;
@@ -209,18 +219,20 @@ body {
   
 }
 .action-btn{
-  width: 60px;
-  height: 60px;
+  width: 55px;
+  height: 55px;
 }
 .btn-wrapper{
-  max-height: 60px;  
+  max-height: 55px;  
 }
 .spacer{
-  width: 100px;
+  width: 150px;
   display: inline-block;
+  margin-top: 15px;
+  opacity: 0.90;
 }
 .footer-action{
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   z-index: 1000;
   text-align: center;
   width: 100%;
