@@ -9,7 +9,7 @@ html {
 body {
   height: 100%;
   width: 100%;
-  overflow: auto;
+  overflow:hidden;
 }
 
 @-webkit-keyframes fadeIn {
@@ -63,6 +63,7 @@ body {
   width: 100%;    
 }
 .card-inset{
+  overflow:hidden;
 //  padding-top:30px;
 //  padding-left:10px;
 //  padding-right:10px;
