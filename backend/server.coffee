@@ -36,15 +36,7 @@ Askus = Models["Askus"]
 # Create the app and listen for API requests
 app = express()
 # app.use(express.basicAuth('simple', 'simple1337'));
-# app.use(express.static(__dirname + '/../frontend/dist'));
-app.use("/**/bower_components/*",express.static(__dirname + '/../frontend/dist/bower_components'));
-app.use("*fonts*",express.static(__dirname + '/../frontend/dist/fonts'));
-app.use("*images*",express.static(__dirname + '/../frontend/dist/images'));
-app.use("/app/libs",express.static(__dirname + '/../frontend/dist/libs'));
-app.use("*scripts*",express.static(__dirname + '/../frontend/dist/scripts'));
-app.use("*styles*",express.static(__dirname + '/../frontend/dist/styles'));
-app.use("*views*",express.static(__dirname + '/../frontend/dist/views'));
-
+app.use(express.static(__dirname + '/../frontend/dist'));
 app.use("/pages",express.static(__dirname + '/../frontend/pages'));
 
 app.use(express.logger());
@@ -403,11 +395,11 @@ app.get "/logout", (req, res) ->
   res.redirect "/"
   return
 
-path = require "path"
-app.all "/*", (req, res) ->
-  console.log path.resolve("#{__dirname}/../frontend/dist/index.html")
-  res.sendfile path.resolve("#{__dirname}/../frontend/dist/index.html")
-  return
+# path = require "path"
+# app.all "/*", (req, res) ->
+#   console.log path.resolve("#{__dirname}/../frontend/dist/index.html")
+#   res.sendfile path.resolve("#{__dirname}/../frontend/dist/index.html")
+#   return
 
 # Listening
 app.listen port
