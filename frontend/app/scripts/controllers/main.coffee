@@ -2,4 +2,4 @@
 
 angular.module('simplecareersApp')
   .controller 'MainCtrl', ($scope) ->
-    console.log "Hi"
+    $scope.desc = "Hello"
