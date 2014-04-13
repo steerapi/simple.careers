@@ -26,7 +26,6 @@
     "baucis-swagger": "~0.2.7",
     "passport-linkedin": "~0.1.3",
     "mongoose-findorcreate": "~0.1.2",
-    "hat": "0.0.3",
-    "prerender-node": "~1.0.1"
+    "hat": "0.0.3"
   }
 }

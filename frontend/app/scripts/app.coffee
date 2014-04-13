@@ -448,9 +448,9 @@ angular
     '$urlRouterProvider'
   	($locationProvider, RestangularProvider, $stateProvider, $urlRouterProvider, config) ->
       # $locationProvider.html5Mode(true);
-      $locationProvider
-        .html5Mode(false)
-        .hashPrefix('!');
+      # $locationProvider
+      #   .html5Mode(false)
+      #   .hashPrefix('!');
         
       RestangularProvider.setRestangularFields
         id: "_id"

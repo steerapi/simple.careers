@@ -35,7 +35,7 @@ Askus = Models["Askus"]
 
 # Create the app and listen for API requests
 app = express()
-app.use(require('prerender-node').set('prerenderToken', '0AzZ1hJFck8670DrTEY5'));
+# app.use(require('prerender-node').set('prerenderToken', '0AzZ1hJFck8670DrTEY5'));
 
 # app.use(express.basicAuth('simple', 'simple1337'));
 app.use(express.static(__dirname + '/../frontend/dist'));
