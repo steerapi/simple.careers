@@ -1,6 +1,6 @@
       <swipe-cards>
       
-        <swipe-card on-destroy="cardDestroyed($index)" on-swipe="cardSwiped($index)" ng-repeat="job in jobs">
+        <swipe-card on-destroy="cardDestroyed($index)" on-swipe="cardSwiped($index)" on-swipe-left="cardSwipedLeft(job)" on-swipe-right="cardSwipedRight(job)" on-drag="cardDrag($x,$y,job)" ng-repeat="job in jobs">
         
         <div class="flip-container" ng-class="{'flip':job.$$flip}" ng-click="flipClick(job)">
         	<div class="flipper">
@@ -15,6 +15,10 @@
           <div class="item item-avatar card-header">
             <div class="img">
             <img ng-src="{{job.logo.url}}">
+            </div>
+            <div class="card-swipe-badge">
+            <img ng-if="job.$$status=='left'" src="images/no-btn.png">
+            <img ng-if="job.$$status=='right'" src="images/yes-btn.png">
             </div>
             <h2>{{job.companyname}}</h2>
             <p>{{job.companytagline}}</p>
@@ -104,17 +108,17 @@
         </swipe-card>
       </swipe-cards>
 <div class="footer-action">
-  <button class="button button-clear btn-wrapper">
+  <button class="button button-clear btn-wrapper" ng-click="noClick(job)">
   <img src="/images/no-btn.png" class="action-btn"></img>
   </button>
   <span class="spacer">
     <ul ng-social-buttons
              showcounts="true">
-    <li class="ng-social-facebook">Facebook</li>
+    <li class="ng-social-facebook">Share</li>
   </ul>
     
   </span>
-  <button class="button button-clear btn-wrapper">
+  <button class="button button-clear btn-wrapper" ng-click="yesClick(job)">
   <img src="/images/yes-btn.png" class="action-btn"></img>
   </button>
 </div>

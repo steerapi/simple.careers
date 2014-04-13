@@ -228,8 +228,8 @@ window.rAF = window.requestAnimationFrame
     transitionOut: ->
       self = this
       # console.log "@x", @x
-      # if (@y > -50) and (@y < 50)
-      if @y < 50
+      if (@x > -50) and (@x < 50)
+      # if @y < 50
         @el.style[TRANSITION] = "-webkit-transform 0.2s ease-in-out"
         @el.style[ionic.CSS.TRANSFORM] = "translate3d(" + @startX + "px," + (@startY) + "px, 0)"
         setTimeout (->
@@ -245,11 +245,14 @@ window.rAF = window.requestAnimationFrame
         
         # console.log "window.innerWidth: ",window.innerWidth
         # console.log "@y", @y
-        if (@y < -50)
-          @el.style[ionic.CSS.TRANSFORM] = "translate3d(" + @x + "px," + -(window.innerHeight * 1.5) + "px, 0) rotate(" + rotateTo + "rad)"
-        else
+        if (@x < -50)
+          # @el.style[ionic.CSS.TRANSFORM] = "translate3d(" + @x + "px," + -(window.innerHeight * 1.5) + "px, 0) rotate(" + rotateTo + "rad)"
           @el.style[ionic.CSS.TRANSFORM] = "translate3d(" + @x + "px," + (window.innerHeight * 3) + "px, 0) rotate(" + rotateTo + "rad)"
-          
+          @onSwipeLeft and @onSwipeLeft()        
+        else
+          # @el.style[ionic.CSS.TRANSFORM] = "translate3d(" + @x + "px," + (window.innerHeight * 3) + "px, 0) rotate(" + rotateTo + "rad)"
+          @el.style[ionic.CSS.TRANSFORM] = "translate3d(" + @x + "px," + (window.innerHeight * 3) + "px, 0) rotate(" + rotateTo + "rad)"
+          @onSwipeRight and @onSwipeRight()
         @onSwipe and @onSwipe()
         
         # Trigger destroy after card has swiped out
@@ -324,6 +327,7 @@ window.rAF = window.requestAnimationFrame
       @x = @startX + (e.gesture.deltaX)
       @y = @startY + (e.gesture.deltaY)
       @el.style[ionic.CSS.TRANSFORM] = "translate3d(" + @x + "px, " + @y + "px, 0) rotate(" + (@rotationAngle or 0) + "rad)"
+      @onDrag(@x,@y)
       return
 
     _doDragEnd: (e) ->
@@ -342,6 +346,9 @@ window.rAF = window.requestAnimationFrame
         replace: true
         transclude: true
         scope:
+          onDrag: "&"
+          onSwipeLeft: "&"
+          onSwipeRight: "&"
           onSwipe: "&"
           onDestroy: "&"
 
@@ -350,16 +357,37 @@ window.rAF = window.requestAnimationFrame
             el = $element[0]
             swipeableCard = new SwipeableCardView(
               el: el
+              onDrag: (x,y)->
+                $timeout ->
+                  $scope.onDrag?({
+                    $x:x
+                    $y:y
+                  })
+                  return
+
+                return
+              onSwipeRight: ->
+                $timeout ->
+                  $scope.onSwipeRight?()
+                  return
+
+                return
+              onSwipeLeft: ->
+                $timeout ->
+                  $scope.onSwipeLeft?()
+                  return
+
+                return
               onSwipe: ->
                 $timeout ->
-                  $scope.onSwipe()
+                  $scope.onSwipe?()
                   return
 
                 return
 
               onDestroy: ->
                 $timeout ->
-                  $scope.onDestroy()
+                  $scope.onDestroy?()
                   return
 
                 return
@@ -420,11 +448,14 @@ angular
     '$urlRouterProvider'
   	($locationProvider, RestangularProvider, $stateProvider, $urlRouterProvider, config) ->
       # $locationProvider.html5Mode(true);
-      
+      $locationProvider
+        .html5Mode(false)
+        .hashPrefix('!');
+        
       RestangularProvider.setRestangularFields
         id: "_id"
       RestangularProvider.setBaseUrl "http://api.simple.careers/data/v1/"
-        
+      
       $urlRouterProvider.otherwise "/app/0"
       $stateProvider
       .state('intro',
@@ -447,6 +478,7 @@ angular
             }
           }
       )
+      
       .state('app',
         url: "/app",
         views: 
@@ -464,6 +496,16 @@ angular
             'main.view': {
               templateUrl: "/views/app/job.html",
               controller: "AppJobCtrl"
+            }
+          }
+      )
+      .state('app.job.login',
+        url: "/?userId&token",
+        views: 
+          {
+            'main': {
+              templateUrl: "/views/intro/intro.html",
+              controller: "IntroCtrl"
             }
           }
       )

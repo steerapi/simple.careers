@@ -12,16 +12,19 @@
     <meta id="extViewportMeta" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-touch-fullscreen" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
     <meta property="og:title" content="Simple.Careers"/>
-    <meta property="og:image" content="images/icons/iTunesArtwork.png"/>
-    <meta property="og:description" content="A new simple way to discover your perfect job."/>
+    <meta property="og:image" content="http://dev.simple.careers/images/icons/iTunesArtwork.png"/>
+    <!-- <meta property="og:description" content="A simple way to discover your perfect job."/> -->
+    <meta property="og:description" content="{{desc}}"/>
 
     <link rel="icon" 
       type="image/png" 
       href="images/icons/apple-touch-icon-60x60.png">
-      
+    
+    <link rel="apple-touch-startup-image" href="images/splash/startup.png">
+    
     <link rel="apple-touch-icon" href="images/icons/apple-touch-icon-60x60.png">
     <link rel="apple-touch-icon" sizes="76x76" href="images/icons/apple-touch-icon-76x76.png">
     <link rel="apple-touch-icon" sizes="120x120" href="images/icons/apple-touch-icon-60x60@2x.png">
@@ -52,8 +55,7 @@
       });
     </script>
     
-    <link rel="stylesheet" href="libs/add2home/add2home.css">
-    <script type="application/javascript" src="libs/add2home/add2home.js"></script>
+    
     <!--  -->
     <!-- <link rel="stylesheet" href="libs/unelastic/unelastic.css">
     <script type="application/javascript" src="libs/unelastic/unelastic.js"></script> -->
@@ -66,6 +68,7 @@
     <link rel="stylesheet" href="bower_components/angular-social/angular-social.css">
     
     <link rel="stylesheet" href="libs/pathmenu.css">
+    <link rel="stylesheet" href="libs/add2home/add2home.css">
     <!-- endbuild -->
     <!-- build:css({.tmp,app}) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
@@ -127,6 +130,7 @@
     <script src="bower_components/restangular/dist/restangular.js"></script>
     <script src="bower_components/angular-social/angular-social.js"></script>
     <!-- endbower -->
+    <script type="application/javascript" src="libs/add2home/add2home.js"></script>
     <script src="libs/pathmenu.js"></script>
     <!-- endbuild -->
     <!-- <script src="libs/ionic/ionic.swipecards.js"></script> -->
