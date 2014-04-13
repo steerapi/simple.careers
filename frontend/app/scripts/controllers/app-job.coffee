@@ -4,7 +4,6 @@ class AppJobCtrl extends Ctrl
   @$inject: ['$scope', '$stateParams', '$state', "Restangular", "$timeout"]
   constructor: (@scope, @stateParams, @state, @Restangular, @timeout) ->
     super @scope
-    console.log @state
     @skip = @state.params.jobId
     @resource = @Restangular.all "jobs"
     @resource.getList(

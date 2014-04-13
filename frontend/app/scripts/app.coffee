@@ -503,9 +503,9 @@ angular
         url: "/?userId&token",
         views: 
           {
-            'main': {
-              templateUrl: "/views/intro/intro.html",
-              controller: "IntroCtrl"
+            'main.view.view': {
+              templateUrl: "/views/app/login.html",
+              controller: "AppLoginCtrl"
             }
           }
       )
