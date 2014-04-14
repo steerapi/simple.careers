@@ -607,7 +607,7 @@ app = angular
     #   controller: "MainCtrl"
 
 
-app.factory "preloader", ($q, $rootScope) ->
+app.factory "preloader", ["$q","$rootScope",($q, $rootScope) ->
 
   # I manage the preloading of image objects. Accepts an array of image URLs.
   Preloader = (imageLocations) ->
@@ -773,3 +773,4 @@ app.factory "preloader", ($q, $rootScope) ->
 
   # Return the factory instance.
   Preloader
+]
