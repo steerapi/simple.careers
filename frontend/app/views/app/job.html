@@ -5,20 +5,20 @@
         		<div class="front">
 
         <div class="card-inset">
-        <div class="card-background" ng-switch="status">
-          <div ng-switch-when="loading" class="card-loading-wrapper">
+        <div class="card-background">
+          <div ng-show="status=='loading'" class="card-loading-wrapper">
             <img class="card-loading" src="/images/loading.gif">
           </div>
-          <div ng-switch-when="broken" class="card-loading-wrapper">
+          <div ng-show="status=='broken'" class="card-loading-wrapper">
             <img class="card-broken" src="images/broken.png">  
           </div>
-          <div ng-switch-when="pass" class="card-overlay-wrapper">
+          <div ng-show="status=='pass'" class="card-overlay-wrapper">
             <img src="images/overlay-pass.png">  
           </div>
-          <div ng-switch-when="fav" class="card-overlay-wrapper">
+          <div ng-show="status=='fav'" class="card-overlay-wrapper">
             <img src="images/overlay-fav.png">  
           </div>
-          <div ng-switch-when="normal">
+          <div ng-show="status=='normal'">
           <div class="item item-avatar card-header">
             <div class="img">
             <img ng-src="{{job.logo.url}}">
