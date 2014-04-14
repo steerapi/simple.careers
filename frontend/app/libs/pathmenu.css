@@ -20,8 +20,8 @@
   visibility: visible;
 }
 .path .item {
-  width: 40px;
-  height: 40px;
+  width: 60px;
+  height: 60px;
 }
 .path .fade-mainbutton {
   opacity: 0.4;
