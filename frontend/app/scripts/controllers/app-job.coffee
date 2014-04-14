@@ -1,8 +1,8 @@
 'use strict'
 
 class AppJobCtrl extends Ctrl
-  @$inject: ['$scope', '$stateParams', '$state', "Restangular", "$timeout"]
-  constructor: (@scope, @stateParams, @state, @Restangular, @timeout) ->
+  @$inject: ['$scope', '$stateParams', '$state', "Restangular", "$timeout", "preloader"]
+  constructor: (@scope, @stateParams, @state, @Restangular, @timeout, @preloader) ->
     super @scope
     @skip = @state.params.jobId
     @resource = @Restangular.all "jobs"
@@ -10,41 +10,63 @@ class AppJobCtrl extends Ctrl
       sort: "order"
       skip: @skip
       limit: 1
-    ).then (jobs)=>
+    ).then (jobs)=>      
       if jobs and jobs.length > 0
-        @scope.desc = jobs[0].jobtagline
-        jobs.splice 0,0,{}
-        jobs.splice 0,0,{}
-        @scope.jobs = jobs
+        @scope.job = jobs[0]
+        @scope.job.$$flip = false
+        @scope.isLoading = true
+        @scope.status = "loading"
+        if not @isValid(@scope.job)
+          @scope.status = "broken"
+          return
+        @preloader.preloadImages([@scope.job.picture.url]).then =>
+          @scope.status = "normal"
+          @scope.isLoading = false
+          @scope.isSuccessful = true
+        , =>
+          @scope.status = "normal"
+          @scope.isLoading = false
+          @scope.isSuccessful = false
+          
     , =>
       @skip=0
       window.location.hash = "/app/#{@skip}"
-  logout: =>
-    localStorage.removeItem("userId");
-  checkLogin: (cb)=>
-    (cb?(@scope.user);return) if @scope.user
-    userId = localStorage.getItem("userId");
-    @resource = @Restangular.one "users", ""
-    @resource.post({}).then (user)=>
-      @scope.user = user
-      cb?(@scope.user)
-    return
-  noClick:(job)=>
-    return if not @checkLogin()
-  yesClick:(job)=>
-    return if not @checkLogin()
-    
+    @scope.$on "noClick",=>
+      @scope.status = "pass"
+      @scope.swipeCard.setX -500
+      @scope.swipeCard.transitionOut()
+      console.log "no"
+    @scope.$on "yesClick",=>
+      @scope.status = "fav"
+      @scope.swipeCard.setX 500
+      @scope.swipeCard.transitionOut()
+      console.log "yes"
   cardDestroyed: (index)=>
     # @scope.jobs.splice(index, 1);
   cardSwipedLeft: (job)=>
     # console.log "Left"
   cardSwipedRight: (job)=>
     # console.log "Right"
+  cardDragStart: (job)=>
+    console.log "start drag"
+  cardDragEnd: (job)=>
+    console.log "end drag"
+    @dragging = false
+  isValid: (job)=>
+    return false if not job
+    return job.position and job.companyname and job.logo and job.location and job.type and job.picture
   cardDrag: (x,y,job)=>
+    @dragging = true
+    console.log "card drag"
     if x<-50
-      job.$$status = "left"
+      @scope.status = "pass"
     else if x>50
-      job.$$status = "right"
+      @scope.status = "fav"
+    else
+      if not @isValid(@scope.job)
+        @scope.status = "broken"
+      else
+        @scope.status = "normal"
     # console.log "Drag", arguments...
   cardSwiped: (index)=>
     # @count++
@@ -52,23 +74,9 @@ class AppJobCtrl extends Ctrl
       @skip++
       window.location.hash = "/app/#{@skip}"
     , 500
-    # @resource = @Restangular.all "jobs"
-    # @resource.getList(
-    #   skip: @count
-    #   limit: 1
-    # ).then (jobs)=>
-    #     
-    # , =>
-    #   @timeout =>
-    #     @skip=0
-    #     window.location.hash = "/app/#{@skip}"
-    #   , 500  
-
-  isValid: (job)=>
-    return job.position and job.companyname and job.logo and job.location and job.type and job.picture
   flipClick: (job)=>
     # console.log "flipClick"
-    if not @applyClicked 
+    if not @applyClicked and not @dragging
       job.$$flip = not job.$$flip
     @applyClicked = false
   apply: (event)=>
@@ -76,6 +84,6 @@ class AppJobCtrl extends Ctrl
     event.preventDefault()
     @applyClicked = true
     return
-    
+              
 angular.module('simplecareersApp').controller 'AppJobCtrl', AppJobCtrl
   

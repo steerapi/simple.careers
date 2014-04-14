@@ -16,14 +16,16 @@
 
     <meta property="og:title" content="Simple.Careers"/>
     <meta property="og:image" content="http://dev.simple.careers/images/icons/iTunesArtwork.png"/>
-    <!-- <meta property="og:description" content="A simple way to discover your perfect job."/> -->
-    <meta property="og:description" content="{{desc}}"/>
+    <meta property="og:description" content="A simple way to discover your perfect job."/>
+    <!-- <meta property="og:description" content="{{desc}}"/> -->
 
     <link rel="icon" 
       type="image/png" 
       href="images/icons/apple-touch-icon-60x60.png">
     
-    <link rel="apple-touch-startup-image" href="images/splash/startup.png">
+    <!-- <link rel="apple-touch-startup-image" href="images/splash/startup.png"> -->
+    
+    <!-- <link rel="shortcut icon" href="images/icons/favicon.ico"> -->
     
     <link rel="apple-touch-icon" href="images/icons/apple-touch-icon-60x60.png">
     <link rel="apple-touch-icon" sizes="76x76" href="images/icons/apple-touch-icon-76x76.png">
@@ -96,7 +98,7 @@
        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-       ga('create', 'UA-XXXXX-X');
+       ga('create', 'UA-44444236-5');
        ga('send', 'pageview');
     </script>
 
@@ -161,21 +163,25 @@
         bezierCurve: {"x0": 40, "y0": 182, "x1": 85, "y1": 190, "x2": 78, "y2": 100,"x3": 70 },
 				elem: document.getElementById('menu1'), 
 				items: [{
-						url: '#photo',
-						backgroundUrl: 'images/menu/photo.png',
-						title: 'Go to photo page'
+						url: '#/app/all/0',
+						backgroundUrl: 'images/menu/menu-all.png',
+						title: 'All'
 					}, {
-						url: '#people',
-						backgroundUrl: 'images/menu/people.png',
-						title: 'Go to people page'
+						url: '#/app/apply/0',
+						backgroundUrl: 'images/menu/menu-apply.png',
+						title: 'Apply'
 					}, {
-						url: '#music',
-						backgroundUrl: 'images/menu/music.png',
-						title: 'Music'
+						url: '#/app/favorite/0',
+						backgroundUrl: 'images/menu/menu-favorite.png',
+						title: 'Favorite'
+					}, {
+						url: '#/app/logout',
+						backgroundUrl: 'images/menu/menu-logout.png',
+						title: 'Logout'
 					}],
 					mainButton: {
-					    backgroundUrl: 'images/menu/mainbutton.png',
-					    backButtonBackgroundUrl: 'images/menu/backbutton.png'
+					    backgroundUrl: 'images/menu/menu-menu.png',
+					    backButtonBackgroundUrl: 'images/menu/menu-menu.png'
 					},
           expandPattern:PathMenu.ExpandPattern.rightTopFixedArc
 			});
