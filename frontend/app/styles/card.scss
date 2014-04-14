@@ -56,6 +56,13 @@ body {
     height: 100%;  
   }
 }
+.card-share-btn{
+  position: fixed;
+  z-index: 10000;
+  bottom: 20px;
+  width: 100%;
+  text-align: center;
+}
 .full-height{
   height: 100%;    
 }
