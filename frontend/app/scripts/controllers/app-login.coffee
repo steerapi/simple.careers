@@ -3,16 +3,15 @@
 class AppLoginCtrl extends Ctrl
   @$inject: ['$scope', '$stateParams', '$state', "Restangular"]
   constructor: (@scope, @stateParams, @state, @Restangular) ->
-    # console.log @state
-    # console.log @stateParams
-    localStorage.setItem "userId", @stateParams.userId
-    # console.log @Restangular.setDefaultHeaders
-    @Restangular.setDefaultHeaders
-      "Authorization": "Bearer #{@stateParams.token}"
-    @resource = @Restangular.one "users", localStorage.getItem "userId"
-    @resource.get().then (user)=>
-      console.log "user", user
     super @scope
+    # console.log @stateParams.userId
+    # console.log @stateParams.token
+    # console.log @stateParams.redirect
+    localStorage.setItem "userId", @stateParams.userId
+    localStorage.setItem "token", @stateParams.token
+    # @Restangular.setDefaultHeaders
+    #   "Authorization": "Bearer #{@stateParams.token}"
+    window.location.hash = @stateParams.redirect
     
 angular.module('simplecareersApp').controller 'AppLoginCtrl', AppLoginCtrl
-  
+

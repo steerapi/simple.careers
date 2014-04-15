@@ -4,6 +4,8 @@ class AppCtrl extends Ctrl
   @$inject: ['$scope', '$stateParams', '$state', "Restangular", "$timeout"]
   constructor: (@scope, @stateParams, @state, @Restangular, @timeout) ->
     super @scope
+    @scope.$state = @state
+    @scope.url = undefined
     @scope.swipeCard = undefined
     @skip = @state.params.jobId
     @resource = @Restangular.all "jobs"
@@ -20,22 +22,20 @@ class AppCtrl extends Ctrl
     , =>
       @skip=0
       window.location.hash = "/app/#{@skip}"
-  logout: =>
-    localStorage.removeItem("userId");
-  checkLogin: (cb)=>
-    (cb?(@scope.user);return) if @scope.user
-    userId = localStorage.getItem("userId");
-    @resource = @Restangular.one "users", ""
-    @resource.post({}).then (user)=>
-      @scope.user = user
-      cb?(@scope.user)
-    return
+    @scope.$on "shareUrl", (event, url)=>
+      @scope.url = url
+    @scope.$on "setEnableShare", (event, enable)=>
+      @scope.enableShare = enable
   noClick:=>
+    # @checkLogin @Restangular, (user)=>
+      # # console.log "pass"
+      # @scope.user = user
     @scope.$broadcast "noClick"
-    # return if not @checkLogin()
   yesClick:=>
+    # @checkLogin @Restangular, (user)=>
+      # # console.log "pass"
+      # @scope.user = user
     @scope.$broadcast "yesClick"
-    # return if not @checkLogin()
 
     # @resource = @Restangular.all "jobs"
     # @resource.getList(
@@ -53,7 +53,7 @@ class AppCtrl extends Ctrl
     # @init()
       
   # init: =>
-    # console.log "init"
+    # # console.log "init"
     # @count = 0
     # @resource = @Restangular.all "jobs"
     # @resource.getList(

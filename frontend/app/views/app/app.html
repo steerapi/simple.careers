@@ -1,7 +1,10 @@
 <ion-content class="card-wrapper" scroll="false">
       <div class="three-card">
-        <img src="images/3card.png">
+        <img class="three-card-background" src="images/3card.png">
+        <img class="card-loading" src="/images/loading.gif">
       </div>
+      <!-- <div class="card-loading-wrapper">
+      </div> -->
 
       <swipe-cards>
       <div ui-view="main.view" class="full-height full-width"></div>
@@ -12,6 +15,12 @@
     <img src="/images/no-btn.png" class="action-btn"></img>
     </button>
     <span class="spacer">    
+      <ul class="social" ng-show="enableShare" ng-social-buttons
+                 showcounts="true" url="url" title="title">
+        <li class="ng-social-facebook">Share</li>
+      </ul>
+      <img ng-show="$state.includes('app.apply')" src="images/menu/menu-apply.png">
+      <img ng-show="$state.includes('app.favorite')" src="images/menu/menu-favorite.png">
     </span>
     <button class="button button-clear btn-wrapper" ng-click="yesClick(job)">
     <img src="/images/yes-btn.png" class="action-btn"></img>

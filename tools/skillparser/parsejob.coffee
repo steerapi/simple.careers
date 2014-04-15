@@ -7,6 +7,6 @@ lines = lines.filter (line)=>
   line != ''
 lines = _.unique lines
 for line in lines
-  console.log line
-# console.log lines
-# console.log lines.length
+  # console.log line
+# # console.log lines
+# # console.log lines.length

@@ -35,29 +35,32 @@ class AppJobCtrl extends Ctrl
       @scope.status = "pass"
       @scope.swipeCard.setX -500
       @scope.swipeCard.transitionOut()
-      console.log "no"
     @scope.$on "yesClick",=>
       @scope.status = "fav"
       @scope.swipeCard.setX 500
       @scope.swipeCard.transitionOut()
-      console.log "yes"
   cardDestroyed: (index)=>
     # @scope.jobs.splice(index, 1);
   cardSwipedLeft: (job)=>
-    # console.log "Left"
+    # console.log @scope.user,"left"
+    @scope.user.favorites = _.without @scope.user.favorites, @scope.job._id
+    @scope.update @scope.user,'favorites'
   cardSwipedRight: (job)=>
-    # console.log "Right"
+    # console.log @scope.user,"right"
+    @scope.user.favorites?=[]
+    @scope.user.favorites.push @scope.job._id
+    @scope.update @scope.user,'favorites'
   cardDragStart: (job)=>
-    console.log "start drag"
+    # console.log "start drag"
   cardDragEnd: (job)=>
-    console.log "end drag"
+    # console.log "end drag"
     @dragging = false
   isValid: (job)=>
     return false if not job
     return job.position and job.companyname and job.logo and job.location and job.type and job.picture
   cardDrag: (x,y,job)=>
     @dragging = true
-    console.log "card drag"
+    # console.log "card drag"
     if x<-50
       @scope.status = "pass"
     else if x>50
@@ -67,7 +70,7 @@ class AppJobCtrl extends Ctrl
         @scope.status = "broken"
       else
         @scope.status = "normal"
-    # console.log "Drag", arguments...
+    # # console.log "Drag", arguments...
   cardSwiped: (index)=>
     # @count++
     @timeout =>
@@ -75,14 +78,16 @@ class AppJobCtrl extends Ctrl
       window.location.hash = "/app/#{@skip}"
     , 500
   flipClick: (job)=>
-    # console.log "flipClick"
+    # # console.log "flipClick"
     if not @applyClicked and not @dragging
       job.$$flip = not job.$$flip
     @applyClicked = false
   apply: (event)=>
-    # console.log "apply"
+    # # console.log "apply"
     event.preventDefault()
     @applyClicked = true
+    # # console.log window.location.hash
+    window.location.href = "/auth/linkedin?redirect=#{window.location.hash}"
     return
               
 angular.module('simplecareersApp').controller 'AppJobCtrl', AppJobCtrl

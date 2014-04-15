@@ -110,7 +110,7 @@ window.rAF = window.requestAnimationFrame
       
       # Calculate the top left of a default card, as a translated pos
       topLeft = window.innerHeight / 2 - @maxHeight / 2
-      # console.log window.innerHeight, @maxHeight
+      # # console.log window.innerHeight, @maxHeight
       cardOffset = Math.min(@cards.length, 3) * 5
       
       # Move each card 5 pixels down to give a nice stacking effect (max of 3 stacked)
@@ -129,7 +129,7 @@ window.rAF = window.requestAnimationFrame
       card
   )
   SwipeableCardView = ionic.views.View.inherit(
-    
+
     ###
     Initialize a card with the given options.
     ###
@@ -137,6 +137,7 @@ window.rAF = window.requestAnimationFrame
       opts = ionic.extend({}, opts)
       ionic.extend this, opts
       @el = opts.el
+      @enable = true
       @startX = @startY = @x = @y = 0
       @bindEvents()
       return
@@ -207,6 +208,8 @@ window.rAF = window.requestAnimationFrame
       ), 100
       return
 
+    setEnable:(state)->
+      @enable = state
     
     ###
     Disable transitions on the card (for when dragging)
@@ -229,7 +232,7 @@ window.rAF = window.requestAnimationFrame
     ###
     transitionOut: ->
       self = this
-      # console.log "@x", @x
+      # # console.log "@x", @x
       if (@x > -50) and (@x < 50)
       # if @y < 50
         @el.style[TRANSITION] = "-webkit-transform 0.2s ease-in-out"
@@ -240,13 +243,13 @@ window.rAF = window.requestAnimationFrame
         ), 200
       else
       # Fly out
-        # console.log "flyout"
+        # # console.log "flyout"
         rotateTo = (@rotationAngle + (@rotationDirection * 0.6)) or (Math.random() * 0.4)
         duration = (if @rotationAngle then 0.3 else 0.5)
         @el.style[TRANSITION] = "-webkit-transform " + duration + "s ease-in-out"
         
-        # console.log "window.innerWidth: ",window.innerWidth
-        # console.log "@y", @y
+        # # console.log "window.innerWidth: ",window.innerWidth
+        # # console.log "@y", @y
         if (@x < -50)
           # @el.style[ionic.CSS.TRANSFORM] = "translate3d(" + @x + "px," + -(window.innerHeight * 1.5) + "px, 0) rotate(" + rotateTo + "rad)"
           @el.style[ionic.CSS.TRANSFORM] = "translate3d(" + @x + "px," + (window.innerHeight * 3) + "px, 0) rotate(" + rotateTo + "rad)"
@@ -270,7 +273,9 @@ window.rAF = window.requestAnimationFrame
     ###
     bindEvents: ->
       self = this
-      ionic.onGesture "dragstart", ((e) ->
+      ionic.onGesture "dragstart", ((e) =>
+        if not @enable
+          return
         e.preventDefault()
         cx = window.innerWidth / 2
         if e.gesture.touches[0].pageX < cx
@@ -283,7 +288,9 @@ window.rAF = window.requestAnimationFrame
 
         return
       ), @el
-      ionic.onGesture "drag", ((e) ->
+      ionic.onGesture "drag", ((e) =>
+        if not @enable
+          return
         e.preventDefault()
         window.rAF ->
           self._doDrag e
@@ -291,7 +298,9 @@ window.rAF = window.requestAnimationFrame
 
         return
       ), @el
-      ionic.onGesture "dragend", ((e) ->
+      ionic.onGesture "dragend", ((e) =>
+        if not @enable
+          return
         e.preventDefault()
         window.rAF ->
           self._doDragEnd e
@@ -317,9 +326,9 @@ window.rAF = window.requestAnimationFrame
       width = @el.offsetWidth
       point = window.innerWidth / 2 + @rotationDirection * (width / 2)
       distance = Math.abs(point - e.gesture.touches[0].pageY) # - window.innerWidth/2);
-      # console.log distance
+      # # console.log distance
       @touchDistance = distance * 10
-      # console.log "Touch distance", @touchDistance #this.touchDistance, width);
+      # # console.log "Touch distance", @touchDistance #this.touchDistance, width);
       @onDragStart()
       return
 
@@ -474,7 +483,7 @@ app = angular
         id: "_id"
       RestangularProvider.setBaseUrl "http://api.simple.careers/data/v1/"
       
-      $urlRouterProvider.otherwise "/app/0"
+      $urlRouterProvider.otherwise "/app/all/0"
       $stateProvider
       .state('intro',
         url: "/intro",
@@ -507,23 +516,83 @@ app = angular
             }
           }
       )
-      .state('app.job',
-        url: "/:jobId",
+      .state('app.all',
+        url: "/all",
         views: 
           {
             'main.view': {
-              templateUrl: "/views/app/job.html",
-              controller: "AppJobCtrl"
+              templateUrl: "/views/app/item.html",
+              controller: "AppItemCtrl"
             }
           }
       )
-      .state('app.job.login',
-        url: "/?userId&token",
+      .state('app.all.job',
+        url: "/:jobId",
         views: 
           {
             'main.view.view': {
+              templateUrl: "/views/app/job.html",
+              controller: "AppAllJobCtrl"
+            }
+          }
+      )
+      .state('app.favorite',
+        url: "/favorite",
+        views: 
+          {
+            'main.view': {
+              templateUrl: "/views/app/item.html",
+              controller: "AppItemCtrl"
+            }
+          }
+      )
+      .state('app.favorite.job',
+        url: "/:jobId",
+        views: 
+          {
+            'main.view.view': {
+              templateUrl: "/views/app/job.html",
+              controller: "AppFavoriteJobCtrl"
+            }
+          }
+      )
+      .state('app.apply',
+        url: "/apply",
+        views: 
+          {
+            'main.view': {
+              templateUrl: "/views/app/item.html",
+              controller: "AppItemCtrl"
+            }
+          }
+      )
+      .state('app.apply.job',
+        url: "/:jobId",
+        views: 
+          {
+            'main.view.view': {
+              templateUrl: "/views/app/job.html",
+              controller: "AppApplyJobCtrl"
+            }
+          }
+      )
+      .state('app.login',
+        url: "/?userId&token&redirect",
+        views:
+          {
+            'main.view': {
               templateUrl: "/views/app/login.html",
               controller: "AppLoginCtrl"
+            }
+          }
+      )
+      .state('app.logout',
+        url: "/logout",
+        views: 
+          {
+            'main.view': {
+              templateUrl: "/views/app/logout.html",
+              controller: "AppLogoutCtrl"
             }
           }
       )

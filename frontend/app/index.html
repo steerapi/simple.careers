@@ -15,8 +15,8 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
     <meta property="og:title" content="Simple.Careers"/>
-    <meta property="og:image" content="http://dev.simple.careers/images/icons/iTunesArtwork.png"/>
-    <meta property="og:description" content="A simple way to discover your perfect job."/>
+    <meta property="og:image" content="http://www.simple.careers/images/icons/iTunesArtwork.png"/>
+    <meta property="og:description" content="A simple way to discover your perfect job. Once you've found the job, apply via Linkedin."/>
     <!-- <meta property="og:description" content="{{desc}}"/> -->
 
     <link rel="icon" 
@@ -152,16 +152,21 @@
         <script src="scripts/controllers/app-job.js"></script>
         <script src="scripts/controllers/app-student.js"></script>
         <script src="scripts/controllers/app-login.js"></script>
+        <script src="scripts/controllers/app-logout.js"></script>
+        <script src="scripts/controllers/app-item.js"></script>
+        <script src="scripts/controllers/app-common-job.js"></script>
+        <script src="scripts/controllers/app-apply-job.js"></script>
+        <script src="scripts/controllers/app-favorite-job.js"></script>
+        <script src="scripts/controllers/app-all-job.js"></script>
         <!-- endbuild -->
-        {{desc}}
-  <div id="menu1"></div>
+  <div id="menu"></div>
 	<script type="text/javascript">
 		$m.addEvent(window, 'load', 
 		function(){
 			var myMenu = new PathMenu(
 			{
         bezierCurve: {"x0": 40, "y0": 182, "x1": 85, "y1": 190, "x2": 78, "y2": 100,"x3": 70 },
-				elem: document.getElementById('menu1'), 
+				elem: document.getElementById('menu'), 
 				items: [{
 						url: '#/app/all/0',
 						backgroundUrl: 'images/menu/menu-all.png',
