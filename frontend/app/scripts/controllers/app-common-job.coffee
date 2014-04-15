@@ -47,7 +47,7 @@ class AppCommonJobCtrl extends Ctrl
         @scope.swipeCard.setEnable false
         return
       @skip=0
-      window.location.hash = "/app/#{@type}/#{@skip}"
+      window.location.href = "/app/#{@type}/#{@skip}"
     @initButtonEvents()
     
   initButtonEvents:=>
@@ -81,12 +81,20 @@ class AppCommonJobCtrl extends Ctrl
         conditions:
           user: user._id
           job: @scope.job._id
+      @timeout =>
+        @skip++
+        window.location.href = "/app/#{@type}/#{@skip}"
+      , 100
   cardSwipedRight: (job)=>
     @checkLogin @scope,@Restangular, (user)=>
       @scope.user = user
       @Restangular.all("userfavorites").post
         user: user._id
         job: @scope.job._id
+      @timeout =>
+        @skip++
+        window.location.href = "/app/#{@type}/#{@skip}"
+      , 100      
   cardDragStart: (job)=>
   cardDragEnd: (job)=>
     @dragging = false
@@ -107,10 +115,10 @@ class AppCommonJobCtrl extends Ctrl
     # # console.log "Drag", arguments...
   cardSwiped: (index)=>
     # @count++
-    @timeout =>
-      @skip++
-      window.location.hash = "/app/#{@type}/#{@skip}"
-    , 100
+    # @timeout =>
+#       @skip++
+#       window.location.hash = "/app/#{@type}/#{@skip}"
+#     , 100
   flipClick: (job)=>
     # # console.log "flipClick"
     if not @applyClicked and not @dragging
@@ -120,9 +128,19 @@ class AppCommonJobCtrl extends Ctrl
     # # console.log "apply"
     event.preventDefault()
     @applyClicked = true
-    # console.log window.location.hash
-    window.location = "/auth/linkedin?redirect=#{window.location.hash.replace "#",""}&apply=#{@scope.job._id}"
-    return
+    # # console.log window.location.hash
+    
+    userId = localStorage.getItem("userId");
+    token = localStorage.getItem("token");
+    # # console.log "check",userId,token
+    if (not userId) or (not token)
+      window.location.href = "/auth/linkedin?redirect=#{window.location.href}&apply=#{@scope.job._id}"
+      return
+    else
+      resource = @Restangular.all "userapplies"
+      resource.post
+        user: userId
+        job: @scope.job._id
 
 window.AppCommonJobCtrl = AppCommonJobCtrl
 # angular.module('simplecareersApp').controller 'AppCommonJobCtrl', AppCommonJobCtrl

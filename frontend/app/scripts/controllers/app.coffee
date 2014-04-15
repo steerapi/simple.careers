@@ -21,7 +21,7 @@ class AppCtrl extends Ctrl
         @scope.jobs = jobs
     , =>
       @skip=0
-      window.location.hash = "/app/#{@skip}"
+      window.location.href = "/app/#{@skip}"
     @scope.$on "shareUrl", (event, url)=>
       @scope.url = url
     @scope.$on "setEnableShare", (event, enable)=>

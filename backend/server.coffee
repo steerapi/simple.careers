@@ -1,5 +1,5 @@
 # process.on 'uncaughtException', (err)->
-#   # console.log(err)
+#   console.log(err)
 
 config = require("./config.coffee")
 mandrill = require("mandrill-api")
@@ -16,9 +16,9 @@ mongoose.connect config.mongo
 # Web version
 db = mongoose.connection
 db.on "error", ->
-  # console.log arguments...
+  console.log arguments...
 db.once "open", ->
-  # console.log arguments...
+  console.log arguments...
 
 express = require "express"
 Schema = require "./schema"
@@ -36,6 +36,7 @@ UserFavorite = Models["UserFavorite"]
 
 # Create the app and listen for API requests
 app = express()
+app.use express.compress()
 # app.use(require('prerender-node').set('prerenderToken', '0AzZ1hJFck8670DrTEY5'));
 
 # app.use(express.basicAuth('simple', 'simple1337'));
@@ -71,7 +72,7 @@ passport.deserializeUser (obj, done) ->
   return
 
 ensureAuth = (request, response, next) ->
-  # console.log "ensureAuth"
+  console.log "ensureAuth"
   return next()  if request.isAuthenticated()
   response.send 401
 
@@ -100,7 +101,7 @@ sendConfirmToken = (to, token, cb)->
     cb err
 
 # sendConfirmToken "steerapi@gmail.com", "testtoken", ->
-#   # console.log arguments...
+#   console.log arguments...
 
 app.get "/auth/v1/protected", ensureAuth, (req, res) ->
   res.send "You are in."
@@ -115,12 +116,12 @@ app.post "/auth/v1/resend", (req, res) ->
         token = buf.toString('hex')
         user.set "token", token
         user.save (err, user)->
-          # console.log arguments...
+          console.log arguments...
           res.send 401 if err          
           sendConfirmToken req.body.username, token, (err, json) ->
             res.send 401 if err
-            # console.log "err: ",err
-            # console.log "json: ",json
+            console.log "err: ",err
+            console.log "json: ",json
             res.send 200
     else
       res.send 401
@@ -202,8 +203,8 @@ app.post "/auth/v1/signup", (req, res) ->
         return
       sendConfirmToken req.body.username, token, (err,json)-> 
         # return res.send 401 if err
-        # console.log "err: ",err
-        # console.log "json: ",json
+        console.log "err: ",err
+        console.log "json: ",json
         res.send 200
 
 app.get "/auth/v1/logout", (req, res) ->
@@ -350,8 +351,7 @@ passport.use new LinkedInStrategy(
         token: token
         tokenSecret: tokenSecret
     if not users or users.length == 0
-      User.create obj
-      , (err, user) ->
+      User.create obj, (err, user) ->
         done err, user
     else
       user = users[0]
@@ -395,7 +395,7 @@ app.get "/auth/linkedin/callback", passport.authenticate("linkedin",
         user: user._id
         job: req.session["apply"]
       , (err,userapply)->
-    res.redirect "/#/app/?userId=#{user._id}&token=#{user.token}&redirect=#{req.session.redirect}"
+    res.redirect "/app/?userId=#{user._id}&token=#{user.token}&redirect=#{req.session.redirect}"
     return
   return
 
@@ -404,12 +404,18 @@ app.get "/logout", (req, res) ->
   res.redirect "/"
   return
 
-# path = require "path"
-# app.all "/*", (req, res) ->
-#   # console.log path.resolve("#{__dirname}/../frontend/dist/index.html")
+engines = require('consolidate');
+app.engine('html', engines.ejs);
+
+path = require "path"
+app.get "/*", (req, res) ->
+  res.render(path.resolve(__dirname + '/../frontend/dist/index.html'));
+
+# app.all "/*", (req, res) -> 
+#   console.log path.resolve("#{__dirname}/../frontend/dist/index.html")
 #   res.sendfile path.resolve("#{__dirname}/../frontend/dist/index.html")
 #   return
 
 # Listening
 app.listen port
-# console.log "Listening on #{port}"
+console.log "Listening on #{port}"

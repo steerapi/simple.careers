@@ -30,7 +30,7 @@ class AppJobCtrl extends Ctrl
           
     , =>
       @skip=0
-      window.location.hash = "/app/#{@skip}"
+      window.location.href = "/app/#{@skip}"
     @scope.$on "noClick",=>
       @scope.status = "pass"
       @scope.swipeCard.setX -500
@@ -75,7 +75,7 @@ class AppJobCtrl extends Ctrl
     # @count++
     @timeout =>
       @skip++
-      window.location.hash = "/app/#{@skip}"
+      window.location.href = "/app/#{@skip}"
     , 500
   flipClick: (job)=>
     # # console.log "flipClick"
@@ -83,12 +83,21 @@ class AppJobCtrl extends Ctrl
       job.$$flip = not job.$$flip
     @applyClicked = false
   apply: (event)=>
-    # # console.log "apply"
-    event.preventDefault()
-    @applyClicked = true
-    # # console.log window.location.hash
-    window.location.href = "/auth/linkedin?redirect=#{window.location.hash}"
-    return
-              
+    userId = localStorage.getItem("userId");
+    token = localStorage.getItem("token");
+    # # console.log "check",userId,token
+    if (not userId) or (not token)
+      # # console.log "apply"
+      event.preventDefault()
+      @applyClicked = true
+      # # console.log window.location.hash
+      window.location.href = "/auth/linkedin?redirect=#{window.location.href}"
+      return
+    else
+      resource = @Restangular.all "userapplies"
+      resource.post
+        user: userId
+        job: @scope.job._id
+
 angular.module('simplecareersApp').controller 'AppJobCtrl', AppJobCtrl
   

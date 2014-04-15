@@ -21,16 +21,16 @@
 
     <link rel="icon" 
       type="image/png" 
-      href="images/icons/apple-touch-icon-60x60.png">
+      href="/images/icons/apple-touch-icon-60x60.png">
     
     <!-- <link rel="apple-touch-startup-image" href="images/splash/startup.png"> -->
     
     <!-- <link rel="shortcut icon" href="images/icons/favicon.ico"> -->
     
-    <link rel="apple-touch-icon" href="images/icons/apple-touch-icon-60x60.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="images/icons/apple-touch-icon-76x76.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="images/icons/apple-touch-icon-60x60@2x.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="images/icons/apple-touch-icon-76x76@2x.png">
+    <link rel="apple-touch-icon" href="/images/icons/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/images/icons/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/images/icons/apple-touch-icon-60x60@2x.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/images/icons/apple-touch-icon-76x76@2x.png">
     
     <script src="//ajax.googleapis.com/ajax/libs/webfont/1.5.2/webfont.js"></script>
     <script>
@@ -63,7 +63,7 @@
     <script type="application/javascript" src="libs/unelastic/unelastic.js"></script> -->
     
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <!-- build:css styles/vendor.css -->
+    <!-- build:css /styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/ionic/release/css/ionic.css" />
     <!-- endbower -->
@@ -72,7 +72,7 @@
     <link rel="stylesheet" href="libs/pathmenu.css">
     <link rel="stylesheet" href="libs/add2home/add2home.css">
     <!-- endbuild -->
-    <!-- build:css({.tmp,app}) styles/main.css -->
+    <!-- build:css({.tmp,app}) /styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
 
@@ -116,7 +116,7 @@
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));</script>
 
-    <!-- build:js scripts/vendor.js -->
+    <!-- build:js /scripts/vendor.js -->
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
@@ -140,7 +140,7 @@
     
     <!-- <script src="cordova.js"></script> -->
 
-        <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        <!-- build:js({.tmp,app}) /scripts/scripts.js -->
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/ctrl.js"></script>
         <script src="scripts/controllers/main.js"></script>
@@ -168,25 +168,25 @@
         bezierCurve: {"x0": 40, "y0": 182, "x1": 85, "y1": 190, "x2": 78, "y2": 100,"x3": 70 },
 				elem: document.getElementById('menu'), 
 				items: [{
-						url: '#/app/all/0',
-						backgroundUrl: 'images/menu/menu-all.png',
+						url: '/app/all/0',
+						backgroundUrl: '/images/menu/menu-all.png',
 						title: 'All'
 					}, {
-						url: '#/app/apply/0',
-						backgroundUrl: 'images/menu/menu-apply.png',
+						url: '/app/apply/0',
+						backgroundUrl: '/images/menu/menu-apply.png',
 						title: 'Apply'
 					}, {
-						url: '#/app/favorite/0',
-						backgroundUrl: 'images/menu/menu-favorite.png',
+						url: '/app/favorite/0',
+						backgroundUrl: '/images/menu/menu-favorite.png',
 						title: 'Favorite'
 					}, {
-						url: '#/app/logout',
-						backgroundUrl: 'images/menu/menu-logout.png',
+						url: '/app/logout',
+						backgroundUrl: '/images/menu/menu-logout.png',
 						title: 'Logout'
 					}],
 					mainButton: {
-					    backgroundUrl: 'images/menu/menu-menu.png',
-					    backButtonBackgroundUrl: 'images/menu/menu-menu.png'
+					    backgroundUrl: '/images/menu/menu-menu.png',
+					    backButtonBackgroundUrl: '/images/menu/menu-menu.png'
 					},
           expandPattern:PathMenu.ExpandPattern.rightTopFixedArc
 			});

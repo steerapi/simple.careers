@@ -14,7 +14,8 @@ class Ctrl
     # # console.log "check",userId,token
     if (not userId) or (not token)
       # console.log "change location","/auth/linkedin?redirect=#{window.location.hash.replace('#','')}"
-      window.location.href = "/auth/linkedin?redirect=#{window.location.hash.replace('#','')}"
+      setTimeout =>
+        window.location.href = "/auth/linkedin?redirect=#{window.location.href.replace('#','')}"
       return
     # # console.log "check"
     (cb?($scope.user);return) if $scope.user

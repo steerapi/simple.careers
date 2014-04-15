@@ -37,7 +37,7 @@ class AppFavoriteJobCtrl extends AppCommonJobCtrl
         @scope.swipeCard.setEnable false
         return
       @skip=0
-      window.location.hash = "/app/#{@type}/#{@skip}"
+      window.location.href = "/app/#{@type}/#{@skip}"
     @initButtonEvents()      
   newQuery: (sk)=>
     query = super sk
