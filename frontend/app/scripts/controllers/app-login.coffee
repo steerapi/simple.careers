@@ -11,7 +11,7 @@ class AppLoginCtrl extends Ctrl
     localStorage.setItem "token", @stateParams.token
     # @Restangular.setDefaultHeaders
     #   "Authorization": "Bearer #{@stateParams.token}"
-    # window.location.href = @stateParams.redirect
+    window.location.href = @stateParams.redirect
     
 angular.module('simplecareersApp').controller 'AppLoginCtrl', AppLoginCtrl
 
