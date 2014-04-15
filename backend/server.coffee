@@ -351,8 +351,8 @@ passport.use new LinkedInStrategy(
         tokenSecret: tokenSecret
     if not users or users.length == 0
       User.create obj
-      , (err, users) ->
-        done err, users[0]
+      , (err, user) ->
+        done err, user
     else
       user = users[0]
       User.update 
