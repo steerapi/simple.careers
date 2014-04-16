@@ -5,7 +5,8 @@ module.exports = {
   mongo: {
     uri: process.env.MONGOLAB_URI ||
          process.env.MONGOHQ_URL ||
-         'mongodb://joyce:joyce1331@ds035897.mongolab.com:35897/heroku_app23575007'
+         'mongodb://joyce:joyce1331@ds039399-a0.mongolab.com:39399/heroku_app23575007'
+         // 'mongodb://joyce:joyce1331@ds035897.mongolab.com:35897/heroku_app23575007'
   },
   mandrill: "ye5nIk8NpIB6-4g7_WIGhg"
 };

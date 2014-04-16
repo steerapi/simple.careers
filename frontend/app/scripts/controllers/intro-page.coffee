@@ -5,6 +5,9 @@ class IntroPageCtrl extends Ctrl
   constructor: (@scope, @stateParams, @state, @ionicSlideBoxDelegate, @Restangular, @timeout) ->
     super @scope
     @scope.slideIndex = @stateParams.pageId or 0
+    if localStorage.getItem("visited")
+      page = localStorage.getItem("page") or 0
+      @state.go "app.all.job", jobId:page
   startApp: =>
     localStorage.setItem "visited", true
     page = localStorage.getItem("page") or 0

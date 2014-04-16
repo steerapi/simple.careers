@@ -26,7 +26,7 @@ class Ctrl
       $scope.user = user
       cb?(user)
     , =>
-      window.location.href = "/app/logout"
+      @state.go "app.logout"
 
   purgeJobCache:=>
     jobCache = {}
