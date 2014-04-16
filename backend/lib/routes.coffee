@@ -34,15 +34,16 @@ module.exports = (app) ->
   app.get "/auth/facebook/callback", passport.authenticate("facebook",
     failureRedirect: "/auth/facebook"
   ), facebook.callback
-
-  # Baucis
-  app.use "/api/data/", api
   
   # All undefined api routes should return a 404
-  app.get "/api/*", (req, res) ->
-    res.send 404
-    return
-  
+  # app.get "/api/*", (req, res) ->
+  #   res.send 404
+  #   return
+
+  # Baucis
+  app.get /^\/docs(\/.*)?$/, api.swagger  
+  app.use "/api/data/", api.baucis
+    
   # All other routes to use Angular routing in app/scripts/app.js
-  app.get "/*", middleware.setUserCookie, index.index
+  app.get /^((?!\/api\/data\/).)*$/, middleware.setUserCookie, index.index
   return

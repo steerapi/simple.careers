@@ -3,6 +3,7 @@
 passport = require("passport")
 mongoose = require("mongoose")
 User = mongoose.model("user")
+UserApply = mongoose.model("userapply")
 LinkedInStrategy = require('passport-linkedin').Strategy;
 
 linkedin = {}

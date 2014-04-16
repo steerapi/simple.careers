@@ -22,7 +22,6 @@ db.once "open", ->
 
 express = require "express"
 Schema = require "./lib/schema"
-
 Schema.list.forEach (item)->
   mongoose.model item.toLowerCase(), Schema[item]
 
@@ -31,11 +30,17 @@ config = require("./lib/config/config")
 
 # Passport Configuration
 passport = require("./lib/config/passport")
+
 app = express()
 
-# app.use("/pages",express.static(__dirname + '/../frontend/pages'));
+app.use("/pages",express.static(__dirname + '/../frontend/pages'));
 
 require("./lib/config/express") app
+
+# Baucis
+# api = require("./lib/controllers/api")
+# app.get /^\/docs(\/.*)?$/, api.swagger  
+# app.use "/api/data/", api.baucis
 
 # Routing
 require("./lib/routes") app

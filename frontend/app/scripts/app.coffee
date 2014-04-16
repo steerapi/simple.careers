@@ -484,7 +484,7 @@ app = angular
         
       RestangularProvider.setRestangularFields
         id: "_id"
-      RestangularProvider.setBaseUrl "http://api.simple.careers/data/v1/"
+      RestangularProvider.setBaseUrl "/api/data/"
       
       page = localStorage.getItem "page"
       if not page
