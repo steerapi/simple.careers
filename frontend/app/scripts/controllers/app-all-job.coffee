@@ -6,6 +6,7 @@ class AppAllJobCtrl extends AppCommonJobCtrl
     super @scope, @stateParams, @state, @Restangular, @timeout, @preloader
     @type = "all"
     @scope.$emit "setEnableShare", true
+    localStorage.setItem "page", @state.params.jobId
     @init()
   newQuery: (sk)=>
     query = super sk

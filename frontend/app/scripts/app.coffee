@@ -483,7 +483,10 @@ app = angular
         id: "_id"
       RestangularProvider.setBaseUrl "http://api.simple.careers/data/v1/"
       
-      $urlRouterProvider.otherwise "/app/all/0"
+      page = localStorage.getItem "page"
+      if not page
+        page = 0
+      $urlRouterProvider.otherwise "/app/all/#{page}"
       $stateProvider
       .state('intro',
         url: "/intro",
