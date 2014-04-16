@@ -4,9 +4,6 @@ class AppCommonJobCtrl extends Ctrl
   @$inject: ['$scope', '$stateParams', '$state', "Restangular", "$timeout", "preloader","$analytics"]
   constructor: (@scope, @stateParams, @state, @Restangular, @timeout, @preloader,@analytics) ->
     super @scope
-    if not localStorage.getItem("visited")
-      @state.go "intro.page", pageId:0
-    
     @scope.$state = @state
     # @init()
   checkApplied: =>

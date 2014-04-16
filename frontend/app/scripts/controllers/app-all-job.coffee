@@ -7,6 +7,8 @@ class AppAllJobCtrl extends AppCommonJobCtrl
     @type = "all"
     @scope.$emit "setEnableShare", true
     localStorage.setItem "page", @state.params.jobId
+    if not localStorage.getItem("visited")
+      @state.go "intro.page", pageId:0
     @init()
   newQuery: (sk)=>
     query = super sk

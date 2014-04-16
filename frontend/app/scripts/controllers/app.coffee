@@ -4,47 +4,45 @@ class AppCtrl extends Ctrl
   @$inject: ['$scope', '$stateParams', '$state', "Restangular", "$timeout"]
   constructor: (@scope, @stateParams, @state, @Restangular, @timeout) ->
     super @scope
-    $m.addEvent window, "load", ->
-      myMenu = new PathMenu(
-        bezierCurve:
-          x0: 40
-          y0: 182
-          x1: 85
-          y1: 190
-          x2: 78
-          y2: 100
-          x3: 70
+    myMenu = new PathMenu(
+      bezierCurve:
+        x0: 40
+        y0: 182
+        x1: 85
+        y1: 190
+        x2: 78
+        y2: 100
+        x3: 70
 
-        elem: document.getElementById("menu")
-        items: [
-          {
-            url: "/app/all/" + localStorage.getItem("page")
-            backgroundUrl: "/images/menu/menu-all.png"
-            title: "All"
-          }
-          {
-            url: "/app/apply/0"
-            backgroundUrl: "/images/menu/menu-apply.png"
-            title: "Apply"
-          }
-          {
-            url: "/app/favorite/0"
-            backgroundUrl: "/images/menu/menu-favorite.png"
-            title: "Favorite"
-          }
-          {
-            url: "/app/logout"
-            backgroundUrl: "/images/menu/menu-logout.png"
-            title: "Logout"
-          }
-        ]
-        mainButton:
-          backgroundUrl: "/images/menu/menu-menu.png"
-          backButtonBackgroundUrl: "/images/menu/menu-menu.png"
+      elem: document.getElementById("menu")
+      items: [
+        {
+          url: "/app/all/" + localStorage.getItem("page")
+          backgroundUrl: "/images/menu/menu-all.png"
+          title: "All"
+        }
+        {
+          url: "/app/apply/0"
+          backgroundUrl: "/images/menu/menu-apply.png"
+          title: "Apply"
+        }
+        {
+          url: "/app/favorite/0"
+          backgroundUrl: "/images/menu/menu-favorite.png"
+          title: "Favorite"
+        }
+        {
+          url: "/app/logout"
+          backgroundUrl: "/images/menu/menu-logout.png"
+          title: "Logout"
+        }
+      ]
+      mainButton:
+        backgroundUrl: "/images/menu/menu-menu.png"
+        backButtonBackgroundUrl: "/images/menu/menu-menu.png"
 
-        expandPattern: PathMenu.ExpandPattern.rightTopFixedArc
-      )
-      return
+      expandPattern: PathMenu.ExpandPattern.rightTopFixedArc
+    )
 
     @scope.$state = @state
     @scope.url = undefined
