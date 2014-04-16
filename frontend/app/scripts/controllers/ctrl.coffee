@@ -25,6 +25,8 @@ class Ctrl
     resource.get().then (user)=>
       $scope.user = user
       cb?(user)
+    , =>
+      window.location.href = "/app/logout"
 
   purgeJobCache:=>
     jobCache = {}
