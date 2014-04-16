@@ -63,12 +63,19 @@ app.use(passport.session());
 # passport.serializeUser User.serializeUser()
 # passport.deserializeUser User.deserializeUser()
 
+###
+Passport configuration
+###
 passport.serializeUser (user, done) ->
-  done null, user
+  done null, user._id
   return
 
-passport.deserializeUser (obj, done) ->
-  done null, obj
+passport.deserializeUser (id, done) ->
+  User.findOne
+    _id: id
+  , (err, user) -> # don't ever give out the password or salt
+    done err, user
+    return
   return
 
 ensureAuth = (request, response, next) ->
@@ -345,6 +352,8 @@ passport.use new LinkedInStrategy(
     "_linkedin.profile.id": profile.id
   , (err, users) ->
     obj = 
+      username: profile.id
+      password: profile.id
       token: hat()
       _linkedin:
         profile: profile
@@ -387,9 +396,9 @@ app.get "/auth/linkedin", (req, res) ->
 app.get "/auth/linkedin/callback", passport.authenticate("linkedin",
   failureRedirect: "/auth/linkedin"
 ), (req, res) ->
-  user = req.session.passport.user
-  User.findOne _id:user._id, (err,user)->
-    user = JSON.parse JSON.stringify user
+  userId = req.session.passport.user
+  User.findOne _id:userId, (err,user)->
+    user = JSON.parse JSON.stringify user    
     if req.session["apply"]
       UserApply.create
         user: user._id

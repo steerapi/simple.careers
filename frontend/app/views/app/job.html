@@ -102,7 +102,8 @@
               <div class="card-background back-card-background">
                 
                 <p>{{job.jobtagline}}</p>
-                  <button ng-show="!$state.includes('app.apply')" class="button button-full button-large button-assertive apply-btn" ng-click="apply($event)">Apply!</button>
+                  <button ng-show="!job.$$applied" class="button button-full button-large button-assertive apply-btn" ng-click="apply($event)">Apply!</button>
+                  <button ng-show="job.$$applied" class="button button-full button-large button-balanced apply-btn" ng-click="apply($event)" disabled>Applied!</button>
                   
                 <!-- <div class="bar bar-footer bar-assertive"  ng-click="apply($event)">
                     <button class="button button-clear col-xs-12">Apply</button>

@@ -8,14 +8,14 @@ class Ctrl
     for k in _.functions @
       @scope[k] = @[k] if k!="constructor"
     @scope.save = _.debounce @scope.save, 1000
-  checkLogin: ($scope,$Restangular,cb)=>
+  isLogin: =>
     userId = localStorage.getItem("userId");
     token = localStorage.getItem("token");
-    # # console.log "check",userId,token
-    if (not userId) or (not token)
-      # console.log "change location","/auth/linkedin?redirect=#{window.location.hash.replace('#','')}"
-      setTimeout =>
-        window.location.href = "/auth/linkedin?redirect=#{window.location.href.replace('#','')}"
+    return userId and token
+  checkLogin: ($scope,$Restangular,cb)=>
+    if not @isLogin()
+      cb?()
+      window.location.href = "/auth/linkedin?redirect=#{window.location.href}"
       return
     # # console.log "check"
     (cb?($scope.user);return) if $scope.user

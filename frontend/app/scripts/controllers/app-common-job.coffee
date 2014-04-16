@@ -6,6 +6,27 @@ class AppCommonJobCtrl extends Ctrl
     super @scope
     @scope.$state = @state
     # @init()
+  checkApplied: =>
+    if @isLogin()
+      if @scope.user
+        resource = @Restangular.all("userapplies")
+        resource.getList( 
+          conditions:
+            job: @scope.job._id
+            user: @scope.user._id
+        ).then (userapplies)=>
+          if userapplies and userapplies.length > 0 
+            @scope.job.$$applied = true
+      else
+        @checkLogin @scope,@Restangular,(user)=>
+          resource = @Restangular.all("userapplies")
+          resource.getList( 
+            conditions:
+              job: @scope.job._id
+              user: user._id
+          ).then (userapplies)=>
+            if userapplies and userapplies.length > 0 
+              @scope.job.$$applied = true    
   init:=>
     @skip = +@state.params.jobId
     # query = @newQuery()
@@ -24,6 +45,10 @@ class AppCommonJobCtrl extends Ctrl
     # @resource.getList( @newQuery() ).then (jobs)=>      
       if jobs and jobs.length > 0
         @scope.job = jobs[0]
+        if not @scope.job
+          @scope.status = "broken"
+          return
+        @checkApplied()
         @scope.$emit "shareUrl", window.location.href
         @scope.job.$$flip = false
         @scope.isLoading = true
@@ -47,7 +72,7 @@ class AppCommonJobCtrl extends Ctrl
         @scope.swipeCard.setEnable false
         return
       @skip=0
-      window.location.href = "/app/#{@type}/#{@skip}"
+      @state.go "app.#{@type}.job", jobId:@skip
     @initButtonEvents()
     
   initButtonEvents:=>
@@ -75,26 +100,33 @@ class AppCommonJobCtrl extends Ctrl
   cardDestroyed: (index)=>
     # @scope.jobs.splice(index, 1);
   cardSwipedLeft: (job)=>
-    @checkLogin @scope,@Restangular, (user)=>
-      @scope.user = user
+    if not @isLogin()
+      @skip++
+      @timeout =>
+        @state.go "app.#{@type}.job", jobId:@skip
+      , 100
+      return
+    @checkLogin @scope, @Restangular, (user)=>
       @Restangular.all("userfavorites").remove
         conditions:
           user: user._id
           job: @scope.job._id
       @timeout =>
         @skip++
-        window.location.href = "/app/#{@type}/#{@skip}"
-      , 100
+        @state.go "app.#{@type}.job", jobId:@skip
+      , 100      
+
   cardSwipedRight: (job)=>
-    @checkLogin @scope,@Restangular, (user)=>
-      @scope.user = user
+    @checkLogin @scope, @Restangular, (user)=>
+      if not user
+        return
       @Restangular.all("userfavorites").post
         user: user._id
         job: @scope.job._id
       @timeout =>
         @skip++
-        window.location.href = "/app/#{@type}/#{@skip}"
-      , 100      
+        @state.go "app.#{@type}.job", jobId:@skip
+      , 100
   cardDragStart: (job)=>
   cardDragEnd: (job)=>
     @dragging = false
@@ -141,7 +173,8 @@ class AppCommonJobCtrl extends Ctrl
       resource.post
         user: userId
         job: @scope.job._id
-
+      @scope.job.$$applied = true
+      
 window.AppCommonJobCtrl = AppCommonJobCtrl
 # angular.module('simplecareersApp').controller 'AppCommonJobCtrl', AppCommonJobCtrl
   

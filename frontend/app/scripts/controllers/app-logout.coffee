@@ -6,7 +6,7 @@ class AppLogoutCtrl extends Ctrl
     super @scope
     localStorage.removeItem "userId", @stateParams.userId
     localStorage.removeItem "token", @stateParams.token
-    window.location.href = "/app/all/0"
+    @state.go "app.all.job", jobId:0
     
 angular.module('simplecareersApp').controller 'AppLogoutCtrl', AppLogoutCtrl
   

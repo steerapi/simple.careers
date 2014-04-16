@@ -14,6 +14,10 @@ class AppFavoriteJobCtrl extends AppCommonJobCtrl
     @resource = @Restangular.all("userfavorites")
     @resource.getList( @newQuery(@skip) ).then (userfavorites)=>
       @scope.job = userfavorites[0].job
+      if not @scope.job
+        @scope.status = "broken"
+        return
+      @checkApplied()
       @scope.$emit "shareUrl", window.location.href
       @scope.job.$$flip = false
       @scope.isLoading = true
@@ -37,7 +41,7 @@ class AppFavoriteJobCtrl extends AppCommonJobCtrl
         @scope.swipeCard.setEnable false
         return
       @skip=0
-      window.location.href = "/app/#{@type}/#{@skip}"
+      @state.go "app.#{@type}.job", jobId:@skip
     @initButtonEvents()      
   newQuery: (sk)=>
     query = super sk
