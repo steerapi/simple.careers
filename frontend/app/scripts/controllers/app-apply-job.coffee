@@ -7,7 +7,9 @@ class AppApplyJobCtrl extends AppCommonJobCtrl
     @type = "apply"
     @scope.$emit "setEnableShare", false
     @checkLogin @scope,@Restangular, (user)=>
-      @scope.user = user
+      if not user
+        @scope.status = "loading"
+        return
       @init()
   init:=>
     @skip = +@state.params.jobId
