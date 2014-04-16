@@ -489,8 +489,23 @@ app = angular
       page = localStorage.getItem "page"
       if not page
         page = 0
-      $urlRouterProvider.otherwise "/app/all/#{page}"
+        
+      if localStorage.getItem "visited"
+        $urlRouterProvider.otherwise "/app/all/#{page}"
+      else
+        $urlRouterProvider.otherwise "/intro/0"
+    
       $stateProvider
+      .state('terms',
+        url: "/terms",
+        views: 
+          {
+            'main': {
+              templateUrl: "/views/terms.html",
+              controller: "AppTermsCtrl"
+            }
+          }
+      )
       .state('intro',
         url: "/intro",
         views: 
@@ -502,7 +517,7 @@ app = angular
           }
       )
       .state('intro.page',
-        url: "/page",
+        url: "/:pageId",
         views: 
           {
             'main.intro': {
@@ -511,7 +526,6 @@ app = angular
             }
           }
       )
-      
       .state('app',
         url: "/app",
         views: 

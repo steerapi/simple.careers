@@ -1,11 +1,14 @@
 'use strict'
 
 class IntroPageCtrl extends Ctrl
-  @$inject: ['$scope', '$stateParams', '$state', '$ionicSlideBoxDelegate', "Restangular"]
-  constructor: (@scope, @stateParams, @state, @ionicSlideBoxDelegate, @Restangular) ->
+  @$inject: ['$scope', '$stateParams', '$state', '$ionicSlideBoxDelegate', "Restangular", "$timeout"]
+  constructor: (@scope, @stateParams, @state, @ionicSlideBoxDelegate, @Restangular, @timeout) ->
     super @scope
+    @scope.slideIndex = @stateParams.pageId or 0
   startApp: =>
-    @state.go "app"
+    localStorage.setItem "visited", true
+    page = localStorage.getItem("page") or 0
+    @state.go "app.all.job", jobId:page
     return
   next:=>
     @ionicSlideBoxDelegate.next()
@@ -15,7 +18,12 @@ class IntroPageCtrl extends Ctrl
     return
   slideChanged: (index) =>
     @scope.slideIndex = index
+    @timeout =>
+      @state.go "intro.page", pageId:index
+    , 100
     return
+  terms:=>
+    @state.go "terms"
 
 angular.module('simplecareersApp')
   .controller 'IntroPageCtrl', IntroPageCtrl

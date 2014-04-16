@@ -7,8 +7,8 @@
     <meta charset="utf-8">
     <title>Simple.Careers</title>
     
-    <meta name="description" content="">
-
+    <meta name="description" content="A simple way to discover your perfect job. 1-click apply via Linkedin. Found the perfect job for friends? Share it on Facebook and show how much you care!">
+    <meta name="keywords" content="Job, Careers, Simple, Tinder, Easy, Apply, Linkedin, Share, Facebook, Application, Work, Occupation, Card, Job Card, Work Card, Full-time, Intern, Internship">
     <meta id="extViewportMeta" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-touch-fullscreen" content="yes">
@@ -16,7 +16,7 @@
 
     <meta property="og:title" content="Simple.Careers"/>
     <meta property="og:image" content="http://www.simple.careers/images/icons/iTunesArtwork.png"/>
-    <meta property="og:description" content="A simple way to discover your perfect job. Once you've found the job, apply via Linkedin."/>
+    <meta property="og:description" content="A simple way to discover your perfect job. 1-click apply via Linkedin. Found the perfect job for friends? Share it on Facebook and show how much you care!"/>
     <!-- <meta property="og:description" content="{{desc}}"/> -->
 
     <link rel="icon" 
@@ -168,44 +168,8 @@
         <script src="scripts/controllers/app-apply-job.js"></script>
         <script src="scripts/controllers/app-favorite-job.js"></script>
         <script src="scripts/controllers/app-all-job.js"></script>
+        <script src="scripts/controllers/app-terms.js"></script>
         <!-- endbuild -->
-  <div id="menu"></div>
-	<script type="text/javascript">
-		$m.addEvent(window, 'load', 
-		function(){
-			var myMenu = new PathMenu(
-			{
-        bezierCurve: {"x0": 40, "y0": 182, "x1": 85, "y1": 190, "x2": 78, "y2": 100,"x3": 70 },
-				elem: document.getElementById('menu'), 
-				items: [{
-						url: "/app/all/"+localStorage.getItem("page"),
-						backgroundUrl: '/images/menu/menu-all.png',
-						title: 'All'
-					}, {
-						url: "/app/apply/0",
-						backgroundUrl: '/images/menu/menu-apply.png',
-						title: 'Apply'
-					}, {
-						url: "/app/favorite/0",
-						backgroundUrl: '/images/menu/menu-favorite.png',
-						title: 'Favorite'
-					}, {
-						url: "/app/logout",
-						backgroundUrl: '/images/menu/menu-logout.png',
-						title: 'Logout'
-					}],
-					mainButton: {
-					    backgroundUrl: '/images/menu/menu-menu.png',
-					    backButtonBackgroundUrl: '/images/menu/menu-menu.png'
-					},
-          expandPattern:PathMenu.ExpandPattern.rightTopFixedArc
-			});
-		});
-    // setTimeout(function(){
-    //   console.log("inset...");    
-    //   console.log($('.card-inset'));
-    //   $('.card-inset').focus();
-    // },3000)
 	</script>
 </body>
 </html>
