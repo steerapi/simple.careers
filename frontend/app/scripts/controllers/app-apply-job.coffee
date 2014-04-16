@@ -45,6 +45,8 @@ class AppApplyJobCtrl extends AppCommonJobCtrl
     @initButtonEvents()      
   newQuery: (sk)=>
     query = super sk
+    query.conditions =
+      user: @scope.user._id
     query.populate = "job"
     return query
   # newQuery: =>

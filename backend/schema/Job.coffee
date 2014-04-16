@@ -3,15 +3,35 @@ Schema = mongoose.Schema
 ObjectId = Schema.ObjectId
 
 schema = new Schema
+  picture: {
+    # url: String
+    # filename: String
+    # mimetype: String
+    # size: String
+  }
+  logo: {
+    # url: String
+    # filename: String
+    # mimetype: String
+    # size: String
+  }
+  type: String
   companyname: String
   companytagline: String
-  joblocation: String
-  picture: String
+  location: String
   jobtagline: String
-  positionname: String
-  yrsofexperience: String
-  skills: [String]
-  worktypes: [String]
+  position: String
+  badges: [ {
+    # url: String
+    # filename: String
+    # mimetype: String
+    # size: String
+  } ]
+  worktype: String
+  order: Number
+  
+  source: String
+  
   createdAt : { type: Date, "default": Date.now }
   updatedAt : { type: Date, "default": Date.now }
 ,
