@@ -466,7 +466,10 @@ app = angular
     # 'ui.router',
     'ionic',
     'ionic.contrib.ui.cards',
-    'restangular'
+    'restangular',
+    'angulartics',
+    # 'angulartics.google.analytics',
+    'angulartics.segment.io'
   ])
   .config([
     '$locationProvider'

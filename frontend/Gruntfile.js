@@ -24,8 +24,25 @@ module.exports = function (grunt) {
       app: require('./bower.json').appPath || 'app',
       dist: 'dist'
     },
-
+    express: {
+      options: {
+        port: 9000,
+        script: '../backend/server.js',
+      },
+      dev:{
+        options: {
+          debug: true,
+          node_env: 'development'
+        }
+      }
+    },
+    open: {
+      server: {
+        url: 'http://localhost:<%= express.options.port %>'
+      }
+    },
     // Watches files for changes and runs tasks based on the changed files
+
     watch: {
       bower: {
         files: ['bower.json'],
@@ -47,25 +64,28 @@ module.exports = function (grunt) {
         files: ['Gruntfile.js']
       },
       livereload: {
-        options: {
-          livereload: '<%= connect.options.livereload %>',
-          middleware: function (connect) {
-                  return [
-                    modRewrite([
-                      '!\\.html|\\.js|\\.css|\\.png$ /index.html [L]'
-                    ]),
-                    lrSnippet,
-                    mountFolder(connect, '.tmp'),
-                    mountFolder(connect, yeomanConfig.app)
-                  ];
-                }
-        },
         files: [
-          '<%= yeoman.app %>/{,*/}*.html',
-          '.tmp/styles/{,*/}*.css',
-          '.tmp/scripts/{,*/}*.js',
-          '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
-        ]
+          '<%= yeoman.app %>/views/{,*//*}*.{html,jade}',
+          '{.tmp,<%= yeoman.app %>}/styles/{,*//*}*.css',
+          '{.tmp,<%= yeoman.app %>}/scripts/{,*//*}*.js',
+          '<%= yeoman.app %>/images/{,*//*}*.{png,jpg,jpeg,gif,webp,svg}'
+        ],
+      
+        options: {
+          livereload: true
+        }
+      },
+      express: {
+        files: [
+          '../backend/server.coffee',
+          '../backend/server.js',
+          'lib/**/*.{js,json}'
+        ],
+        tasks: ['newer:jshint:server', 'express:dev', 'wait'],
+        options: {
+          livereload: true,
+          nospawn: true //Without this option specified express won't be reloaded
+        }
       }
     },
 
@@ -335,7 +355,7 @@ module.exports = function (grunt) {
             'bower_components/**/*',
             'views/{,*/}*.html',
             'images/{,*/}*.{webp}',
-            'fonts/*',
+            'fonts/**/*',
             'libs/**/*'
           ]
         }, {
@@ -407,17 +427,40 @@ module.exports = function (grunt) {
   });
 
 
+  // Used for delaying livereload until after server has restarted
+  grunt.registerTask('wait', function () {
+    grunt.log.ok('Waiting for server reload...');
+
+    var done = this.async();
+
+    setTimeout(function () {
+      grunt.log.writeln('Done waiting!');
+      done();
+    }, 500);
+  });
+
+  grunt.registerTask('express-keepalive', 'Keep grunt running', function() {
+    this.async();
+  });
+  
   grunt.registerTask('serve', function (target) {
     if (target === 'dist') {
       return grunt.task.run(['build', 'connect:dist:keepalive']);
     }
-
+    var fs = require("fs");
+    var data = undefined;
+    data = ""+fs.readFileSync(__dirname + "/app/scripts/app.coffee");
+    data = data.replace("$locationProvider.html5Mode(true);","$locationProvider.html5Mode(false);")
+    fs.writeFileSync(__dirname + "/app/scripts/app.coffee",data);
+    
     grunt.task.run([
       'clean:server',
       'bowerInstall',
       'concurrent:server',
       'autoprefixer',
-      'connect:livereload',
+      // 'connect:livereload',
+      'express:dev',
+      'open',
       'watch'
     ]);
   });
@@ -435,22 +478,30 @@ module.exports = function (grunt) {
     'karma'
   ]);
 
-  grunt.registerTask('build', [
-    'clean:dist',
-    'bowerInstall',
-    'useminPrepare',
-    'concurrent:dist',
-    'autoprefixer',
-    'concat',
-    'ngmin',
-    'copy:dist',
-    'cdnify',
-    'cssmin',
-    'uglify',
-    'rev',
-    'usemin',
-    'htmlmin'
-  ]);
+  grunt.registerTask('build', function(){
+    var fs = require("fs");
+    var data = undefined;
+    data = ""+fs.readFileSync(__dirname + "/app/scripts/app.coffee");
+    data = data.replace("$locationProvider.html5Mode(false);","$locationProvider.html5Mode(true);")
+    fs.writeFileSync(__dirname + "/app/scripts/app.coffee",data);
+    
+    grunt.task.run([
+      'clean:dist',
+      'bowerInstall',
+      'useminPrepare',
+      'concurrent:dist',
+      'autoprefixer',
+      'concat',
+      'ngmin',
+      'copy:dist',
+      'cdnify',
+      'cssmin',
+      'uglify',
+      'rev',
+      'usemin',
+      'htmlmin'
+    ]);
+  });
 
   grunt.registerTask('default', [
     'newer:jshint',

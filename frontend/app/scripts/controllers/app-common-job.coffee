@@ -1,8 +1,8 @@
 'use strict'
 
 class AppCommonJobCtrl extends Ctrl
-  @$inject: ['$scope', '$stateParams', '$state', "Restangular", "$timeout", "preloader"]
-  constructor: (@scope, @stateParams, @state, @Restangular, @timeout, @preloader) ->
+  @$inject: ['$scope', '$stateParams', '$state', "Restangular", "$timeout", "preloader","$analytics"]
+  constructor: (@scope, @stateParams, @state, @Restangular, @timeout, @preloader,@analytics) ->
     super @scope
     @scope.$state = @state
     # @init()
@@ -80,6 +80,17 @@ class AppCommonJobCtrl extends Ctrl
     @noLis = @scope.$on "noClick",=>
       if not @scope.swipeCard.enable
         return
+
+      eventData = 
+        job: 
+          _id: @scope.job._id
+          position: @scope.job.position
+          companyname: @scope.job.companyname
+      eventData.type = @type if @type
+      if @scope.user
+        eventData.user = @scope.user.username
+      @analytics.eventTrack "passClick", eventData
+      
       @scope.status = "pass"
       @scope.swipeCard.setX -500
       @scope.swipeCard.transitionOut()
@@ -87,6 +98,17 @@ class AppCommonJobCtrl extends Ctrl
     @yesLis =@scope.$on "yesClick",=>
       if not @scope.swipeCard.enable
         return
+
+      eventData = 
+        job: 
+          _id: @scope.job._id
+          position: @scope.job.position
+          companyname: @scope.job.companyname
+      eventData.type = @type if @type
+      if @scope.user
+        eventData.user = @scope.user.username
+      @analytics.eventTrack "favClick", eventData
+  
       @scope.status = "fav"
       @scope.swipeCard.setX 500
       @scope.swipeCard.transitionOut()
@@ -100,6 +122,16 @@ class AppCommonJobCtrl extends Ctrl
   cardDestroyed: (index)=>
     # @scope.jobs.splice(index, 1);
   cardSwipedLeft: (job)=>
+    eventData = 
+      job: 
+        _id: @scope.job._id
+        position: @scope.job.position
+        companyname: @scope.job.companyname
+    eventData.type = @type if @type
+    if @scope.user
+      eventData.user = @scope.user.username
+    @analytics.eventTrack "passSwipe", eventData
+    
     if not @isLogin()
       @skip++
       @timeout =>
@@ -117,6 +149,16 @@ class AppCommonJobCtrl extends Ctrl
       , 100      
 
   cardSwipedRight: (job)=>
+    eventData = 
+      job: 
+        _id: @scope.job._id
+        position: @scope.job.position
+        companyname: @scope.job.companyname
+    eventData.type = @type if @type
+    if @scope.user
+      eventData.user = @scope.user.username
+    @analytics.eventTrack "favSwipe", eventData
+    
     @checkLogin @scope, @Restangular, (user)=>
       if not user
         return
@@ -152,11 +194,31 @@ class AppCommonJobCtrl extends Ctrl
 #       window.location.hash = "/app/#{@type}/#{@skip}"
 #     , 100
   flipClick: (job)=>
+    eventData = 
+      job: 
+        _id: @scope.job._id
+        position: @scope.job.position
+        companyname: @scope.job.companyname
+    eventData.type = @type if @type
+    if @scope.user
+      eventData.user = @scope.user.username
+    @analytics.eventTrack "flipClick", eventData
+
     # # console.log "flipClick"
     if not @applyClicked and not @dragging
       job?.$$flip = not job?.$$flip
     @applyClicked = false
   apply: (event)=>
+    eventData = 
+      job: 
+        _id: @scope.job._id
+        position: @scope.job.position
+        companyname: @scope.job.companyname
+    eventData.type = @type if @type
+    if @scope.user
+      eventData.user = @scope.user.username
+    @analytics.eventTrack "applyClick", eventData
+    
     # # console.log "apply"
     event.preventDefault()
     @applyClicked = true

@@ -28,6 +28,11 @@
     "mongoose-findorcreate": "~0.1.2",
     "hat": "0.0.3",
     "consolidate": "~0.10.0",
-    "ejs": "~1.0.0"
+    "ejs": "~1.0.0",
+    "passport-http-bearer": "~1.0.1",
+    "passport-facebook": "~1.0.3",
+    "lodash": "~2.4.1",
+    "connect-mongo": "~0.4.0",
+    "connect-livereload": "~0.4.0"
   }
 }

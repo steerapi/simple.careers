@@ -1,0 +1,21 @@
+html
+  body
+    ion-content.card-wrapper(scroll='false')
+      .three-card
+        img.three-card-background(src='/images/3card.png')
+        img.card-loading(src='/images/loading.gif')
+      //
+         <div class="card-loading-wrapper">
+              </div> 
+      swipe-cards
+        .full-height.full-width(ui-view='main.view')
+      .footer-action
+        button.button.button-clear.btn-wrapper(ng-click='noClick(job)')
+          img.action-btn(src='/images/no-btn.png')
+        span.spacer
+          ul.social(ng-show='enableShare', ng-social-buttons='', showcounts='true', url='url', title='title')
+            li.ng-social-facebook Share
+          img(ng-show='$state.includes("app.apply")', src='/images/menu/menu-apply.png')
+          img(ng-show='$state.includes("app.favorite")', src='/images/menu/menu-favorite.png')
+        button.button.button-clear.btn-wrapper(ng-click='yesClick(job)')
+          img.action-btn(src='/images/yes-btn.png')

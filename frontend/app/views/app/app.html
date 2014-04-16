@@ -17,7 +17,7 @@
     <span class="spacer">    
       <ul class="social" ng-show="enableShare" ng-social-buttons
                  showcounts="true" url="url" title="title">
-        <li class="ng-social-facebook">Share</li>
+        <li class="ng-social-facebook" analytics-on="click" analytics-event="facebookShareClick" analytics-url="{{url}}">Share</li>
       </ul>
       <img ng-show="$state.includes('app.apply')" src="/images/menu/menu-apply.png">
       <img ng-show="$state.includes('app.favorite')" src="/images/menu/menu-favorite.png">

@@ -1,0 +1,87 @@
+html
+  body
+    swipe-card(on-destroy='cardDestroyed($index)', on-swipe='cardSwiped($index)', on-swipe-left='cardSwipedLeft(job)', on-swipe-right='cardSwipedRight(job)', on-dragging='cardDrag($x,$y,job)', on-drag-start='cardDragStart()', on-drag-end='cardDragEnd()')
+      .flip-container(ng-class='{"flip":job.$$flip}', ng-click='flipClick(job)')
+        .flipper
+          .front
+            .card-inset
+              .card-background
+                .card-loading-wrapper(ng-show='status=="loading"')
+                  img.card-broken(src='/images/loading.gif')
+                .card-loading-wrapper(ng-show='status=="empty"')
+                  img.card-broken(src='/images/empty.png')
+                .card-loading-wrapper(ng-show='status=="broken"')
+                  img.card-broken(src='/images/broken.png')
+                .card-overlay-wrapper(ng-show='status=="pass"')
+                  img(src='/images/overlay-pass.png')
+                .card-overlay-wrapper(ng-show='status=="fav"')
+                  img(src='/images/overlay-fav.png')
+                div(ng-show='status=="normal"')
+                  .item.item-avatar.card-header
+                    .img
+                      img(ng-src='{{job.logo.url}}')
+                    h2 {{job.companyname}}
+                    p {{job.companytagline}}
+                    //
+                       <div class="tab-item card-location">
+                                    <i class="icon ion-location"></i>
+                                    NH
+                                  </div> 
+                  .item.item-body.card-content
+                    .card-title-wrapper
+                      .card-image
+                        img(ng-src='{{convert(job.picture)}}', width='300', height='225')
+                      span.card-title
+                        | {{job.position}}
+                        span
+                    //
+                       <p>
+                                    This is a "Facebook" styled Card. The header is created from a Thumbnail List item,
+                                    the content is from a card-body consisting of an image and paragraph text. The footer
+                                    consists of a Tab Bar, icons aligned left, within the card-footer.
+                                  </p>
+                                  <p>
+                                    <a href="#" class="subdued">1 Like</a>
+                                    <a href="#" class="subdued">5 Comments</a>
+                                  </p> 
+                  .item.item-body.card-badge-content
+                    // <ion-scroll direction="x">
+                    .card-badge-body
+                      img.card-badge(ng-repeat='badge in job.badges', ng-src='{{badge.url}}')
+                    // </ion-scroll>
+                    //
+                       <img class="card-badge" src="/images/badges/C.png">
+                                  <img class="card-badge" src="/images/badges/Java.png">
+                                  <img class="card-badge" src="/images/badges/Python.png">
+                                  <img class="card-badge" src="/images/badges/C.png">
+                                  <img class="card-badge" src="/images/badges/Java.png">
+                                  <img class="card-badge" src="/images/badges/Python.png"> 
+                  .item.tabs.tabs-secondary.tabs-icon-left.card-info
+                    span.tab-item
+                      i.icon.ion-ios7-navigate
+                      | {{job.location}}
+                      //
+                         <i class="icon ion-ios7-pie"></i>
+                                      ENGR 
+                    span.tab-item
+                      i.icon.ion-ios7-timer
+                      | {{job.type}}
+                    //
+                       <a class="tab-item" href="#">
+                                    <i class="icon ion-share"></i>
+                                    3yrs+
+                                  </a> 
+                  //
+                     <div class="bar bar-footer bar-positive"  ng-click="apply($event)">
+                                    <button class="button button-clear col-xs-12">Next</button>
+                                </div> 
+          .back
+            .card-inset.back-card-inset
+              .card-background.back-card-background
+                p {{job.jobtagline}}
+                button.button.button-full.button-large.button-assertive.apply-btn(ng-show='!job.$$applied', ng-click='apply($event)') Apply!
+                button.button.button-full.button-large.button-balanced.apply-btn(ng-show='job.$$applied', ng-click='apply($event)', disabled='') Applied!
+                //
+                   <div class="bar bar-footer bar-assertive"  ng-click="apply($event)">
+                                      <button class="button button-clear col-xs-12">Apply</button>
+                                  </div> 

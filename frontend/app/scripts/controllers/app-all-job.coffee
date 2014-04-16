@@ -1,9 +1,9 @@
 'use strict'
 
 class AppAllJobCtrl extends AppCommonJobCtrl
-  @$inject: ['$scope', '$stateParams', '$state', "Restangular", "$timeout", "preloader"]
-  constructor: (@scope, @stateParams, @state, @Restangular, @timeout, @preloader) ->
-    super @scope, @stateParams, @state, @Restangular, @timeout, @preloader
+  @$inject: ['$scope', '$stateParams', '$state', "Restangular", "$timeout", "preloader","$analytics"]
+  constructor: (@scope, @stateParams, @state, @Restangular, @timeout, @preloader,@analytics) ->
+    super @scope, @stateParams, @state, @Restangular, @timeout, @preloader,@analytics
     @type = "all"
     @scope.$emit "setEnableShare", true
     localStorage.setItem "page", @state.params.jobId

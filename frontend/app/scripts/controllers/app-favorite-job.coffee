@@ -1,9 +1,9 @@
 'use strict'
 
 class AppFavoriteJobCtrl extends AppCommonJobCtrl
-  @$inject: ['$scope', '$stateParams', '$state', "Restangular", "$timeout", "preloader", "$window"]
-  constructor: (@scope, @stateParams, @state, @Restangular, @timeout, @preloader, @window) ->
-    super @scope, @stateParams, @state, @Restangular, @timeout, @preloader
+  @$inject: ['$scope', '$stateParams', '$state', "Restangular", "$timeout", "preloader","$analytics"]
+  constructor: (@scope, @stateParams, @state, @Restangular, @timeout, @preloader,@analytics) ->
+    super @scope, @stateParams, @state, @Restangular, @timeout, @preloader,@analytics
     @type = "favorite"
     @scope.$emit "setEnableShare", false
     @checkLogin @scope,@Restangular, (user)=>
