@@ -337,6 +337,7 @@ window.rAF = window.requestAnimationFrame
       # # console.log distance
       @touchDistance = distance * 10
       # # console.log "Touch distance", @touchDistance #this.touchDistance, width);
+      # if @enable
       @onDragStart()
       return
 
@@ -347,10 +348,12 @@ window.rAF = window.requestAnimationFrame
       @x = @startX + (e.gesture.deltaX)
       @y = @startY + (e.gesture.deltaY)
       @el.style[ionic.CSS.TRANSFORM] = "translate3d(" + @x + "px, " + @y + "px, 0) rotate(" + (@rotationAngle or 0) + "rad)"
+      # if @enable
       @onDrag(@x,@y)
       return
 
     _doDragEnd: (e) ->
+      # if @enable
       @onDragEnd()
       @transitionOut e
       return

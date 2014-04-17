@@ -26,8 +26,12 @@ class Ctrl
       $scope.user = user
       cb?(user)
     , =>
-      @state.go "app.logout"
-
+      @logout()
+  logout: =>
+    @state.go "app.logout"
+  errHandler: (err)=>
+    if err.status == "401"
+      @logout()
   purgeJobCache:=>
     jobCache = {}
   jobRequest:(Restangular, preloadImages, query, cb, ecb)=>

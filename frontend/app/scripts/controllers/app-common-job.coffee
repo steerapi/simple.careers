@@ -17,8 +17,11 @@ class AppCommonJobCtrl extends Ctrl
         ).then (userapplies)=>
           if userapplies and userapplies.length > 0 
             @scope.job.$$applied = true
+        , @errHandler
       else
         @checkLogin @scope,@Restangular,(user)=>
+          if not user
+            return          
           resource = @Restangular.all("userapplies")
           resource.getList( 
             conditions:
@@ -26,7 +29,8 @@ class AppCommonJobCtrl extends Ctrl
               user: user._id
           ).then (userapplies)=>
             if userapplies and userapplies.length > 0 
-              @scope.job.$$applied = true    
+              @scope.job.$$applied = true
+          , @errHandler
   init:=>
     @skip = +@state.params.jobId
     # query = @newQuery()
@@ -143,10 +147,15 @@ class AppCommonJobCtrl extends Ctrl
       # , 100
       return
     @checkLogin @scope, @Restangular, (user)=>
+      if not user
+        return
       @Restangular.all("userfavorites").remove
         conditions:
           user: user._id
           job: @scope.job._id
+      .then =>
+        console.log ""
+      , @errHandler 
       # @timeout =>
       #   @skip++
       #   @state.go "app.#{@type}.job", jobId:@skip
@@ -169,6 +178,9 @@ class AppCommonJobCtrl extends Ctrl
       @Restangular.all("userfavorites").post
         user: user._id
         job: @scope.job._id
+      .then =>
+        console.log ""
+      , @errHandler
       # @timeout =>
       #   @skip++
       #   @state.go "app.#{@type}.job", jobId:@skip
@@ -181,6 +193,8 @@ class AppCommonJobCtrl extends Ctrl
     return job.position and job.companyname and job.logo and job.location and job.type and job.picture
   cardDrag: (x,y,job)=>
     @dragging = true
+    if not (@scope.status == "normal" or @scope.status == "pass" or @scope.status == "fav")
+      return
     if x<-50
       @scope.status = "pass"
     else if x>50
@@ -198,6 +212,8 @@ class AppCommonJobCtrl extends Ctrl
 #       window.location.hash = "/app/#{@type}/#{@skip}"
 #     , 100
   flipClick: (job)=>
+    if not @scope.job
+      return
     eventData = 
       job: 
         _id: @scope.job._id
@@ -244,6 +260,9 @@ class AppCommonJobCtrl extends Ctrl
       resource.post
         user: userId
         job: @scope.job._id
+      .then =>
+        console.log ""
+      , @errHandler
       @scope.job.$$applied = true
       
 window.AppCommonJobCtrl = AppCommonJobCtrl
