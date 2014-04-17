@@ -242,6 +242,14 @@ window.rAF = window.requestAnimationFrame
           return
         ), 200
       else
+        if not @enable
+          @el.style[TRANSITION] = "-webkit-transform 0.2s ease-in-out"
+          @el.style[ionic.CSS.TRANSFORM] = "translate3d(" + @startX + "px," + (@startY) + "px, 0)"
+          setTimeout (->
+            self.el.style[TRANSITION] = "none"
+            return
+          ), 200          
+          return
       # Fly out
         # # console.log "flyout"
         rotateTo = (@rotationAngle + (@rotationDirection * 0.6)) or (Math.random() * 0.4)
@@ -274,8 +282,8 @@ window.rAF = window.requestAnimationFrame
     bindEvents: ->
       self = this
       ionic.onGesture "dragstart", ((e) =>
-        if not @enable
-          return
+        # if not @enable
+        #   return
         e.preventDefault()
         cx = window.innerWidth / 2
         if e.gesture.touches[0].pageX < cx
@@ -289,8 +297,8 @@ window.rAF = window.requestAnimationFrame
         return
       ), @el
       ionic.onGesture "drag", ((e) =>
-        if not @enable
-          return
+        # if not @enable
+        #   return
         e.preventDefault()
         window.rAF ->
           self._doDrag e
@@ -299,8 +307,8 @@ window.rAF = window.requestAnimationFrame
         return
       ), @el
       ionic.onGesture "dragend", ((e) =>
-        if not @enable
-          return
+        # if not @enable
+        #   return
         e.preventDefault()
         window.rAF ->
           self._doDragEnd e
