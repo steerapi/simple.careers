@@ -13,6 +13,7 @@ class AppApplyJobCtrl extends AppCommonJobCtrl
       @init()
   init:=>
     @skip = +@state.params.jobId
+    @scope.status = "loading"
     @resource = @Restangular.all("userapplies")
     @resource.getList( @newQuery(@skip) ).then (userapplies)=>
       @scope.job = userapplies[0].job

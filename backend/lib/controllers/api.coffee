@@ -10,9 +10,9 @@ api = {}
 baucis.rest("user").request passport.authenticate('bearer', { session: false })
 baucis.rest
   singular: 'job'
-  # put: false
-  # post: false
-  # del: false
+  put: false
+  post: false
+  del: false
 baucis.rest("askus")
 baucis.rest("userapply").request passport.authenticate('bearer', { session: false })
 baucis.rest("userfavorite").request passport.authenticate('bearer', { session: false })

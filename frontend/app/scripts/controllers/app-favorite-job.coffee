@@ -13,6 +13,7 @@ class AppFavoriteJobCtrl extends AppCommonJobCtrl
       @init()
   init:=>
     @skip = +@state.params.jobId
+    @scope.status = "loading"
     @resource = @Restangular.all("userfavorites")
     @resource.getList( @newQuery(@skip) ).then (userfavorites)=>
       @scope.job = userfavorites[0].job

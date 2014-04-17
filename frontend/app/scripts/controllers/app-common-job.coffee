@@ -39,6 +39,7 @@ class AppCommonJobCtrl extends Ctrl
     # # console.log "sk",@newQuery(+@skip)
     # # console.log "sk",@newQuery(+@skip+1)
     # # console.log "sk",@newQuery(+@skip+2)
+    @scope.status = "loading"
     @jobRequest @Restangular, @preloader.preloadImages, @newQuery(+@skip), (jobs)=>
       @jobRequest @Restangular, @preloader.preloadImages, @newQuery(+@skip+1)
     # @resource = @Restangular.all("jobs")
