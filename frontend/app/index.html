@@ -41,15 +41,6 @@
       //     xStart = e.touches[0].screenX;
       //     yStart = e.touches[0].screenY;
       // });
-       
-      document.addEventListener('touchmove',function(e) {
-          // var xMovement = Math.abs(e.touches[0].screenX - xStart);
-          // var yMovement = Math.abs(e.touches[0].screenY - yStart);
-          // if((yMovement * 3) > xMovement) {
-            e.preventDefault();
-          // }
-      });
-      
       WebFont.load({
         google: {
           families: ["Source Sans Pro:300,regular,600,700"]
@@ -88,7 +79,7 @@
                  type="bar-positive" 
                  back-button-type="button-icon" 
                  back-button-icon="ion-arrow-left-c"></ion-nav-bar> -->
-    <div ui-view="main"></div>
+    <div ui-view="main" autoscroll='false'></div>
     <!-- <div class="container" ng-view=""></div> -->
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->

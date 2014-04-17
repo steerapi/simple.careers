@@ -245,7 +245,7 @@ window.rAF = window.requestAnimationFrame
       # Fly out
         # # console.log "flyout"
         rotateTo = (@rotationAngle + (@rotationDirection * 0.6)) or (Math.random() * 0.4)
-        duration = (if @rotationAngle then 0.3 else 0.5)
+        duration = (if @rotationAngle then 0.2 else 0.2)
         @el.style[TRANSITION] = "-webkit-transform " + duration + "s ease-in-out"
         
         # # console.log "window.innerWidth: ",window.innerWidth

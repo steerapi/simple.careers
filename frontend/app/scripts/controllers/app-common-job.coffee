@@ -121,6 +121,9 @@ class AppCommonJobCtrl extends Ctrl
     return query
   cardDestroyed: (index)=>
     # @scope.jobs.splice(index, 1);
+    @skip++
+    @state.go "app.#{@type}.job", jobId:@skip
+    
   cardSwipedLeft: (job)=>
     eventData = 
       job: 
@@ -133,20 +136,20 @@ class AppCommonJobCtrl extends Ctrl
     @analytics.eventTrack "passSwipe", eventData
     
     if not @isLogin()
-      @skip++
-      @timeout =>
-        @state.go "app.#{@type}.job", jobId:@skip
-      , 100
+      # @skip++
+      # @timeout =>
+      #   @state.go "app.#{@type}.job", jobId:@skip
+      # , 100
       return
     @checkLogin @scope, @Restangular, (user)=>
       @Restangular.all("userfavorites").remove
         conditions:
           user: user._id
           job: @scope.job._id
-      @timeout =>
-        @skip++
-        @state.go "app.#{@type}.job", jobId:@skip
-      , 100      
+      # @timeout =>
+      #   @skip++
+      #   @state.go "app.#{@type}.job", jobId:@skip
+      # , 100
 
   cardSwipedRight: (job)=>
     eventData = 
@@ -165,10 +168,10 @@ class AppCommonJobCtrl extends Ctrl
       @Restangular.all("userfavorites").post
         user: user._id
         job: @scope.job._id
-      @timeout =>
-        @skip++
-        @state.go "app.#{@type}.job", jobId:@skip
-      , 100
+      # @timeout =>
+      #   @skip++
+      #   @state.go "app.#{@type}.job", jobId:@skip
+      # , 100
   cardDragStart: (job)=>
   cardDragEnd: (job)=>
     @dragging = false

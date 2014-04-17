@@ -4,6 +4,11 @@ class AppCtrl extends Ctrl
   @$inject: ['$scope', '$stateParams', '$state', "Restangular", "$timeout"]
   constructor: (@scope, @stateParams, @state, @Restangular, @timeout) ->
     super @scope
+    if window.eventListener
+      document.removeEventListener "touchmove", window.eventListener
+    document.addEventListener "touchmove", window.eventListener = (e) ->
+      e.preventDefault()
+      return
     myMenu = new PathMenu(
       bezierCurve:
         x0: 40
