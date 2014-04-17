@@ -1,24 +1,12 @@
 # process.on 'uncaughtException', (err)->
 #   console.log(err)
 
-config = require("./config.coffee")
 mandrill = require("mandrill-api")
 mongoose = require "mongoose"
 mongooseCachebox = require "mongoose-cachebox"
 options =
   cache: true # start caching
   ttl: 30 # 30 seconds
-hat = require('hat')
-
-mongooseCachebox mongoose, options
-mongoose.connect config.mongo
-
-# Web version
-db = mongoose.connection
-db.on "error", ->
-  console.log arguments...
-db.once "open", ->
-  console.log arguments...
 
 express = require "express"
 Schema = require "./lib/schema"
@@ -27,6 +15,14 @@ Schema.list.forEach (item)->
 
 # Application Config
 config = require("./lib/config/config")
+
+# Connect to database
+db = mongoose.connect(config.mongo.uri, config.mongo.options)
+
+mongoose.connection.on "error", ->
+  console.log arguments...
+mongoose.connection.once "open", ->
+  console.log arguments...
 
 # Passport Configuration
 passport = require("./lib/config/passport")
