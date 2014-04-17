@@ -22,7 +22,7 @@ class IntroPageCtrl extends Ctrl
   slideChanged: (index) =>
     @scope.slideIndex = index
     @timeout =>
-      @state.go "intro.page", pageId:index
+      @state.go "intro.page",{pageId:index},{reload: false}
     , 100
     return
   terms:=>
