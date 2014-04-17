@@ -7,8 +7,8 @@ class AppCtrl extends Ctrl
     super @scope
     if window.eventListener
       document.removeEventListener "touchmove", window.eventListener
-      document.addEventListener "touchmove", window.eventListener = (e) ->
-        e.preventDefault()
+    document.addEventListener "touchmove", window.eventListener = (e) ->
+      e.preventDefault()
       return
     @timeout =>
       # console.log "AppCtrl", window.myMenu
