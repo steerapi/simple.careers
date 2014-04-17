@@ -211,6 +211,9 @@ class AppCommonJobCtrl extends Ctrl
     if not @applyClicked and not @dragging
       job?.$$flip = not job?.$$flip
       @scope.swipeCard.setEnable(not job?.$$flip)
+      if not job?.$$flip
+        @scope.status = "normal"
+        return
       
     @applyClicked = false
   apply: (event)=>
