@@ -13,7 +13,11 @@ baucis.rest
   put: false
   post: false
   del: false
-baucis.rest("askus")
+baucis.rest
+  singular: 'askus'
+  get: false
+  del: false
+  put: false  
 baucis.rest("userapply").request passport.authenticate('bearer', { session: false })
 baucis.rest("userfavorite").request passport.authenticate('bearer', { session: false })
 api.baucis = baucis
