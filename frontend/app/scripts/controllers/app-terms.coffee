@@ -5,7 +5,7 @@ class AppTermsCtrl extends Ctrl
   constructor: (@scope, @stateParams, @state, @Restangular) ->
     super @scope
   back:=>
-    window.history.back();
+    @state.go "intro.page", pageId:2
     
     
 angular.module('simplecareersApp').controller 'AppTermsCtrl', AppTermsCtrl
