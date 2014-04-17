@@ -57,7 +57,8 @@ class AppFavoriteJobCtrl extends AppCommonJobCtrl
     @timeout =>
       @purgeJobCache()
       # refresh
-      location.reload()
+      # location.reload()
+      @state.go "app.favorite.job", @stateParams.jobId, { reload: true }
     , 110
   cardSwipedRight: (job)=>
     super job
