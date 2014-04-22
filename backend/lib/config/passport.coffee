@@ -5,7 +5,9 @@ passport = require("passport")
 LocalStrategy = require("passport-local").Strategy
 BearerStrategy = require("passport-http-bearer").Strategy
 BasicStrategy = require("passport-http").BasicStrategy
-  
+
+
+config = require("../config/config")
 hat = require "hat"
 
 ###
@@ -59,20 +61,11 @@ passport.use new BearerStrategy((token, done) ->
 )
 
 passport.use new BasicStrategy((username, password, done) ->
-  User.findOne
-    username: username
-  , (err, user) ->
-    return done(err)  if err
-    return done(null, false)  unless user
-    done null, user,
-      scope: "all"
+  if username==config.annotate.username && password == config.annotate.password
+    done null, {id:username}
+  else
+    done "invalid"
   return
 )
 
-# User.create 
-#   username: "simple"
-#   password: "simple1337"
-# .then ->
-#   console.log "hello simple"
-  
 module.exports = passport
