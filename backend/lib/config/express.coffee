@@ -41,6 +41,16 @@ module.exports = (app) ->
     app.use(express.static(__dirname + '/../../../frontend/dist'));
     return
 
+  app.configure "jokno", ->
+    app.use express.compress()
+    # app.use express.favicon(path.join(config.root, "public", "favicon.ico"))
+    # app.use express.static(path.join(config.root, "public"))
+    # app.set "views", config.root + "/views"
+  
+    app.use(express.static(__dirname + '/../../../frontend/dist'));
+    return
+
+
   app.configure ->
     app.engine('html', engines.ejs);
     app.set "view engine", "ejs"

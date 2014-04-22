@@ -18,6 +18,10 @@ passport.serializeUser (user, done) ->
   return
 
 passport.deserializeUser (id, done) ->
+  # console.log "deserial"
+  if id==config.annotate.username
+    done null, {id:id}
+    return
   User.findOne
     _id: id
   , "-salt -hashedPassword", (err, user) -> # don't ever give out the password or salt
@@ -61,7 +65,11 @@ passport.use new BearerStrategy((token, done) ->
 )
 
 passport.use new BasicStrategy((username, password, done) ->
-  if username==config.annotate.username && password == config.annotate.password
+  # console.log username
+  # console.log password
+  # console.log config.annotate.username
+  # console.log config.annotate.password
+  if (username==config.annotate.username) && (password == config.annotate.password)
     done null, {id:username}
   else
     done "invalid"

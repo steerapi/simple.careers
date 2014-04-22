@@ -9,7 +9,7 @@ module.exports = {
   },
   mandrill: "ye5nIk8NpIB6-4g7_WIGhg",
   annotate: {
-    usernmae: "simple",
+    username: "simple",
     password: "simple1337"
   }
 };
