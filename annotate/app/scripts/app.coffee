@@ -28,7 +28,7 @@ angular
         views: 
           {
             'view': {
-              templateUrl: "/views/job.html",
+              templateUrl: "./views/job.html",
               controller: "JobCtrl"
             }
           }
@@ -38,7 +38,7 @@ angular
         views: 
           {
             'view.view': {
-              templateUrl: "/views/job-item.html",
+              templateUrl: "./views/job-item.html",
               controller: "JobItemCtrl"
             }
           }
@@ -48,7 +48,7 @@ angular
         views: 
           {
             'view.view.view': {
-              templateUrl: "/views/job-desc.html",
+              templateUrl: "./views/job-desc.html",
               controller: "JobDescCtrl"
             }
           }
@@ -58,7 +58,7 @@ angular
         views: 
           {
             'view.view.view': {
-              templateUrl: "/views/job-app.html",
+              templateUrl: "./views/job-app.html",
               controller: "JobAppCtrl"
             }
           }
