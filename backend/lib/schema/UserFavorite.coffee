@@ -17,9 +17,6 @@ schema.index({ user: 1, job: 1 }, { unique: true })
 # schema.plugin(passportLocalMongoose)
 
 schema.pre "save", (next) ->
-  for k,v of @._doc
-    delete @._doc[k] if v == null
-  
   date = new Date
   @updatedAt = date 
   @createdAt = @updatedAt unless @createdAt

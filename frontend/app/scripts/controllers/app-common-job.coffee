@@ -6,17 +6,17 @@ class AppCommonJobCtrl extends Ctrl
     super @scope
     @scope.$state = @state
     # @init()
-  checkApplied: =>
+  checkApplied: (job)=>
     if @isLogin()
       if @scope.user
         resource = @Restangular.all("userapplies")
         resource.getList( 
           conditions:
-            job: @scope.job._id
+            job: job._id
             user: @scope.user._id
         ).then (userapplies)=>
           if userapplies and userapplies.length > 0 
-            @scope.job.$$applied = true
+            job.$$applied = true
         , @errHandler
       else
         @checkLogin @scope,@Restangular,(user)=>
@@ -25,13 +25,13 @@ class AppCommonJobCtrl extends Ctrl
           resource = @Restangular.all("userapplies")
           resource.getList( 
             conditions:
-              job: @scope.job._id
+              job: job._id
               user: user._id
           ).then (userapplies)=>
             if userapplies and userapplies.length > 0 
-              @scope.job.$$applied = true
+              job.$$applied = true
           , @errHandler
-  init:=>
+  init:(collection="jobs", extractor=((jobs)->return jobs[0]))=>
     @skip = +@state.params.jobId
     # query = @newQuery()
     # query.count = true
@@ -44,16 +44,27 @@ class AppCommonJobCtrl extends Ctrl
     # # console.log "sk",@newQuery(+@skip+1)
     # # console.log "sk",@newQuery(+@skip+2)
     @scope.status = "loading"
-    @jobRequest @Restangular, @preloader.preloadImages, @newQuery(+@skip), (jobs)=>
-      @jobRequest @Restangular, @preloader.preloadImages, @newQuery(+@skip+1)
+    @jobRequest @Restangular, collection, @preloader.preloadImages, @newQuery(+@skip), extractor,(jobs)=>
+      @jobRequest @Restangular, collection, @preloader.preloadImages, @newQuery(+@skip+1), extractor,(jobs)=>
+        @timeout =>
+          # console.log jobs
+          @scope.$emit "jobswap", jobs[0]
+        , 100
+      , =>
+        @timeout =>
+          # console.log jobs
+          @scope.$emit "jobswap", {$$status:"loading"}
+        , 100
+        
     # @resource = @Restangular.all("jobs")
     # @resource.getList( @newQuery() ).then (jobs)=>      
       if jobs and jobs.length > 0
+        # @scope.jobs = jobs        
         @scope.job = jobs[0]
         if not @scope.job
           @scope.status = "broken"
           return
-        @checkApplied()
+        @checkApplied(@scope.job)
         @scope.$emit "shareUrl", window.location.href
         @scope.job.$$flip = false
         @scope.isLoading = true
@@ -69,6 +80,7 @@ class AppCommonJobCtrl extends Ctrl
           @scope.status = "normal"
           @scope.isLoading = false
           @scope.isSuccessful = false        
+      @initButtonEvents(@scope.job)
     , =>
       # # console.log "err", @skip
       if +@skip == 0
@@ -78,9 +90,8 @@ class AppCommonJobCtrl extends Ctrl
         return
       @skip=0
       @state.go "app.#{@type}.job", jobId:@skip
-    @initButtonEvents()
     
-  initButtonEvents:=>
+  initButtonEvents:(job)=>
     @noLis?()
     @noLis = @scope.$on "noClick",=>
       if not @scope.swipeCard.enable
@@ -88,9 +99,9 @@ class AppCommonJobCtrl extends Ctrl
 
       eventData = 
         job: 
-          _id: @scope.job._id
-          position: @scope.job.position
-          companyname: @scope.job.companyname
+          _id: job._id
+          position: job.position
+          companyname: job.companyname
       eventData.type = @type if @type
       if @scope.user
         eventData.user = @scope.user.username
@@ -106,9 +117,9 @@ class AppCommonJobCtrl extends Ctrl
 
       eventData = 
         job: 
-          _id: @scope.job._id
-          position: @scope.job.position
-          companyname: @scope.job.companyname
+          _id: job._id
+          position: job.position
+          companyname: job.companyname
       eventData.type = @type if @type
       if @scope.user
         eventData.user = @scope.user.username
@@ -132,9 +143,9 @@ class AppCommonJobCtrl extends Ctrl
   cardSwipedLeft: (job)=>
     eventData = 
       job: 
-        _id: @scope.job._id
-        position: @scope.job.position
-        companyname: @scope.job.companyname
+        _id: job._id
+        position: job.position
+        companyname: job.companyname
     eventData.type = @type if @type
     if @scope.user
       eventData.user = @scope.user.username
@@ -152,7 +163,7 @@ class AppCommonJobCtrl extends Ctrl
       @Restangular.all("userfavorites").remove
         conditions:
           user: user._id
-          job: @scope.job._id
+          job: job._id
       .then =>
         console.log ""
       , @errHandler 
@@ -164,9 +175,9 @@ class AppCommonJobCtrl extends Ctrl
   cardSwipedRight: (job)=>
     eventData = 
       job: 
-        _id: @scope.job._id
-        position: @scope.job.position
-        companyname: @scope.job.companyname
+        _id: job._id
+        position: job.position
+        companyname: job.companyname
     eventData.type = @type if @type
     if @scope.user
       eventData.user = @scope.user.username
@@ -177,7 +188,7 @@ class AppCommonJobCtrl extends Ctrl
         return
       @Restangular.all("userfavorites").post
         user: user._id
-        job: @scope.job._id
+        job: job._id
       .then =>
         console.log ""
       , @errHandler
@@ -200,7 +211,7 @@ class AppCommonJobCtrl extends Ctrl
     else if x>50
       @scope.status = "fav"
     else
-      if not @isValid(@scope.job)
+      if not @isValid(job)
         @scope.status = "broken"
       else
         @scope.status = "normal"
@@ -212,13 +223,13 @@ class AppCommonJobCtrl extends Ctrl
 #       window.location.hash = "/app/#{@type}/#{@skip}"
 #     , 100
   flipClick: (job)=>
-    if not @scope.job
+    if not job
       return
     eventData = 
       job: 
-        _id: @scope.job._id
-        position: @scope.job.position
-        companyname: @scope.job.companyname
+        _id: job._id
+        position: job.position
+        companyname: job.companyname
     eventData.type = @type if @type
     if @scope.user
       eventData.user = @scope.user.username
@@ -230,40 +241,33 @@ class AppCommonJobCtrl extends Ctrl
       @scope.swipeCard.setEnable(not job?.$$flip)
       if not job?.$$flip
         @scope.status = "normal"
-        return
       
     @applyClicked = false
-  apply: (event)=>
+  apply: (event,job)=>
+    @login()
+    
+    event.preventDefault()
+    @applyClicked = true
+
     eventData = 
       job: 
-        _id: @scope.job._id
-        position: @scope.job.position
-        companyname: @scope.job.companyname
+        _id: job._id
+        position: job.position
+        companyname: job.companyname
     eventData.type = @type if @type
     if @scope.user
       eventData.user = @scope.user.username
+    eventData.userId = userId        
     @analytics.eventTrack "applyClick", eventData
     
-    # # console.log "apply"
-    event.preventDefault()
-    @applyClicked = true
-    # # console.log window.location.hash
-    
-    userId = localStorage.getItem("userId");
-    token = localStorage.getItem("token");
-    # # console.log "check",userId,token
-    if (not userId) or (not token)
-      window.location.href = "/auth/linkedin?redirect=#{window.location.href}&apply=#{@scope.job._id}"
-      return
-    else
-      resource = @Restangular.all "userapplies"
-      resource.post
-        user: userId
-        job: @scope.job._id
-      .then =>
-        console.log ""
-      , @errHandler
-      @scope.job.$$applied = true
+    resource = @Restangular.all "userapplies"
+    resource.post
+      user: userId
+      job: job._id
+    .then =>
+      console.log ""
+    , @errHandler
+    job.$$applied = true
       
 window.AppCommonJobCtrl = AppCommonJobCtrl
 # angular.module('simplecareersApp').controller 'AppCommonJobCtrl', AppCommonJobCtrl

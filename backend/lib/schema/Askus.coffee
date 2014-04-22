@@ -13,9 +13,6 @@ schema = new Schema
   versionKey: false
 
 schema.pre "save", (next) ->
-  for k,v of @._doc
-    delete @._doc[k] if v == null
-  
   date = new Date
   @updatedAt = date 
   @createdAt = @updatedAt unless @createdAt

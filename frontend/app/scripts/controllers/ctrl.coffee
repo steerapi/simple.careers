@@ -8,15 +8,17 @@ class Ctrl
     for k in _.functions @
       @scope[k] = @[k] if k!="constructor"
     @scope.save = _.debounce @scope.save, 1000
+  login: (cb)=>
+    if not @isLogin()
+      cb?()
+      window.location.href = "/auth/linkedin?redirect=#{window.location.href}"
+      return
   isLogin: =>
     userId = localStorage.getItem("userId");
     token = localStorage.getItem("token");
     return userId and token
   checkLogin: ($scope,$Restangular,cb)=>
-    if not @isLogin()
-      cb?()
-      window.location.href = "/auth/linkedin?redirect=#{window.location.href}"
-      return
+    @login cb
     # # console.log "check"
     (cb?($scope.user);return) if $scope.user
     $Restangular.setDefaultHeaders
@@ -34,7 +36,8 @@ class Ctrl
       @logout()
   purgeJobCache:=>
     jobCache = {}
-  jobRequest:(Restangular, preloadImages, query, cb, ecb)=>
+
+  jobRequest:(Restangular, collection, preloadImages, query, extractor, cb, ecb)=>
     k = JSON.stringify(query)
     job = jobCache[k]
     if job
@@ -42,13 +45,18 @@ class Ctrl
       delete jobCache[k]
       cb? [job]
       return
-    resource = Restangular.all("jobs")
+    resource = Restangular.all(collection)
     resource.getList( query ).then (jobs)=>
       if jobs and jobs.length > 0
-        job = jobs[0]
+        job = extractor(jobs)
         jobCache[k] = job
         preloadImages?([job.picture?.url]).then =>
-      cb? jobs
+        preloadImages?([job.logo?.url]).then =>
+        for badge in job.badges?
+          preloadImages?([badge?.url]).then =>
+        cb? [job]
+      else
+        ecb? arguments...
     , =>
       ecb? arguments...
   update: (resource, key)=>
@@ -71,7 +79,8 @@ class Ctrl
     url = file.url
     return url if /gif/.test file.mimetype
     if /filepicker/.test url
-      return "#{url}/convert?w=600&h=450"
+      return "#{url}"
+      # return "#{url}/convert?w=300&h=225"
     return url
   wait: (scope,key,cb)=>
     # # console.log "scope[key]", scope[key], key

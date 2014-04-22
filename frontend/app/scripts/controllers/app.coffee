@@ -57,6 +57,9 @@ class AppCtrl extends Ctrl
       @scope.url = url
     @scope.$on "setEnableShare", (event, enable)=>
       @scope.enableShare = enable
+    @scope.$on "jobswap", (event, job)=>
+      # @scope.jobswaps = [job]
+      @scope.jobswap = job
   noClick:=>
     # @checkLogin @Restangular, (user)=>
       # # console.log "pass"

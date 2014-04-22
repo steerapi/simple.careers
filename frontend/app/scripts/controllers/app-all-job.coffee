@@ -10,7 +10,7 @@ class AppAllJobCtrl extends AppCommonJobCtrl
     @timeout =>
       if not localStorage.getItem("visited")
         @state.go "intro.page", pageId:0
-      @init()
+      @init("jobs")
   newQuery: (sk)=>
     query = super sk
     return query

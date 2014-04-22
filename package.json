@@ -33,6 +33,7 @@
     "passport-facebook": "~1.0.3",
     "lodash": "~2.4.1",
     "connect-mongo": "~0.4.0",
-    "connect-livereload": "~0.4.0"
+    "connect-livereload": "~0.4.0",
+    "passport-http": "~0.2.2"
   }
 }
