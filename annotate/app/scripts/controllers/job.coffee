@@ -12,7 +12,7 @@ class JobCtrl extends Ctrl
     @scope.sortableOptions = {
       update: (e, ui)=>
         @timeout =>
-          @scope.jobs.forEach (item, idx)=>
+          @scope.jobs?.forEach (item, idx)=>
             item.order = idx
             @save item
         return
@@ -28,13 +28,13 @@ class JobCtrl extends Ctrl
           
     @scope.job = null
   newJob: =>
+    @scope.jobs?=[]
     job = 
       order: @scope.jobs.length
     @resource.post(job).then (job)=>
-      @scope.jobs?=[]
       @scope.jobs.push job
   removeJob: (cjob)=>
-    for job,i in @scope.jobs
+    for job,i in @scope.jobs?
       if cjob and job and cjob._id == job._id
         @scope.jobs.splice i,1
         cjob.remove()
