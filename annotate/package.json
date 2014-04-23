@@ -6,6 +6,8 @@
     "express": "~3.5.1"
   },
   "devDependencies": {
+    "grunt-express-server": "~0.4.13",
+    "grunt-open": "~0.2.3",
     "grunt": "~0.4.1",
     "grunt-autoprefixer": "~0.4.0",
     "grunt-bower-install": "~1.0.0",

@@ -41,8 +41,8 @@ module.exports = function (grunt) {
         url: 'http://localhost:<%= express.options.port %>'
       }
     },
+    
     // Watches files for changes and runs tasks based on the changed files
-
     watch: {
       bower: {
         files: ['bower.json'],

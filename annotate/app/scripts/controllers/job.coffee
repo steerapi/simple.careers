@@ -31,11 +31,14 @@ class JobCtrl extends Ctrl
       order: @scope.jobs.length
     @resource.post(job).then (job)=>
       @scope.jobs.push job
-  removeJob: (cjob)=>
-    for job,i in @scope.jobs?
-      if cjob and job and cjob._id == job._id
+  removeJob: (cjob,$event)=>
+    $event.stopPropagation()
+    for job,i in @scope.jobs
+      if job and cjob and cjob._id == job._id
         @scope.jobs.splice i,1
         cjob.remove()
+        break
+    return
   changeJob: (job)=>
     @scope.job = job
     @state.go "job.item.#{@scope.mode}", jobId:job._id

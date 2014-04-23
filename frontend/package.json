@@ -2,12 +2,14 @@
   "name": "simplecareers",
   "version": "0.0.0",
   "dependencies": {
-    "connect-modrewrite": "~0.5.11",
-    "grunt-express-server": "~0.4.13",
-    "grunt-open": "~0.2.3",
-    "connect-livereload": "~0.4.0"
+    "coffee-script": "~1.7.1",
+    "express": "~3.5.1"
   },
   "devDependencies": {
+    "connect-modrewrite": "~0.5.11",
+    "connect-livereload": "~0.4.0",
+    "grunt-express-server": "~0.4.13",
+    "grunt-open": "~0.2.3",
     "grunt": "~0.4.1",
     "grunt-autoprefixer": "~0.4.0",
     "grunt-bower-install": "~1.0.0",
