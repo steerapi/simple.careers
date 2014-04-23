@@ -259,12 +259,12 @@ class AppCommonJobCtrl extends Ctrl
     eventData.type = @type if @type
     if @scope.user
       eventData.user = @scope.user.username
-      eventData.userId = @scope.user._id
+    eventData.userId = localStorage.getItem "userId"
     @analytics.eventTrack "applyClick", eventData
     
     resource = @Restangular.all "userapplies"
     resource.post
-      user: @scope.user._id
+      user: localStorage.getItem "userId"
       job: job._id
     .then =>
       console.log ""

@@ -7,8 +7,6 @@ class JobCtrl extends Ctrl
     @scope.mode = "desc"
     @scope.$on "changeMode", (e,mode)=>
       @scope.mode = mode
-    @Restangular.setDefaultHeaders
-      "Authorization": "Bearer 710882c2d16bb36d6b51505038fcd9eb"
     @scope.sortableOptions = {
       update: (e, ui)=>
         @timeout =>
