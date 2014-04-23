@@ -137,9 +137,10 @@ class AppCommonJobCtrl extends Ctrl
     return query
   cardDestroyed: (index)=>
     # @scope.jobs.splice(index, 1);
-    @skip++
-    @state.go "app.#{@type}.job", jobId:@skip
-    
+    if not @scope.loggingIn
+      @skip++
+      @state.go "app.#{@type}.job", jobId:@skip
+  
   cardSwipedLeft: (job)=>
     eventData = 
       job: 
@@ -185,6 +186,7 @@ class AppCommonJobCtrl extends Ctrl
     
     @checkLogin @scope, @Restangular, (user)=>
       if not user
+        # @loggingIn = true
         return
       @Restangular.all("userfavorites").post
         user: user._id

@@ -8,9 +8,12 @@ class Ctrl
     for k in _.functions @
       @scope[k] = @[k] if k!="constructor"
     @scope.save = _.debounce @scope.save, 1000
+    @scope.loggingIn = false
   login: (cb)=>
     if not @isLogin()
       cb?()
+      @scope.loggingIn = true
+      @scope.$emit "loggingIn", @scope.loggingIn
       window.location.href = "/auth/linkedin?redirect=#{window.location.href}"
       return
   isLogin: =>
@@ -27,8 +30,8 @@ class Ctrl
     resource.get().then (user)=>
       $scope.user = user
       cb?(user)
-    , =>
-      @logout()
+    , @errHandler      
+      # @logout()
   logout: =>
     @state.go "app.logout"
   errHandler: (err)=>

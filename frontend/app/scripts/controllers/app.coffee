@@ -5,6 +5,14 @@ class AppCtrl extends Ctrl
   @$inject: ['$scope', '$stateParams', '$state', "Restangular", "$timeout"]
   constructor: (@scope, @stateParams, @state, @Restangular, @timeout) ->
     super @scope
+    
+    # console.log "@state.params.jobId",@state.params.jobId
+    if not @state.params.jobId
+      page = localStorage.getItem("page")
+      if not page
+        page = 0
+      @state.go "app.all.job", jobId:page
+    
     if window.eventListener
       document.removeEventListener "touchmove", window.eventListener
     document.addEventListener "touchmove", window.eventListener = (e) ->
@@ -60,6 +68,9 @@ class AppCtrl extends Ctrl
     @scope.$on "jobswap", (event, job)=>
       # @scope.jobswaps = [job]
       @scope.jobswap = job
+    @scope.$on "loggingIn", (event)=>
+      # @scope.jobswaps = [job]
+      @scope.loggingIn = true
   noClick:=>
     # @checkLogin @Restangular, (user)=>
       # # console.log "pass"

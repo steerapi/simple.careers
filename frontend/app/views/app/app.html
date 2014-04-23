@@ -31,7 +31,7 @@
 
       <swipe-cards>
       
-      <swipe-card id="jobswap" style="pointer-events: none;">
+      <swipe-card ng-show="jobswap" id="jobswap" style="pointer-events: none;">
       
       <div class="flip-container">
       	<div class="flipper">
@@ -169,6 +169,9 @@
     <img src="/images/yes-btn.png" class="action-btn"></img>
     </button>
   </div>
-  
+  <div class="loggingIn-wrapper" ng-show="loggingIn">
+    <!-- <h1 class=>Logging In...</h1> -->
+    <img src="/images/loading.gif">
+  </div>
 </ion-content>
 <div id="menu"></div>

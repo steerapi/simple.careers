@@ -497,12 +497,12 @@ app = angular
         id: "_id"
       RestangularProvider.setBaseUrl "/api/data/"
       
-      page = localStorage.getItem "page"
-      if not page
-        page = 0
+      # page = localStorage.getItem "page"
+      # if not page
+      # page = 0
         
       if localStorage.getItem "visited"
-        $urlRouterProvider.otherwise "/app/all/#{page}"
+        $urlRouterProvider.otherwise "/app"
       else
         $urlRouterProvider.otherwise "/intro/0"
     
@@ -614,6 +614,16 @@ app = angular
             'main.view': {
               templateUrl: "/views/app/login.html",
               controller: "AppLoginCtrl"
+            }
+          }
+      )
+      .state('app.loggingIn',
+        url: "/loggingIn",
+        views:
+          {
+            'main.view': {
+              templateUrl: "/views/app/logging.html",
+              controller: "AppLoggingInCtrl"
             }
           }
       )
