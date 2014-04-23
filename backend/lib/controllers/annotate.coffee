@@ -5,7 +5,8 @@ path = require "path"
 
 annotate = express()
 
-annotate.use(express.basicAuth('simple', 'simple1337'));
+config = require("../config/config")
+annotate.use(express.basicAuth(config.annotate.username, config.annotate.password));
 annotate.use(express.static(path.resolve(__dirname+'/../../../annotate/dist')));
 annotate.use(express.logger());
 annotate.use(express.cookieParser());

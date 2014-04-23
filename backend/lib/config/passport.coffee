@@ -4,10 +4,10 @@ User = mongoose.model("user")
 passport = require("passport")
 LocalStrategy = require("passport-local").Strategy
 BearerStrategy = require("passport-http-bearer").Strategy
-BasicStrategy = require("passport-http").BasicStrategy
+# BasicStrategy = require("passport-http").BasicStrategy
 
 
-config = require("../config/config")
+# config = require("../config/config")
 hat = require "hat"
 
 ###
@@ -18,10 +18,9 @@ passport.serializeUser (user, done) ->
   return
 
 passport.deserializeUser (id, done) ->
-  # console.log "deserial"
-  if id==config.annotate.username
-    done null, {id:id}
-    return
+  # if id==config.annotate.username
+  #   done null, {id:username}
+  #   return
   User.findOne
     _id: id
   , "-salt -hashedPassword", (err, user) -> # don't ever give out the password or salt
@@ -64,16 +63,16 @@ passport.use new BearerStrategy((token, done) ->
   return
 )
 
-passport.use new BasicStrategy((username, password, done) ->
-  # console.log username
-  # console.log password
-  # console.log config.annotate.username
-  # console.log config.annotate.password
-  if (username==config.annotate.username) && (password == config.annotate.password)
-    done null, {id:username}
-  else
-    done "invalid"
-  return
-)
+# passport.use new BasicStrategy((username, password, done) ->
+#   # console.log username
+#   # console.log password
+#   # console.log config.annotate.username
+#   # console.log config.annotate.password
+#   if (username==config.annotate.username) && (password == config.annotate.password)
+#     done null, {id:username}
+#   else
+#     done "invalid"
+#   return
+# )
 
 module.exports = passport
