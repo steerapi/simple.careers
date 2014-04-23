@@ -20,7 +20,9 @@ angular
       RestangularProvider.setRestangularFields
         id: "_id"
       RestangularProvider.setBaseUrl "/api/data/"
-        
+      RestangularProvider.setDefaultHeaders
+        "Authorization": "Bearer 5168fb941960bec6afaa7b23f2d0fa92"
+      
       $urlRouterProvider.otherwise "/job"
       $stateProvider
       .state('job',

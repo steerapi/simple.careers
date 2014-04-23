@@ -7,3 +7,4 @@ angular.module('simpleannotateApp')
       'AngularJS'
       'Karma'
     ]
+    
