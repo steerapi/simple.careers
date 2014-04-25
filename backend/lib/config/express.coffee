@@ -64,7 +64,9 @@ module.exports = (app) ->
     # Persist sessions with mongoStore
     app.use express.session(
       secret: "simplecareers1331"
+      cookie: { maxAge: 24 * 60 * 60 * 1000 }
       store: new mongoStore(
+        clear_interval: 3600
         url: config.mongo.uri
         collection: "sessions"
       , ->
