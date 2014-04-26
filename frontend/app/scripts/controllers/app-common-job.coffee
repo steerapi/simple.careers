@@ -262,14 +262,16 @@ class AppCommonJobCtrl extends Ctrl
     eventData.userId = localStorage.getItem "userId"
     @analytics.eventTrack "applyClick", eventData
     
-    resource = @Restangular.all "userapplies"
-    resource.post
-      user: localStorage.getItem "userId"
-      job: job._id
-    .then =>
-      console.log ""
-    , @errHandler
-    job.$$applied = true
+    if localStorage.getItem "userId"
+      resource = @Restangular.all "userapplies"
+      resource.post
+        user: localStorage.getItem "userId"
+        job: job._id
+      .then =>
+        job.$$applied = true
+        # console.log ""
+      , @errHandler
+    
       
 window.AppCommonJobCtrl = AppCommonJobCtrl
 # angular.module('simplecareersApp').controller 'AppCommonJobCtrl', AppCommonJobCtrl
