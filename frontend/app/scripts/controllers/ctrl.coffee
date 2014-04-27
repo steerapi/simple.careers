@@ -35,7 +35,7 @@ class Ctrl
   logout: =>
     @state.go "app.logout"
   errHandler: (err)=>
-    if err.status == "401"
+    if err.status == 401
       @logout()
   purgeJobCache:=>
     jobCache = {}
