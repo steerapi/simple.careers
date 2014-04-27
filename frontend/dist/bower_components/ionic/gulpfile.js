@@ -3,8 +3,16 @@ var buildConfig = require('./config/build.config.js');
 var changelog = require('conventional-changelog');
 var connect = require('connect');
 var dgeni = require('dgeni');
+var es = require('event-stream');
+var htmlparser = require('htmlparser2');
+var lunr = require('lunr');
+var mkdirp = require('mkdirp');
+var yaml = require('js-yaml');
+
 var http = require('http');
 var cp = require('child_process');
+var fs = require('fs');
+
 var gulp = require('gulp');
 var pkg = require('./package.json');
 var semver = require('semver');
@@ -13,6 +21,7 @@ var through = require('through');
 var argv = require('minimist')(process.argv.slice(2));
 
 var concat = require('gulp-concat');
+var footer = require('gulp-footer');
 var gulpif = require('gulp-if');
 var header = require('gulp-header');
 var jshint = require('gulp-jshint');
@@ -38,6 +47,67 @@ if (IS_RELEASE_BUILD) {
 gulp.task('default', ['build']);
 gulp.task('build', ['bundle', 'sass']);
 
+gulp.task('docs-index', function() {
+  var idx = lunr(function() {
+    this.field('path');
+    this.field('title', {boost: 10});
+    this.field('body');
+    this.ref('path');
+  });
+  var ref = {};
+
+  return gulp.src([
+    'tmp/ionic-site/docs/{components,guide,overview,angularjs}/**/*.{md,html}',
+    'tmp/ionic-site/tutorials/**/*.{md,html}'
+  ])
+    .pipe(es.map(function(file, callback) {
+      //docs for gulp file objects: https://github.com/wearefractal/vinyl
+      var contents = file.contents.toString(); //was buffer
+      // Grab relative path from ionic-site root
+      var relpath = file.path.replace(/^.*?tmp\/ionic-site\//, '');
+
+      // Read out the yaml portion of the Jekyll file
+      var title, layout;
+      var yamlStartIndex = contents.indexOf('---');
+      var yamlEndIndex = contents.indexOf('---', yamlStartIndex+3); //starting from start
+      var yamlRaw = contents.substring(yamlStartIndex+3, yamlEndIndex);
+
+      var properties =  yaml.safeLoad(yamlRaw);
+      contents = contents.substring(yamlEndIndex+3);
+
+      if(properties.title && properties.layout) {
+        title = properties.title;
+        layout = properties.layout;
+      } else {
+        return callback('layout and title properties not found in Jekyll file '+relpath);
+      }
+
+      var body = '';
+      // Parse all html and use only text portion
+      var parser = new htmlparser.Parser({
+        ontext: function(text){
+          // Ignore any Jekyll expressions
+          body += text.replace(/{%.*%}/, '', 'g');
+        },
+      });
+      parser.write(contents);
+      parser.end();
+
+      // Add the data to the indexer and ref object
+      idx.add({'path': relpath, 'body': body, 'title': title});
+      ref[relpath] = {'title': title, 'layout': layout};
+
+      callback();
+    })).on('end', function() {
+      // Write out as one json file
+      mkdirp.sync('tmp/ionic-site/data');
+      fs.writeFileSync(
+        'tmp/ionic-site/data/index.json',
+        JSON.stringify({'ref': ref, 'index': idx.toJSON()})
+      );
+    });
+});
+
 gulp.task('docs', function(done) {
   var docVersion = argv['doc-version'];
   if (docVersion != 'nightly' && !semver.valid(docVersion)) {
@@ -51,7 +121,7 @@ gulp.task('docs', function(done) {
 });
 
 var IS_WATCH = false;
-gulp.task('watch', function() {
+gulp.task('watch', ['bundle'], function() {
   IS_WATCH = true;
   gulp.watch('js/**/*.js', ['bundle']);
   gulp.watch('scss/**/*.scss', ['sass']);
@@ -63,7 +133,7 @@ gulp.task('changelog', function(done) {
     version: pkg.version,
   }, function(err, data) {
     if (err) return done(err);
-    require('fs').writeFileSync('CHANGELOG.md', data);
+    fs.writeFileSync('CHANGELOG.md', data);
     done();
   });
 });
@@ -114,7 +184,10 @@ gulp.task('vendor', function() {
 gulp.task('scripts', function() {
   return gulp.src(buildConfig.ionicFiles)
     .pipe(gulpif(IS_RELEASE_BUILD, stripDebug()))
+    .pipe(template({ pkg: pkg }))
     .pipe(concat('ionic.js'))
+    .pipe(header(buildConfig.closureStart))
+    .pipe(footer(buildConfig.closureEnd))
     .pipe(header(banner))
     .pipe(gulp.dest(buildConfig.distJs))
     .pipe(gulpif(IS_RELEASE_BUILD, uglify()))
@@ -125,8 +198,10 @@ gulp.task('scripts', function() {
 
 gulp.task('scripts-ng', function() {
   return gulp.src(buildConfig.angularIonicFiles)
-    // .pipe(gulpif(IS_RELEASE_BUILD, stripDebug()))
+    .pipe(gulpif(IS_RELEASE_BUILD, stripDebug()))
     .pipe(concat('ionic-angular.js'))
+    .pipe(header(buildConfig.closureStart))
+    .pipe(footer(buildConfig.closureEnd))
     .pipe(header(banner))
     .pipe(gulp.dest(buildConfig.distJs))
     .pipe(gulpif(IS_RELEASE_BUILD, uglify()))

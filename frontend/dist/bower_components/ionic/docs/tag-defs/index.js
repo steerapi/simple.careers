@@ -1,8 +1,8 @@
 module.exports = [
   {
-    name: 'controller',
+    name: 'delegate',
     transformFn: function(doc, tag) {
-      return '{@link ionic.controller:' + tag.description.trim() + '}';
+      return '{@link ' + tag.description + '}';
     }
   },
   {
@@ -21,11 +21,5 @@ module.exports = [
   },
   {
     name: 'alias'
-  },
-  {
-    name: 'group'
-  },
-  {
-    name: 'groupMainItem'
   }
 ];

@@ -22,13 +22,15 @@ docType: "<$ doc.docType $>"
   <$ doc.name $>
 <@ endif @>
 <@ if doc.parentLinks @>
+<br />
 <small>
-  (child of <$ doc.parentLinks $>)
+  Child of <$ doc.parentLinks $>
 </small>
 <@ endif @>
-<@ if doc.controller @>
+<@ if doc.delegate @>
+<br/>
 <small>
-  (controller: <$ doc.controller $>)
+  Delegate: <$ doc.delegate $>
 </small>
 <@ endif @>
 </h1>
