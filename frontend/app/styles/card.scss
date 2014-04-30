@@ -251,6 +251,10 @@ body {
           overflow: hidden;          
           position: relative;
           text-align: center;
+          iframe{
+            width: 300px;
+            height: 225px;
+          }
         }
         .card-title{
           position: absolute;

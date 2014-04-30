@@ -481,6 +481,7 @@ app = angular
     'angulartics',
     # 'angulartics.google.analytics',
     'angulartics.segment.io'
+    'videosharing-embed'
   ])
   .config([
     '$locationProvider'

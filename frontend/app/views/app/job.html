@@ -40,7 +40,10 @@
           <div class="item item-body card-content">
             <div class="card-title-wrapper">
               <div class="card-image">
-            <img  ng-src="{{convert(job.picture)}}" width="300" height="225">
+            <img ng-if="!job.video" ng-src="{{convert(job.picture)}}" width="300" height="225">
+            <!-- <div ng-show="job.video"> -->
+            <a ng-show="job.video" ng-href="{{job.video}}" embed-video></a>
+          <!-- </div> -->
           </div>
             <span class="card-title">{{job.position}}<span>
             </div>

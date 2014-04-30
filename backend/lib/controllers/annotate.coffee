@@ -13,8 +13,8 @@ app.configure "development", ->
   app.use(express.static(path.resolve(__dirname+'/../../../annotate/app')));
 app.configure "production", ->
   app.use(express.static(path.resolve(__dirname+'/../../../annotate/dist')));
-app.configure "jokno", ->
-  app.use(express.static(path.resolve(__dirname+'/../../../annotate/dist')));
+# app.configure "jokno", ->
+#   app.use(express.static(path.resolve(__dirname+'/../../../annotate/dist')));
   
 app.use(express.logger());
 app.use(express.cookieParser());

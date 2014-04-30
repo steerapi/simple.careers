@@ -22,6 +22,12 @@
     <img ng-src="{{job.picture.url}}" width='300' height='225'></img>
     </div>
   </div>
+  
+  <div class="form-group">
+    <label>Video</label>
+    <input class="form-control" type="text" ng-model="job.video" ng-change="save(job)">
+  </div>
+  
   <div class="form-group">
     <label>Company Name</label>
     <input class="form-control" type="text" ng-model="job.companyname" ng-change="save(job)">
