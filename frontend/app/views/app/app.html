@@ -159,7 +159,7 @@
     </button>
     <span class="spacer">    
       <ul class="social" ng-show="enableShare" ng-social-buttons
-                 showcounts="true" url="url" title="title">
+                 showcounts="true" url="url" title="title" ng-if="showShare">
         <li class="ng-social-facebook" analytics-on="click" analytics-event="facebookShareClick" analytics-url="{{url}}">Share</li>
       </ul>
       <img ng-show="$state.includes('app.apply')" src="/images/menu/menu-apply.png">

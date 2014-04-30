@@ -63,6 +63,9 @@ class AppCtrl extends Ctrl
     @scope.url = undefined
     @scope.$on "shareUrl", (event, url)=>
       @scope.url = url
+      @scope.showShare = false
+      @timeout =>
+        @scope.showShare = true
     @scope.$on "setEnableShare", (event, enable)=>
       @scope.enableShare = enable
     @scope.$on "jobswap", (event, job)=>
