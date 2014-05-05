@@ -20,7 +20,7 @@
 </label>
     <div>
       <div ng-show="isCropable()">
-      <img img-cropped ng-hide="isCropable()" ng-src="{{job.picture.url}}" width='300' height='225' selected="cropSelected(cords)" crop="job.picture.crop"></img>
+      <img img-cropped ng-hide="isCropable()" ng-src="{{job.picture.url}}" width='300' height='225' cselected="cropSelected(cords)" crop="job.picture.crop"></img>
       </div>
       <div ng-hide="isCropable()">
     <img ng-src="{{job.picture.url}}" width='300' height='225'></img>

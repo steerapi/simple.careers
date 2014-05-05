@@ -83,7 +83,7 @@ angular
     scope:
       src: "@"
       crop: "="
-      selected: "&"
+      cselected: "&"
 
     link: (scope, element, attr) ->
       myImg = undefined
@@ -96,7 +96,6 @@ angular
 
       scope.$watch "src", (nv) ->
         clear()
-        console.log nv
         if not nv
           return
         scope.crop?=
@@ -118,7 +117,7 @@ angular
             trackDocument: true
             onSelect: (x) ->
               console.log "selected",cords: x
-              scope.selected({cords:x})
+              scope.cselected({cords:x})
               return
 
             aspectRatio: 4/3
