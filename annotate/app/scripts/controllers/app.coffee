@@ -8,7 +8,7 @@ class AppCtrl extends Ctrl
     @resource.getList(
       sort: "order"
     ).then (jobs)=>
-      async.series jobs,(job,cb)=>
+      async.eachSeries jobs,(job,cb)=>
         @resource = @Restangular.all "userapplies"
         @resource.getList
           conditions:
@@ -16,6 +16,8 @@ class AppCtrl extends Ctrl
           populate: "user job"
         .then (userapplies)=>
           @scope.userapplies = @scope.userapplies.concat userapplies
+          cb()
+        , =>
           cb()
     @scope.userapplies = []
   update: (userapply,key)=>
