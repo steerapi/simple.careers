@@ -24,5 +24,13 @@ class AppCtrl extends Ctrl
     resource = @Restangular.one "userapplies",userapply._id
     resource[key] = userapply[key]
     resource.put()
+  removeApp: (userapply,index)=>
+    resource = @Restangular.all "userapplies"
+    resource.remove
+      conditions:
+        _id: userapply._id
+    .then (userapply)=>
+      @scope.userapplies.splice index,1
+      return
     
 angular.module('simpleannotateApp').controller('AppCtrl', AppCtrl)

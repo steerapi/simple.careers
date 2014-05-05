@@ -2,6 +2,7 @@
   
   <table class="table table-striped col-xs-12">
     <thead>
+      <th></th>
       <th>#</th>
       <th>Name</th>
       <th>Email</th>
@@ -11,6 +12,9 @@
     </thead>
     <tbody>
       <tr ng-repeat="userapply in userapplies">
+        <td>
+<button class="btn btn-danger btn-xs" ng-click="removeApp(userapply, $index)"><i class="glyphicon glyphicon-remove"></i></button>
+        </td>
         <td>{{$index+1}}</td>
         <td>{{userapply.user.name}}</td>
         <td><a ng-href="mailto:{{userapply.user.email}}" target="_blank">{{userapply.user.email}}</a></td>
