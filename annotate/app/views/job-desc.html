@@ -19,13 +19,19 @@
     <label><button class="btn btn-default" ng-click="pickPicture()">Pick Picture (Aspect Ratio 4:3, 300px by 225px)</button>
 </label>
     <div>
+      <div ng-show="isCropable()">
+      <img img-cropped ng-hide="isCropable()" ng-src="{{job.picture.url}}" width='300' height='225' selected="selected(cords)" crop="job.picture.crop"></img>
+      </div>
+      <div ng-hide="isCropable()">
     <img ng-src="{{job.picture.url}}" width='300' height='225'></img>
+      </div>
     </div>
   </div>
   
   <div class="form-group">
     <label>Video</label>
     <input class="form-control" type="text" ng-model="job.video" ng-change="save(job)">
+    <a ng-show="job.video" ng-href="{{job.video}}" embed-video width="300" height="225"></a>
   </div>
   
   <div class="form-group">

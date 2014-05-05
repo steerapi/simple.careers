@@ -1,0 +1,24 @@
+<div class="container-fluid">
+  
+  <table class="table table-striped col-xs-12">
+    <thead>
+      <th>#</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Company</th>
+      <th>Position</th>
+      <th>Check</th>
+    </thead>
+    <tbody>
+      <tr ng-repeat="userapply in userapplies">
+        <td>{{$index+1}}</td>
+        <td>{{userapply.user.name}}</td>
+        <td><a ng-href="mailto:{{userapply.user.email}}" target="_blank">{{userapply.user.email}}</a></td>
+        <td>{{userapply.job.companyname}}</td>
+        <td>{{userapply.job.position}}</td>
+        <td><input type="checkbox" ng-model="userapply.check" ng-change="update(userapply,'check')"></td>
+      </tr>
+    </tbody>
+  </table>
+  
+</div>

@@ -354,7 +354,8 @@ module.exports = function (grunt) {
             'bower_components/**/*',
             'views/{,*/}*.html',
             'images/{,*/}*.{webp}',
-            'fonts/*'
+            'fonts/*',
+            'libs/**/*'
           ]
         }, {
           expand: true,

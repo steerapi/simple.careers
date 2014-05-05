@@ -47,9 +47,10 @@ schema.pre "save", (next) ->
   User = mongoose.model("user")
   Job = mongoose.model("job")
   
-  User.findById @._doc["user"], (err,user)=>
-    Job.findById @._doc["job"], (err,job)=>
-      sendMail user,job
+  unless @createdAt
+    User.findById @._doc["user"], (err,user)=>
+      Job.findById @._doc["job"], (err,job)=>
+        sendMail user,job
   
   date = new Date
   @updatedAt = date 

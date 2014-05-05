@@ -32,4 +32,12 @@ class JobDescCtrl extends Ctrl
       if cBadge and badge and cBadge.url == badge.url
         @scope.job.badges.splice i,1
         @save @scope.job
+  selected: (cords)=>
+    @scope.job.picture.crop = cords
+    @save @scope.job
+  isCropable: ()=>
+    if not @scope.job
+      return false
+    return @scope.job.picture.mimetype != "image/gif"
+    
 angular.module('simpleannotateApp').controller('JobDescCtrl', JobDescCtrl)

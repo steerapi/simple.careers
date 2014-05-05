@@ -82,8 +82,13 @@ class Ctrl
     url = file.url
     return url if /gif/.test file.mimetype
     if /filepicker/.test url
-      return "#{url}"
+      # return "#{url}"
       # return "#{url}/convert?w=300&h=225"
+      crop = file.crop
+      if crop
+        return "#{url}/convert?crop=#{crop.x},#{crop.y},#{crop.w},#{crop.h}"
+      else
+        return "#{url}"
     return url
   wait: (scope,key,cb)=>
     # # console.log "scope[key]", scope[key], key
