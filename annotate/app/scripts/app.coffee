@@ -96,41 +96,45 @@ angular
 
       scope.$watch "src", (nv) ->
         clear()
-        if nv
-          scope.crop?=
-            x:0
-            y:0
-            x2:300
-            y2:225
-          element.after "<img />"
-          myImg = element.next()
-          myImg.attr "src", nv
-          temp = new Image()
-          temp.src = nv
-          temp.onload = ->
-            width = @width
-            height = @height
-            $(myImg).Jcrop
-              trackDocument: true
-              onSelect: (x) ->
-                scope.selected cords: x
-                return
+        console.log nv
+        if not nv
+          return
+        scope.crop?=
+          x:0
+          y:0
+          x2:300
+          y2:225
+          w:300
+          h:225
+        element.after "<img />"
+        myImg = element.next()
+        myImg.attr "src", nv
+        temp = new Image()
+        temp.src = nv
+        temp.onload = ->
+          width = @width
+          height = @height
+          $(myImg).Jcrop
+            trackDocument: true
+            onSelect: (x) ->
+              console.log "selected",cords: x
+              scope.selected({cords:x})
+              return
 
-              aspectRatio: 4/3
-              boxWidth: 400
-              boxHeight: 400
-              setSelect: [
-                scope.crop.x
-                scope.crop.y
-                scope.crop.x2
-                scope.crop.y2
-              ]
-              trueSize: [
-                width
-                height
-              ]
-
-            return
+            aspectRatio: 4/3
+            boxWidth: 400
+            boxHeight: 400
+            setSelect: [
+              scope.crop.x
+              scope.crop.y
+              scope.crop.x2
+              scope.crop.y2
+            ]
+            trueSize: [
+              width
+              height
+            ]
+          return
         return
 
       scope.$on "$destroy", clear
