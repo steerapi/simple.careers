@@ -1,7 +1,7 @@
 'use strict'
 
 class JobDescCtrl extends Ctrl
-  @$inject: ['$scope', '$stateParams', '$state', "Restangular"]
+  @$inject: ['$scope', '$stateParams', '$state', "Restangular", "$timeout"]
   constructor: (@scope, @stateParams, @state, @Restangular, @timeout) ->
     super @scope
     @scope.$state = @state
@@ -32,8 +32,9 @@ class JobDescCtrl extends Ctrl
       if cBadge and badge and cBadge.url == badge.url
         @scope.job.badges.splice i,1
         @save @scope.job
-  selected: (cords)=>
+  cropSelected: (cords)=>
     @scope.job.picture.crop = cords
+    console.log "selected", @scope.job.picture.crop
     @save @scope.job
   isCropable: ()=>
     if not @scope.job
