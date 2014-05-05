@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "dependencies": {
     "coffee-script": "~1.7.1",
-    "express": "~3.5.1"
+    "express": "~3.5.1",
+    "moment": "~2.6.0"
   },
   "devDependencies": {
     "grunt-express-server": "~0.4.13",

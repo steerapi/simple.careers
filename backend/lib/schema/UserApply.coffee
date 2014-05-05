@@ -43,18 +43,23 @@ sendMail = (user,job,cb)->
   , (err) ->
     cb? err
     
+moment = require('moment')
+
 schema.pre "save", (next) ->
   User = mongoose.model("user")
   Job = mongoose.model("job")
+    
+  date = new Date
+  @updatedAt = date 
+  @createdAt = @updatedAt unless @createdAt
   
-  unless @createdAt
+  startDate = moment(@createdAt)
+  endDate = moment(@updatedAt)
+  if endDate.diff(startDate, 'seconds') <= 0
     User.findById @._doc["user"], (err,user)=>
       Job.findById @._doc["job"], (err,job)=>
         sendMail user,job
   
-  date = new Date
-  @updatedAt = date 
-  @createdAt = @updatedAt unless @createdAt
   next()
 
 module.exports = schema
