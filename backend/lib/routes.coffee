@@ -49,6 +49,7 @@ module.exports = (app) ->
   # All other routes to use Angular routing in app/scripts/app.js
   # app.get /^(((?!\/api\/data\/).)*&((?!\/annotate\/).))$/, middleware.setUserCookie, index.index
   app.get /^(?!\/api\/data)(?!\/annotate)(?!\/startup).*$/, middleware.setUserCookie, index.index
+  # app.get /^(?!\/api\/data)(?!\/annotate).*$/, middleware.setUserCookie, index.index
   
   # app.get /^[(?!\/api\/data\/)|(?!\/annotate\/)].*$/, middleware.setUserCookie, index.index
   return
