@@ -30,6 +30,7 @@ passport = require("./lib/config/passport")
 app = express()
 
 app.use("/pages",express.static(__dirname + '/../frontend/pages'));
+app.use("/startup",require("../startup"));
 
 require("./lib/config/express") app
 
