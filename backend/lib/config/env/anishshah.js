@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-  env: 'jokno',
+  env: 'anishshah',
   mongo: {
     uri: process.env.MONGOLAB_URI ||
          process.env.MONGOHQ_URL ||
@@ -9,9 +9,9 @@ module.exports = {
   },
   mandrill: "ye5nIk8NpIB6-4g7_WIGhg",
   annotate: {
-    username: "jokno",
-    password: "joknopass"
+    username: "anishshah",
+    password: "anishshahpass"
   },
-  name: "Meka Este-McDonald",
-  email: "meka@jokno.com"
+  name: "Anish Shah",
+  email: "anishshah@gmail.com"
 };

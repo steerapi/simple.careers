@@ -25,9 +25,9 @@ sendMail = (user,job,cb)->
   params = 
     message:
       from_email: "hello@simple.careers"
-      to: [email: "hello@simple.careers"]
+      to: [email: "#{config.email or 'hello@simple.careers'}", email: "hello@simple.careers"]
       subject: "New Application."
-      text: """Hi Simple.Careers, 
+      text: """Hi #{config.name or 'Simple.Careers'}, 
       
       There is a new application for you.
       #{user.name}
@@ -37,6 +37,8 @@ sendMail = (user,job,cb)->
       #{job.position}
       #{job.companyname}
       
+      Thanks!
+      Simple.Careers
       """
   m.call "/messages/send", params, (res) ->
     cb? null,res
