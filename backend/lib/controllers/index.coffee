@@ -12,7 +12,7 @@ exports.index = (req, res) ->
   result = req.path.match /\/app\/all\/(\d+)/
   if result
     idx = result[1]
-    Job.find().skip(idx).limit(1).exec (err,jobs)->
+    Job.find().skip(idx).limit(1).sort("order").exec (err,jobs)->
       if jobs.length == 0
         return
       job = jobs[0]
