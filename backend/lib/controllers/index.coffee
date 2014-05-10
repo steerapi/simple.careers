@@ -17,10 +17,14 @@ exports.index = (req, res) ->
         return
       job = jobs[0]
       if /facebookexternalhit/.test userAgent
-        res.render """
+        res.send """
+        <html>
+          <head>
           <meta property="og:title" content="#{job.companyname}: #{job.position}"/>
           <meta property="og:image" content="#{job.picture.url}"/>
           <meta property="og:description" content="#{job.companytagline}. #{job.jobtagline}"/>
+          </head>
+        </html>
         """
       else
         res.render(path.resolve(__dirname + '/../../../frontend/dist/index.html'));
