@@ -20,9 +20,9 @@ exports.index = (req, res) ->
         res.send """
         <html>
           <head>
-          <meta property="og:title" content="#{job.companyname}: #{job.position}"/>
-          <meta property="og:image" content="#{job.picture.url}"/>
-          <meta property="og:description" content="#{job.companytagline}. #{job.jobtagline}"/>
+          <meta property="og:title" content="#{job.companyname or ''}: #{job.position or ''}"/>
+          <meta property="og:image" content="#{job.picture.url or ''}"/>
+          <meta property="og:description" content="#{job.companytagline or ''}. #{job.jobtagline or ''}"/>
           </head>
         </html>
         """
