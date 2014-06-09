@@ -1,0 +1,83 @@
+<fa-app class="full-screen">
+  <fa-modifier 
+    fa-origin="[.5, .5]"
+    fa-size="[320, 568]"
+    >
+  <fa-view id="menuView"
+    fa-pipe-to="eventHandler"
+  >
+    <fa-modifier id="backgroundMod"
+      fa-origin="[.5, .5]"
+      >
+      <fa-image-surface 
+        class="menu-background"
+        fa-image-url="/images/assets/profile.png"
+        fa-size="[true, undefined]"
+        >
+      </fa-image-surface>
+    </fa-modifier>
+    
+    <fa-modifier 
+        fa-origin="[0,0]"
+        fa-align="[0,0]"
+        fa-translate="[110,67]"
+      >
+      <fa-image-surface 
+        fa-image-url="/images/assets/logo.png"
+        fa-size="[100,39]"
+        >
+      </fa-image-surface>
+    </fa-modifier>
+    
+    <fa-modifier 
+        fa-origin="[.5,0]"
+        fa-align="[0,0]"
+        fa-translate="[94/2,178/2]"
+      >
+      <fa-image-surface 
+        fa-image-url="/images/assets/line.png"
+        fa-size="[true,(menus.length-1)*100+200]"
+        >
+      </fa-image-surface>
+    </fa-modifier>
+
+    <fa-modifier ng-repeat="menu in menus"
+      fa-origin="[.5, .5]"
+      fa-align="[0, .5]"
+      fa-translate="[94/2,($index-1)*100]"
+      >
+      <fa-image-surface 
+        fa-image-url="/images/assets/oval.png"
+        fa-size="[15, 15]"
+        >
+      </fa-image-surface>
+      <fa-modifier
+        fa-origin="[0, .5]"
+        fa-translate="[31,0]"
+        >
+      <fa-surface 
+        fa-size="[true, true]"
+        class="menu-item"
+        >
+        {{menu}}
+      </fa-surface>
+      </fa-modifier>
+    </fa-modifier>
+   
+  </fa-view>
+  </fa-modifier>
+  
+  <fa-animation event="startEvent" duration="2000">
+    <animate  targetModSelector="#backgroundMod"
+              field="scale"
+              startValue="[0,0,0]"
+              endValue="[1,1,1]"
+              curve="outBack"
+              timelineLowerBound="0"
+              timelineUpperBound=".25" />
+    </fa-animation>
+    
+    <div ng-include="'./views/newapp/job.html'"></div>
+    
+</fa-app>
+

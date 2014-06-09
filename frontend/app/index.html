@@ -5,11 +5,13 @@
 <!--[if gt IE 8]><!--> <html class="no-js" ng-app="simplecareersApp" ng-controller="MainCtrl" ng-cloak> <!--<![endif]-->
   <head>
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
     <title>Simple.Careers</title>
 
     <meta name="description" content="A simple way to discover your perfect job. 1-click apply via Linkedin. Found the perfect job for friends? Share it on Facebook and show how much you care!">
     <meta name="keywords" content="Job, Careers, Simple, Tinder, Easy, Apply, Linkedin, Share, Facebook, Application, Work, Occupation, Card, Job Card, Work Card, Full-time, Intern, Internship">
-    <meta id="extViewportMeta" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta id="extViewportMeta" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-touch-fullscreen" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -31,6 +33,7 @@
     <link rel="apple-touch-icon" sizes="76x76" href="/images/icons/apple-touch-icon-76x76.png">
     <link rel="apple-touch-icon" sizes="120x120" href="/images/icons/apple-touch-icon-60x60@2x.png">
     <link rel="apple-touch-icon" sizes="152x152" href="/images/icons/apple-touch-icon-76x76@2x.png">
+
 
     <script src="//ajax.googleapis.com/ajax/libs/webfont/1.5.2/webfont.js"></script>
     <script>
@@ -150,6 +153,13 @@
     <!-- endbuild -->
     <!-- <script src="libs/ionic/ionic.swipecards.js"></script> -->
 
+    <link rel="stylesheet" href="bower_components/famous-angular/dist/famous-angular.css">
+    <script src="bower_components/requirejs/require.js"></script>
+    <script>
+      //set requirejs's base to where the famous lib folder lives
+      require.config({baseUrl: 'bower_components'});
+    </script>
+    <script src="bower_components/famous-angular/dist/famous-angular.js"></script>
 
     <!-- <script src="cordova.js"></script> -->
 
@@ -173,6 +183,12 @@
         <script src="scripts/controllers/app-all-job.js"></script>
         <script src="scripts/controllers/app-terms.js"></script>
         <script src="scripts/controllers/app-logging-in.js"></script>
+        
+        <script src="scripts/controllers/newapp.js"></script>
+        <script src="scripts/controllers/newapp-menu.js"></script>
+        <script src="scripts/controllers/newapp-job.js"></script>
+        <script src="scripts/controllers/newapp-apply.js"></script>
+        
         <!-- endbuild -->
 	</script>
 </body>

@@ -482,6 +482,7 @@ app = angular
     # 'angulartics.google.analytics',
     'angulartics.segment.io'
     'videosharing-embed'
+    'famous.angular'
   ])
   .config([
     '$locationProvider'
@@ -503,11 +504,51 @@ app = angular
       # page = 0
         
       if localStorage.getItem "visited"
-        $urlRouterProvider.otherwise "/app"
+        $urlRouterProvider.otherwise "/newapp/job"
       else
         $urlRouterProvider.otherwise "/intro/0"
     
       $stateProvider
+      .state('newapp',
+        url: "/newapp",
+        views: 
+          {
+            'main': {
+              templateUrl: "/views/newapp/app.html",
+              controller: "NewAppCtrl"
+            }
+          }
+      )
+      .state('newapp.job',
+        url: "/job",
+        views: 
+          {
+            'main.view': {
+              templateUrl: "/views/newapp/job.html",
+              controller: "NewAppJobCtrl"
+            }
+          }
+      )
+      .state('newapp.menu',
+        url: "/menu",
+        views: 
+          {
+            'main.view': {
+              templateUrl: "/views/newapp/menu.html",
+              controller: "NewAppMenuCtrl"
+            }
+          }
+      )
+      .state('newapp.apply',
+        url: "/apply",
+        views: 
+          {
+            'main.view': {
+              templateUrl: "/views/newapp/apply.html",
+              controller: "NewAppApplyCtrl"
+            }
+          }
+      )
       .state('terms',
         url: "/terms",
         views: 

@@ -1,0 +1,79 @@
+/* Bitmap: */
+$primary-color: #fff;
+
+body {
+    margin: 0;
+}
+
+.center-box {
+//    padding: 15px 50px 15px 50px;
+    text-align: center;
+}
+
+.full-screen {
+    position: fixed;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.menuView {
+  border: 1px solid black;
+}
+
+@mixin filter($filter) { 
+  -webkit-filter: $filter;
+  -moz-filter: $filter;
+  -ms-filter: $filter;
+  -o-filter: $filter;
+  filter: $filter;
+}
+
+.menu-logo{
+  margin: 134px auto 0;
+}
+
+.fa-surface{
+  width: 100%;
+  height: 100%;
+}
+
+.menu-wrap{
+  background: rgba(0,0,0,0.30);
+  height: 100%;
+  position: relative;
+}
+
+.menu-background{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  max-height: 100%;
+  @include filter(blur(50px) brightness(0.6));
+  background: rgba(0,0,0,0.30);
+}
+.menu-item{
+  font-size: 18px;
+  color: $primary-color;
+  line-height: 21.5px;
+  position: absolute;
+  text-align: left;
+  font-family: 'Source Sans Pro';
+  font-weight: 400;
+}
+
+ul{
+  list-style-type: none;
+  padding: 0px;
+  margin: 0px;
+
+}
+
+.line{
+  background-image: url(/images/assets/line.png);
+  background-repeat: no-repeat;
+  width: 1px;
+  height: 100%;
+  position: absolute;
+}
