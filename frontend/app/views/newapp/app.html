@@ -1,5 +1,23 @@
-<!-- <div class="desktop" style="position: relative;">
-<img style="position: absolute; left: 0; top: 0; width: 420px; z-index: 1" src="/images/iphone-5s-frame.png" style="width: 340px;" />
-<div ui-view="main.view" style="position: absolute; left: 52px; top: 128px; z-index: 2" autoscroll='false'></div>
-</div> -->
-<div ui-view="main.view" autoscroll='false'></div>
+  
+<fa-app class="full-screen">
+
+  <fa-modifier 
+    fa-origin="[.5, .5]"
+    fa-size="[320, 568]"
+    >
+    
+  <fa-scroll-view id="main-scroll-view" fa-start-index="2" fa-pipe-from="enginePipe" fa-options="options.mainScrollView">
+    <div ng-include="'./views/newapp/menu.html'"></div>
+    <div ng-include="'./views/newapp/job.html'"></div>
+    <div ng-include="'./views/newapp/apply.html'"></div>
+  </fa-scroll-view>
+  
+  </fa-modifier>
+  <!-- <fa-animation timeline="scrollYPosition">
+    <animate  targetModSelector="#top-capsule"
+              field="translate"
+              startValue="[0,0,0]"
+              endValue="[0,-100,0]" />
+  </fa-animation> -->
+      
+</fa-app>

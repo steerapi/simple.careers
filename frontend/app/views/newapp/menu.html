@@ -1,15 +1,16 @@
-<fa-app class="full-screen">
-  <fa-modifier 
-    fa-origin="[.5, .5]"
-    fa-size="[320, 568]"
-    >
   <fa-view id="menuView"
-    fa-pipe-to="eventHandler"
+    fa-pipe-to="enginePipe"
+    fa-index="0"
   >
     <fa-modifier id="backgroundMod"
       fa-origin="[.5, .5]"
       >
-      <fa-image-surface 
+      <fa-surface fa-background-color="'#000011'"
+        class="menu-background"
+        fa-size="[480, undefined]"
+        >
+      </fa-surface>
+      <fa-image-surface
         class="menu-background"
         fa-image-url="/images/assets/profile.png"
         fa-size="[true, undefined]"
@@ -56,28 +57,26 @@
         fa-translate="[31,0]"
         >
       <fa-surface 
-        fa-size="[true, true]"
+        fa-size="[undefined, true]"
         class="menu-item"
         >
         {{menu}}
       </fa-surface>
       </fa-modifier>
     </fa-modifier>
+    
+<!--    <fa-animation event="startEvent" duration="2000">
+     <animate  targetModSelector="#backgroundMod"
+               field="scale"
+               startValue="[0,0,0]"
+               endValue="[1,1,1]"
+               curve="outBack"
+               timelineLowerBound="0"
+               timelineUpperBound=".25" />
+   </fa-animation> -->
    
   </fa-view>
-  </fa-modifier>
+  <!-- </fa-modifier> -->
   
-  <fa-animation event="startEvent" duration="2000">
-    <animate  targetModSelector="#backgroundMod"
-              field="scale"
-              startValue="[0,0,0]"
-              endValue="[1,1,1]"
-              curve="outBack"
-              timelineLowerBound="0"
-              timelineUpperBound=".25" />
-    </fa-animation>
-    
-    <div ng-include="'./views/newapp/job.html'"></div>
-    
-</fa-app>
-
+  
+  

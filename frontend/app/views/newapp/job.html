@@ -1,14 +1,120 @@
-  <fa-modifier 
-    fa-origin="[.5, .5]"
-    fa-size="[320, 568]"
+<fa-view id="jobView"
+  fa-pipe-to="enginePipe"
+  fa-index="1"
+>
+
+  <fa-surface fa-background-color="'rgba(0,0,0,0.5)'"
+    fa-size="[undefined, undefined]"
     >
-  <fa-view id="jobView"
-    fa-pipe-to="eventHandler"
+  </fa-surface>
+  
+  <fa-modifier
+    id="swipedownMod"
+    fa-origin="[.5, .5]"
+    fa-align="[0.5, 0]"
+    fa-translate="[0,26]"
   >
-    <fa-surface 
-      fa-size="[true, true]"
-      >
-      Hello
-    </fa-surface>
-  </fa-view>
+
+  <fa-image-surface 
+    fa-image-url="/images/assets/swipedown.png"
+    fa-size="[371/2,8.5]"
+    >
+
+  </fa-image-surface>
+  
   </fa-modifier>
+
+  <fa-modifier
+    id="swipeupMod"
+    fa-origin="[.5, .5]"
+    fa-align="[0.5, 1]"
+    fa-translate="[0,-26]"
+  >
+
+  <fa-image-surface 
+    fa-image-url="/images/assets/swipeup.png"
+    fa-size="[474/2,8.5]"
+    >
+
+  </fa-image-surface>
+  
+  </fa-modifier>
+
+  <fa-modifier
+    id="cardMod"
+    fa-origin="[0, 0]"
+    fa-align="[0, 0]"
+    fa-translate="[18/2, 86/2]"
+  >
+
+  <fa-image-surface 
+    fa-image-url="/images/assets/card.png"
+    fa-size="[300,470]"
+    >
+  </fa-image-surface>
+  </fa-modifier>
+
+  <fa-modifier
+    id="heroMod"
+    fa-origin="[0, 0]"
+    fa-align="[0, 0]"
+    fa-translate="[18/2, 86/2]"
+  >
+
+  <fa-image-surface 
+    fa-image-url="/images/assets/hero.png"
+    fa-size="[300,225]"
+    >
+
+  </fa-image-surface>
+
+  </fa-modifier>
+
+  <fa-modifier
+    id="titlegradMod"
+    fa-origin="[0, 0]"
+    fa-align="[0, 0]"
+    fa-translate="[18/2,356/2]"
+  >
+
+  <fa-surface 
+    class="title-grad"
+    fa-size="[300,90]"
+    >
+  </fa-surface>
+
+  </fa-modifier>
+
+  <fa-modifier
+    id="logoMod"
+    fa-origin="[0, 0]"
+    fa-align="[0, 0]"
+    fa-translate="[48/2,434/2]"
+  >
+
+  <fa-image-surface 
+    fa-image-url="/images/assets/logosq.png"
+    fa-size="[65,65]"
+    >
+
+  </fa-image-surface>
+  
+  </fa-modifier>
+
+  <fa-modifier
+    id="helpMod"
+    fa-origin="[.5, .5]"
+    fa-align="[1, 0]"
+    fa-translate="[-37,37]"
+  >
+
+  <fa-image-surface 
+    fa-image-url="/images/assets/help.png"
+    fa-size="[40,40]"
+    >
+
+  </fa-image-surface>
+  </fa-modifier>
+  
+  
+</fa-view>

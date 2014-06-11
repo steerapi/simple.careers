@@ -1,8 +1,13 @@
 /* Bitmap: */
-$primary-color: #fff;
+$primary-color: #ffffff;
+$secondary-color: #5A5A5A;
+$decor-color: #AFAFAF;
+$bg-color: #e1e1e1;
 
 body {
     margin: 0;
+    font-family: 'Source Sans Pro';
+    font-weight: 400;
 }
 
 .center-box {
@@ -18,10 +23,6 @@ body {
     right: 0;
 }
 
-.menuView {
-  border: 1px solid black;
-}
-
 @mixin filter($filter) { 
   -webkit-filter: $filter;
   -moz-filter: $filter;
@@ -30,28 +31,13 @@ body {
   filter: $filter;
 }
 
-.menu-logo{
-  margin: 134px auto 0;
-}
-
-.fa-surface{
-  width: 100%;
-  height: 100%;
-}
-
-.menu-wrap{
-  background: rgba(0,0,0,0.30);
-  height: 100%;
-  position: relative;
-}
-
 .menu-background{
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  max-height: 100%;
+//  position: absolute;
+//  top: 0px;
+//  left: 0px;
+//  max-height: 100%;
   @include filter(blur(50px) brightness(0.6));
-  background: rgba(0,0,0,0.30);
+//  background: rgba(0,0,0,0.30);
 }
 .menu-item{
   font-size: 18px;
@@ -59,21 +45,75 @@ body {
   line-height: 21.5px;
   position: absolute;
   text-align: left;
-  font-family: 'Source Sans Pro';
-  font-weight: 400;
 }
 
-ul{
-  list-style-type: none;
-  padding: 0px;
-  margin: 0px;
-
+.main-card{
+  border-radius: 2px;
+  /* Main Card: */
+  background: $primary-color;
+  border: 1px solid $bg-color;
 }
 
-.line{
-  background-image: url(/images/assets/line.png);
-  background-repeat: no-repeat;
-  width: 1px;
-  height: 100%;
-  position: absolute;
+.title-grad{
+  /* grad: */
+  background-image: -o-linear-gradient(-89deg, rgba(255,255,255,0.00) 0%, rgba(0,0,0,0.80) 73%);
+  background-image: -moz-linear-gradient(-89deg, rgba(255,255,255,0.00) 0%, rgba(0,0,0,0.80) 73%);
+  background-image: -ms-linear-gradient(-89deg, rgba(255,255,255,0.00) 0%, rgba(0,0,0,0.80) 73%);
+  background-image: linear-gradient(-179deg, rgba(255,255,255,0.00) 0%, rgba(0,0,0,0.80) 73%);
+}
+
+.h1{
+  font-size: 34px;
+  color: $primary-color;
+  line-height: 40px;
+  /* Mid Front End Engine: */
+}
+
+.h2{
+  font-size: 26px;
+  color: $primary-color;
+  line-height: 26px;
+  /* Famo.us • San Franci: */
+}
+
+.b1{
+  font-size: 30px;
+  color: $secondary-color;
+  line-height: 40px;
+  /* Lorem ipsum dolor si: */
+}
+
+.b2{
+  font-size: 28px;
+  color: $decor-color;
+  line-height: 44px;
+  /* 34 applicants: */
+}
+
+.b3{
+  font-size: 24px;
+  color: $decor-color;
+  line-height: 36px;
+}
+
+.applymenu-item{
+  text-align: center;
+  font-size: 13px;
+  color: #FFFFFF;
+  line-height: 18px;
+}
+
+.list-item-thumb{
+  border-radius: 50%;
+}
+
+.list-h1{
+  font-size: 17px;
+  color: #5A5A5A;
+  line-height: 20px;
+}
+.list-h2{
+  font-size: 13px;
+  color: #A8A8A8;
+  line-height: 15px;
 }

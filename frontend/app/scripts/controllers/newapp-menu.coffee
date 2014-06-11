@@ -44,4 +44,12 @@ class NewAppMenuCtrl extends Ctrl
       @scope.$broadcast('startEvent')
     , 1000
     
+    $scope.scrollYPosition = =>
+      _scrollView = _scrollView or @famous.find("#main-scroll-view")[0].renderNode
+      if _scrollView and _scrollView._node
+        page = _scrollView._node.index
+        absPosition = _width * page + _scrollView.getPosition()
+        perPosition = Math.max(0, Math.min(1, absPosition / (_width)))
+        1 - perPosition
+    
 angular.module('simplecareersApp').controller('NewAppMenuCtrl', NewAppMenuCtrl)
