@@ -1,21 +1,30 @@
 <fa-view id="jobView"
-  fa-pipe-to="enginePipe"
   fa-index="1"
 >
 
-  <fa-surface fa-background-color="'rgba(0,0,0,0.5)'"
-    fa-size="[undefined, undefined]"
+  <fa-modifier
+    id="backgroundMod"
+    fa-translate="[0,0,-25]"
+    fa-origin="[.5, .5]"
+    fa-align="[.5, .5]"
+  >
+  <fa-surface 
+    class="screen-background"
+    fa-background-color="'rgba(0,0,0,0.5)'"
+    fa-size="[400, undefined]"
     >
   </fa-surface>
+  </fa-modifier>
   
   <fa-modifier
     id="swipedownMod"
     fa-origin="[.5, .5]"
     fa-align="[0.5, 0]"
-    fa-translate="[0,26]"
+    fa-translate="[0,26,0]"
   >
 
   <fa-image-surface 
+    class="job-layer"
     fa-image-url="/images/assets/swipedown.png"
     fa-size="[371/2,8.5]"
     >
@@ -32,6 +41,7 @@
   >
 
   <fa-image-surface 
+    class="job-layer"
     fa-image-url="/images/assets/swipeup.png"
     fa-size="[474/2,8.5]"
     >
@@ -40,81 +50,183 @@
   
   </fa-modifier>
 
-  <fa-modifier
-    id="cardMod"
-    fa-origin="[0, 0]"
-    fa-align="[0, 0]"
-    fa-translate="[18/2, 86/2]"
-  >
 
-  <fa-image-surface 
-    fa-image-url="/images/assets/card.png"
-    fa-size="[300,470]"
+  <fa-view id="cardView"
+    ng-repeat="card in cards"
+  >  
+    <fa-modifier
+     id="{{'swipeMod'+$index}}"
+     fa-translate="getPosition($index)"
     >
-  </fa-image-surface>
-  </fa-modifier>
+      
+      <fa-modifier
+        id="cardMod"
+        fa-origin="[0, 0]"
+        fa-align="[0, 0]"
+        fa-translate="[18/2, 86/2]"
+      >
 
-  <fa-modifier
-    id="heroMod"
-    fa-origin="[0, 0]"
-    fa-align="[0, 0]"
-    fa-translate="[18/2, 86/2]"
-  >
+      <fa-image-surface 
+        class="job-layer"
+        fa-pipe-to="swipePipe"
+        fa-image-url="/images/assets/card.png"
+        fa-size="[300,470]"
+        >
+      </fa-image-surface>
+      </fa-modifier>
 
-  <fa-image-surface 
-    fa-image-url="/images/assets/hero.png"
-    fa-size="[300,225]"
-    >
+      <fa-modifier
+        id="heroMod"
+        fa-origin="[0, 0]"
+        fa-align="[0, 0]"
+        fa-translate="[18/2, 86/2]"
+      >
 
-  </fa-image-surface>
+      <fa-image-surface 
+        class="job-layer"
+        fa-image-url="/images/assets/hero.png"
+        fa-size="[300,225]"
+        fa-pipe-to="swipePipe"
+        >
 
-  </fa-modifier>
+      </fa-image-surface>
 
-  <fa-modifier
-    id="titlegradMod"
-    fa-origin="[0, 0]"
-    fa-align="[0, 0]"
-    fa-translate="[18/2,356/2]"
-  >
+      </fa-modifier>
 
-  <fa-surface 
-    class="title-grad"
-    fa-size="[300,90]"
-    >
-  </fa-surface>
+      <fa-modifier
+        id="titlegradMod"
+        fa-origin="[0, 0]"
+        fa-align="[0, 0]"
+        fa-translate="[18/2,356/2]"
+      >
 
-  </fa-modifier>
+      <fa-surface 
+        fa-pipe-to="swipePipe"
+        class="title-grad job-layer"
+        fa-size="[300,90]"
+        >
+      </fa-surface>
 
-  <fa-modifier
-    id="logoMod"
-    fa-origin="[0, 0]"
-    fa-align="[0, 0]"
-    fa-translate="[48/2,434/2]"
-  >
+      </fa-modifier>
 
-  <fa-image-surface 
-    fa-image-url="/images/assets/logosq.png"
-    fa-size="[65,65]"
-    >
+      <fa-modifier
+        id="logoMod"
+        fa-origin="[0, 0]"
+        fa-align="[0, 0]"
+        fa-translate="[48/2,434/2]"
+      >
 
-  </fa-image-surface>
+      <fa-image-surface 
+        class="job-layer"
+        fa-pipe-to="swipePipe"
+        fa-image-url="/images/assets/logosq.png"
+        fa-size="[65,65]"
+        >
+
+      </fa-image-surface>
   
-  </fa-modifier>
+      </fa-modifier>
+  
+      <fa-modifier
+        id="descMod"
+        fa-origin="[0, 0]"
+        fa-align="[0, 0]"
+        fa-translate="[9,268]"
+      >
 
-  <fa-modifier
+      <fa-surface 
+        class="job-layer"
+        fa-pipe-to="swipePipe"
+        fa-size="[300,245]"
+        >
+        <div class="desc">
+          Famo.us is a free and open source JavaScript development framework back by a host of cloud services. {{card}}
+        </div>
+        <div class="hline"> </div>
+        <div class="detail">
+          <ul>
+            <li class="list-item" ng-repeat="item in items track by $index">
+              {{item}}
+            </li>
+          </ul>
+        </div>
+        <div class="hline"> </div>
+    
+        <div class="score-header">Compatibility Score</div>
+    
+        <div class="score">
+          <div class="front-score">
+          </div>
+          <div class="back-score">
+          </div>
+        </div>
+      </fa-surface>
+      </fa-modifier>
+  
+      <fa-modifier
+        id="titleMod"
+        fa-origin="[0, 0]"
+        fa-align="[0, 0]"
+        fa-translate="[95,224]"
+      >
+
+      <fa-surface 
+        class="title"
+        fa-pipe-to="swipePipe"
+        fa-size="[undefined,20.5]"
+        >
+        Front End Engineer
+      </fa-surface>
+      </fa-modifier>
+  
+      <fa-modifier
+        id="subtitleMod"
+        fa-origin="[0, 0]"
+        fa-align="[0, 0]"
+        fa-translate="[95,246.5]"
+      >
+
+      <fa-surface 
+        class="subtitle"
+        fa-pipe-to="swipePipe"
+        fa-size="[undefined,15.5]"
+        >
+        Famo.us • San Francisco
+      </fa-surface>
+      </fa-modifier>
+    </fa-modifier>
+  </fa-view>
+  
+  <!-- <fa-modifier
     id="helpMod"
     fa-origin="[.5, .5]"
     fa-align="[1, 0]"
     fa-translate="[-37,37]"
   >
 
-  <fa-image-surface 
+  <fa-image-surface
+    class="help"
     fa-image-url="/images/assets/help.png"
     fa-size="[40,40]"
+    fa-click="clickHelp()"
     >
 
   </fa-image-surface>
-  </fa-modifier>
+  </fa-modifier> -->
   
+  <fa-animation timeline="scrollXPosition">
+    <animate  targetModSelector="#swipeMod1"
+              field="translate"
+              startValue="[0,0,0]"
+              endValue="[0,-cardSpacing,cardSpacing]"
+               />
+  </fa-animation>
+  <fa-animation timeline="scrollXPosition">
+    <animate  targetModSelector="#swipeMod0"
+              field="translate"
+              startValue="[0,0,0]"
+              endValue="[0,-cardSpacing,cardSpacing]"
+               />
+  </fa-animation>
   
 </fa-view>

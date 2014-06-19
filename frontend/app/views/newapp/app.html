@@ -1,18 +1,55 @@
   
-<fa-app class="full-screen">
-
+<fa-app class="full-screen"
+fa-perspective="500"
+  >
   <fa-modifier 
     fa-origin="[.5, .5]"
     fa-size="[320, 568]"
     >
-    
-  <fa-scroll-view id="main-scroll-view" fa-start-index="1" fa-pipe-from="enginePipe" fa-options="options.mainScrollView">
-    <div ng-include="'./views/newapp/menu.html'"></div>
+    <fa-modifier 
+      fa-translate="[0,0,0]"
+      >
     <div ng-include="'./views/newapp/job.html'"></div>
+    </fa-modifier>
+
+    <fa-modifier
+      fa-translate="[0,-568,10]"
+      fa-size="[320, 568+30]"
+      >
+    <div ng-include="'./views/newapp/menu.html'"></div>
+    </fa-modifier>
+    
+    <fa-modifier
+      fa-translate="[0,490,20]"
+      fa-size="[320, 568+40]"
+      >
+    <div ng-include="'./views/newapp/paper.html'"></div>
+    </fa-modifier>
+    
+<!--  <fa-scroll-view id="main-scroll-view" fa-start-index="1" fa-pipe-from="enginePipe"
+  fa-options="options.mainScrollView">
+    <fa-modifier
+      fa-translate="[0,0,0]"
+      >
+    <div ng-include="'./views/newapp/menu.html'"></div>
+    </fa-modifier>
+
+    <fa-modifier 
+      fa-translate="[0,0,0]"
+      >
+    <div ng-include="'./views/newapp/job.html'"></div>
+    </fa-modifier>
+
+    <fa-modifier
+      fa-translate="[0,0,0]"
+      >
+
     <div ng-include="'./views/newapp/apply.html'"></div>
+    </fa-modifier>
+
   </fa-scroll-view>
-  
-  </fa-modifier>
+
+  </fa-modifier> -->
   <!-- <fa-animation timeline="scrollYPosition">
     <animate  targetModSelector="#top-capsule"
               field="translate"

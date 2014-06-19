@@ -1,0 +1,145 @@
+<fa-view id="paperView"
+  fa-index="2"
+  ng-controller="PaperCtrl"
+>
+
+  <fa-modifier 
+    fa-translate="paperpos.get()"
+    >
+    
+  <fa-view
+  >        
+      <!-- <fa-modifier
+        fa-origin="[0, 0]"
+        fa-align="[0, 0]"
+        fa-translate="[18/2, 86/2]"
+      >
+
+      <fa-image-surface
+        class="job-layer"
+        fa-pipe-to="paperPipe"
+        fa-image-url="/images/assets/card.png"
+        fa-size="[300,470]"
+        >
+      </fa-image-surface>
+      </fa-modifier> -->
+
+
+      <fa-modifier
+        fa-origin="[0, 0]"
+        fa-align="[0, 0]"
+        fa-translate="[0, 0]"
+      >
+
+      <fa-scroll-view fa-start-index="0" fa-pipe-from="heroPipe"
+        fa-options="options.heroScrollView">
+        
+        <fa-image-surface 
+          class="job-layer"
+          fa-image-url="/images/assets/hero.png"
+          fa-size="[300,225]"
+          fa-pipe-to="heroPipe"
+          >
+
+        </fa-image-surface>
+        <fa-image-surface 
+          class="job-layer"
+          fa-image-url="/images/assets/hero.png"
+          fa-size="[300,225]"
+          fa-pipe-to="heroPipe"
+          >
+
+        </fa-image-surface>
+        <fa-image-surface 
+          class="job-layer"
+          fa-image-url="/images/assets/hero.png"
+          fa-size="[300,225]"
+          fa-pipe-to="heroPipe"
+          >
+
+        </fa-image-surface>
+        <fa-image-surface 
+          class="job-layer"
+          fa-image-url="/images/assets/hero.png"
+          fa-size="[300,225]"
+          fa-pipe-to="heroPipe"
+          >
+
+        </fa-image-surface>
+
+      </fa-scroll-view>
+        
+ 
+      </fa-modifier>
+  
+      <fa-modifier
+        fa-origin="[0, 0]"
+        fa-align="[0, 0]"
+        fa-translate="[0,220]"
+      >
+        
+        <fa-modifier
+          fa-scale="paperScale.get()"
+          fa-translate="[0,-220]"
+        >
+        <fa-scroll-view fa-start-index="0" fa-pipe-from="paperListPipe"
+          fa-options="options.paperListScrollView">
+          
+        <fa-view
+          ng-repeat="card in [1,2,3,4,5]"
+        >  
+      
+            <fa-modifier
+              fa-origin="[0, 0]"
+              fa-align="[0, 0]"
+              fa-translate="[0, 0]"
+            >
+
+            <fa-surface 
+              class="job-layer"
+              fa-pipe-to="paperListPipe"
+              >
+              <div class="card-background">
+              <div class="card-top">
+              <img class="card-hero" src="/images/assets/hero.png"></img>
+              <div class="card-title-grad title-grad">
+              </div>
+              <img class="card-logo" src="/images/assets/logosq.png" width="65" height="65"></img>
+              <span class="card-title title">Front End Engineer</span>
+              <span class="card-subtitle subtitle">Famo.us | San  Francisco</span>
+              </div>
+              
+              <div class="desc">
+                Famo.us is a free and open source JavaScript development framework back by a host of cloud services. {{card}}
+              </div>
+              <div class="hline"> </div>
+              <div class="detail">
+                <ul>
+                  <li class="list-item" ng-repeat="item in items track by $index">
+                    {{item}}
+                  </li>
+                </ul>
+              </div>
+              <div class="hline"> </div>
+    
+              <div class="score-header">Compatibility Score</div>
+    
+              <div class="score">
+                <div class="front-score">
+                </div>
+                <div class="back-score">
+                </div>
+              </div>
+              </div>
+              
+            </fa-surface>
+            </fa-modifier>
+        </fa-view>
+        </fa-scroll-view>
+        </fa-modifier>
+
+      </fa-modifier>
+  </fa-view>
+  
+  </fa-modifier>
+</fa-view>
