@@ -1,0 +1,37 @@
+<fa-view id="paperView" fa-index="2" ng-controller="PaperCtrl"><fa-modifier fa-translate="paperpos.get()"><fa-view><!-- <fa-modifier
+        fa-origin="[0, 0]"
+        fa-align="[0, 0]"
+        fa-translate="[18/2, 86/2]"
+      >
+
+      <fa-image-surface
+        class="job-layer"
+        fa-pipe-to="paperPipe"
+        fa-image-url="/images/assets/card.png"
+        fa-size="[300,470]"
+        >
+      </fa-image-surface>
+      </fa-modifier> --><fa-modifier fa-origin="[0, 0]" fa-align="[0, 0]" fa-translate="[0, 0]"><fa-scroll-view fa-start-index="0" fa-pipe-from="heroPipe" fa-options="options.heroScrollView"><fa-image-surface class="apply-layer" fa-image-url="/images/assets/hero.png" fa-size="[undefined,undefined]" fa-pipe-to="heroPipe" ng-repeat="img in [1,2,3,4]"></fa-image-surface></fa-scroll-view></fa-modifier><fa-modifier fa-translate="paperListPos.get()"><fa-modifier fa-origin="[0, 0]" fa-align="[0, 0]" fa-translate="[0, 568+210]"><fa-modifier fa-translate="[0, -568-210]" fa-scale="paperScale.get()"><fa-scroll-view fa-start-index="0" fa-pipe-from="paperListPipe" fa-options="options.paperListScrollView"><fa-view ng-repeat="card in [1,2,3,4,5]"><fa-modifier id="heroMod" fa-origin="[0, 0]" fa-align="[0, 0]" fa-translate="[0, 0]"><fa-image-surface class="job-layer" fa-image-url="/images/assets/hero.png" fa-size="[320,225]" fa-pipe-to="paperListPipe"></fa-image-surface></fa-modifier><fa-modifier id="gradMod" fa-origin="[0, 0]" fa-align="[0, 0]" fa-translate="[0,356/2-43]"><fa-surface fa-pipe-to="paperListPipe" class="title-grad apply-layer" fa-size="[320,90]"></fa-surface></fa-modifier><fa-modifier id="titleMod" fa-origin="[0, 0]" fa-align="[0, 0]" fa-translate="[95,224-43]"><fa-surface class="title apply-layer" fa-pipe-to="paperListPipe" fa-size="[undefined,20.5]">Front End Engineer</fa-surface></fa-modifier><fa-modifier id="subtitleMod" fa-origin="[0, 0]" fa-align="[0, 0]" fa-translate="[95,246.5-43]"><fa-surface class="subtitle apply-layer" fa-pipe-to="paperListPipe" fa-size="[undefined,15.5]">Famo.us • San Francisco</fa-surface></fa-modifier><fa-modifier id="logoMod" fa-origin="[0, 0]" fa-align="[0, 0]" fa-translate="[39/2,434/2-43]"><fa-image-surface class="logo" fa-pipe-to="paperListPipe" fa-image-url="/images/assets/logosq.png" fa-size="[65,65]"></fa-image-surface></fa-modifier><fa-modifier id="innerListMod"><fa-modifier fa-translate="[0,225]"><fa-surface class="apply-layer" fa-pipe-to="innerPaperListPipe"><div class="card-background"><!-- <div class="card-top">
+              <img class="card-hero" src="/images/assets/hero.png"></img>
+              <div class="card-title-grad title-grad">
+              </div>
+              <img class="card-logo" src="/images/assets/logosq.png"></img>
+              <span class="card-title title">Front End Engineer</span>
+              <span class="card-subtitle subtitle">Famo.us | San  Francisco</span>
+              </div> --><div class="desc">Famo.us is a free and open source JavaScript development framework back by a host of cloud services. {{card}}</div><div class="hline"></div><div class="detail"><ul><li class="list-item" ng-repeat="item in items track by $index">{{item}}</li></ul></div><div class="hline"></div><div class="score-header">Compatibility Score</div><div class="score"><div class="front-score"></div><div class="back-score"></div></div><div class="hline"></div><div class="desc">Famo.us is a free and open source JavaScript development framework back by a host of cloud services. {{card}}</div><div class="hline"></div><div class="desc">Famo.us is a free and open source JavaScript development framework back by a host of cloud services. {{card}}</div><div class="hline"></div><div class="desc">Famo.us is a free and open source JavaScript development framework back by a host of cloud services. {{card}}</div><div class="hline"></div><div class="desc">Famo.us is a free and open source JavaScript development framework back by a host of cloud services. {{card}}</div></div></fa-surface></fa-modifier></fa-modifier></fa-view></fa-scroll-view></fa-modifier></fa-modifier></fa-modifier></fa-view><fa-animation timeline="scrollYScale"><animate targetmodselector="#titleMod" field="translate" startvalue="[0,0,0]" endvalue="[0,-160,0]"></fa-animation><fa-animation timeline="scrollYScale"><animate targetmodselector="#subtitleMod" field="translate" startvalue="[0,0,0]" endvalue="[0,-160,0]"></fa-animation><fa-animation timeline="scrollYScale"><animate targetmodselector="#gradMod" field="translate" startvalue="[0,0,0]" endvalue="[0,-160,0]"></fa-animation><fa-animation timeline="scrollYScale"><animate targetmodselector="#logoMod" field="translate" startvalue="[0,0,0]" endvalue="[0,-160,0]"></fa-animation><fa-animation timeline="scrollYScale"><animate targetmodselector="#innerListMod" field="translate" startvalue="[0,0,0]" endvalue="[0,-160,0]"></fa-animation><!-- <fa-modifier
+    id="swipeupMod"
+    fa-origin="[.5, 0]"
+    fa-align="[0.5, 0]"
+    fa-translate="[0,8.5]"
+  >
+
+  <fa-image-surface
+    class="apply-layer"
+    fa-image-url="/images/assets/swipeup.png"
+    fa-size="[474/2,8.5]"
+    >
+
+  </fa-image-surface>
+
+  </fa-modifier>
+   --></fa-modifier></fa-view>

@@ -36,7 +36,7 @@ body {
 //  top: 0px;
 //  left: 0px;
 //  max-height: 100%;
-  @include filter(blur(50px) brightness(0.6));
+  @include filter(blur(5px) brightness(0.6));
 //  background: rgba(0,0,0,0.30);
 }
 .menu-item{
@@ -251,6 +251,9 @@ li.list-item:before {
   position: relative;
   background: #fff;
   border: 1px solid #E1E1E1;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 568px;
 }
 
 .card-hero{
@@ -275,6 +278,8 @@ li.list-item:before {
   position: absolute;
   left:24px;
   top:174px;
+  width: 65px;
+  height: 65px;
 }
 .card-title-grad{
   position: absolute;
@@ -285,4 +290,7 @@ li.list-item:before {
 }
 .card-top{
   height: 225px;
+}
+.logo{
+  z-index: 270;
 }

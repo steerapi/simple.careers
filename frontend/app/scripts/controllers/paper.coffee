@@ -1,6 +1,22 @@
 'use strict'
 
+Utils = {}
+Utils.map = (value, inputMin, inputMax, outputMin, outputMax, clamp) ->
+  outValue = ((value - inputMin) / (inputMax - inputMin)) * (outputMax - outputMin) + outputMin
+  if clamp
+    if outputMax > outputMin
+      if outValue > outputMax
+        outValue = outputMax
+      else outValue = outputMin  if outValue < outputMin
+    else
+      if outValue < outputMax
+        outValue = outputMax
+      else outValue = outputMin  if outValue > outputMin
+  outValue
 
+Utils.mapNorm = (value, start, end) ->
+  Utils.map value, 0, 1, start, end
+  
 class PaperCtrl extends Ctrl
   @$inject: ['$scope', '$stateParams', '$state', "Restangular", "$timeout", "$famous"]
   
@@ -33,19 +49,18 @@ class PaperCtrl extends Ctrl
         direction: 0
         speedLimit: 5
         margin: 10000
-
-        
+              
     @scope.paperPipe = new EventHandler();
-    @scope.paperListPipe = new EventHandler();
-
-
+    @scope.paperListPipe = @_paperListPipe = new EventHandler();
+    @scope.innerPaperListPipe = @_innerPaperListPipe = new EventHandler();
+    @scope.innerPaperListPipe.pipe @scope.paperListPipe
+    
     applySync = new GenericSync(['mouse', 'touch'])
     # @scope.paperListPipe.pipe applySync
     @scope.heroPipe.pipe @scope.paperPipe
     @scope.paperPipe.pipe applySync
     @scope.paperpos = new Transitionable([0, 0])
     applySync.on "start", (e) =>
-      console.log "start"
       @applyStartDrag = true
       # console.log "mousedown"
       # @menuStartX = e.clientX
@@ -63,17 +78,17 @@ class PaperCtrl extends Ctrl
       @applyStartDrag = false
       if @applyDirection == "open" 
         if Math.abs(e.clientY-@applyStartY) > 25
-          @scope.paperpos.set [0,-490+15],{duration : 300,curve : 'inSine'},=>
+          @scope.paperpos.set [0,-(568-40)],{duration : 300,curve : 'inSine'},=>
             @applyDragging = false
         else
           @scope.paperpos.set [0,0],{duration : 300,curve : 'inSine'},=>
             @applyDragging = false
       else
-        if e.clientY-@applyStartY > -490+25
+        if e.clientY-@applyStartY > -(568-40)+25
           @scope.paperpos.set [0,0],{duration : 300,curve : 'inSine'},=>
             @applyDragging = false          
         else
-          @scope.paperpos.set [0,-490+15],{duration : 300,curve : 'inSine'},=>
+          @scope.paperpos.set [0,-(568-40)],{duration : 300,curve : 'inSine'},=>
             @applyDragging = false
   
     applySync.on "end", endApplySync
@@ -84,33 +99,41 @@ class PaperCtrl extends Ctrl
     @scope.paperPipe.on "mouseleave", endApplySync
     
     pullSync = new GenericSync(['mouse', 'touch'])
-    @scope.paperScale = new Transitionable([0.5, 0.5])
+    @initScale = 0.7
+    @scope.paperScale = new Transitionable([@initScale, @initScale ])
+    @scope.paperListPos = new Transitionable([0,0])
     @scope.paperListPipe.pipe pullSync
     pullSync.on "start", (e) =>
-      @paperStartDrag = true
-      # console.log "mousedown"
-      # @menuStartX = e.clientX
-      pos = @scope.paperScale.get()
-      @paperStartY = -pos[1]+e.clientY
-      if pos[1] < 0
-        #in open state
-        @paperDirection = "close"
-      else
-        @paperDirection = "open"
-        #in close state
     endPullSync = (e) =>
-      if not @paperStartDrag
-        return
-      @paperStartDrag = false
-      @scope.paperScale.set [1,1],{duration : 300,curve : 'inSine'},=>
-        @paperDragging = false
-  
+      paperScale = @scope.paperScale.get()
+      if Math.abs(paperScale[1] - 1.0) < Math.abs(paperScale[1] - @initScale)
+        @scope.paperScale.set [1,1],{duration : 300,curve : 'inSine'},=>
+          @paperDragging = false
+          @timeout =>
+            @scope.innerPaperListPipe = undefined
+      else
+        @scope.paperScale.set [@initScale,@initScale],{duration : 300,curve : 'inSine'},=>
+          @paperDragging = false
+          @timeout =>
+            @scope.innerPaperListPipe = @_innerPaperListPipe
+          
     pullSync.on "end", endPullSync
     pullSync.on "update", (e) =>
-      if @paperStartDrag
-        @paperDragging = true
-        paperScale = @scope.paperScale.get()
-        @scope.paperScale.set [paperScale[0]*1.1,paperScale[1]*1.1]
+      paperScale = @scope.paperScale.get()
+      paperPos = @scope.paperListPos.get()
+      console.log paperPos[1]
+      # if paperScale[1] < 1
+      scale = 1-e.delta[1]/568
+      @scope.paperScale.set [paperScale[1]*scale,paperScale[1]*scale]
+      # else
+      #   if paperPos[1] <= 0
+      #     @scope.paperListPos.set [0,paperPos[1]+e.delta[1]]
+      #   else
+      #     @scope.paperListPos.set [0,0]
+      #     scale = 1-e.delta[1]/568
+      #     @scope.paperScale.set [paperScale[1]*scale,paperScale[1]*scale]
+        
     @scope.paperListPipe.on "mouseleave", endPullSync
-    
+  scrollYScale: =>
+    return (@scope.paperScale.get()[0]-@initScale)/(1-@initScale)
 angular.module('simplecareersApp').controller('PaperCtrl', PaperCtrl)

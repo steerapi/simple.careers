@@ -2,6 +2,22 @@
 <fa-app class="full-screen"
 fa-perspective="500"
   >
+  <fa-modifier
+    fa-translate="[0,0,-50]"
+    fa-origin="[.5, .5]"
+    fa-align="[.5, .5]"
+    fa-size="getWindowSize()"
+  >
+    <!-- fa-size="getWindowSize()" -->
+
+  <fa-surface 
+    class="screen-background"
+    fa-background-color="'rgba(0,0,0,0.5)'"
+    >
+  </fa-surface>
+  </fa-modifier>
+  
+  
   <fa-modifier 
     fa-origin="[.5, .5]"
     fa-size="[320, 568]"
@@ -13,15 +29,15 @@ fa-perspective="500"
     </fa-modifier>
 
     <fa-modifier
-      fa-translate="[0,-568,10]"
-      fa-size="[320, 568+30]"
+      fa-translate="[0,-568,0]"
+      fa-size="[320, 568+40]"
       >
     <div ng-include="'./views/newapp/menu.html'"></div>
     </fa-modifier>
     
     <fa-modifier
-      fa-translate="[0,490,20]"
-      fa-size="[320, 568+40]"
+      fa-translate="[0,568-40,1]"
+      fa-size="[(320)*(500-1)/500, (568)*(500-1)/500]"
       >
     <div ng-include="'./views/newapp/paper.html'"></div>
     </fa-modifier>

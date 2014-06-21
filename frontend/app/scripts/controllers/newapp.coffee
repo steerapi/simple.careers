@@ -4,8 +4,25 @@
 class NewAppCtrl extends Ctrl
   @$inject: ['$scope', '$stateParams', '$state', "Restangular", "$timeout", "$famous"]
   
+  fit: (iw,ih,ow,oh)=>
+    nw = iw
+    nh = ih
+    if nw > ow
+      # width overflow, adjust width and height maintain aspect
+      nw = ow
+      nh = nh*ow/nw
+    if nh > oh
+      # new height overflow
+      nh = oh
+      nw = nw*oh/nh    
+    return [nw,nh]
+
+  getWindowSize: =>
+    return [@scope.windowWidth*(500+50)/500, @scope.windowHeight*(500+50)/500]
+    
   constructor: (@scope, @stateParams, @state, @Restangular, @timeout, @famous) ->
     super @scope
+    
     Transitionable = @famous["famous/transitions/Transitionable"]
     GenericSync = @famous["famous/inputs/GenericSync"]
     MouseSync = @famous["famous/inputs/MouseSync"]
@@ -21,6 +38,27 @@ class NewAppCtrl extends Ctrl
     
     TweenTransition = require('famous/transitions/TweenTransition')
     TweenTransition.registerCurve('inSine', Easing.inSine)
+    
+    @scope.windowWidth = new Transitionable(angular.element(window).width())
+    $(window).on "resize", =>
+      console.log "resize"
+      @currentWS =
+        width: angular.element(window).width()
+        height: angular.element(window).height()
+      @timeout =>
+        @scope.windowWidth = angular.element(window).width()
+        @scope.windowHeight = angular.element(window).height()
+      
+    @standardWS =
+      width: 320
+      height: 568
+    @currentWS =
+      width: angular.element(window).width()
+      height: angular.element(window).height()
+    
+    @scope.windowWidth = angular.element(window).width()
+    @scope.windowHeight = angular.element(window).height()
+    
     
     GenericSync.register 
       mouse : MouseSync
@@ -182,9 +220,9 @@ class NewAppCtrl extends Ctrl
     @scope.cardSpacing = 10
     
   scrollXPosition: =>
-    # console.log @pos[0]/50
+    threshold = 50
     pos = @pos.get()
-    return Math.abs pos[0]/50
+    return Math.abs pos[0]/threshold
   getApplyPosition: =>
     pos = @applypos.get()
     return pos

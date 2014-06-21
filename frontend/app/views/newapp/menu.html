@@ -8,19 +8,19 @@
   <fa-modifier id="backgroundMod"
     fa-origin="[.5, .5]"
     >
-    <fa-surface fa-background-color="'#000011'"
+    <fa-surface fa-background-color="'#000030'"
       class="menu-background"
       fa-pipe-to="menuPipe"
-      fa-size="[480, undefined]"
+      fa-size="[undefined, undefined]"
       >
     </fa-surface>
-    <fa-image-surface
+    <!-- <fa-image-surface
       class="menu-background"
       fa-pipe-to="menuPipe"
       fa-image-url="/images/assets/profile.png"
       fa-size="[true, undefined]"
       >
-    </fa-image-surface>
+    </fa-image-surface> -->
   </fa-modifier>
   
   <fa-modifier 
@@ -75,8 +75,29 @@
       {{menu}}
     </fa-surface>
     </fa-modifier>
+    
+    
+  </fa-modifier>
+  <fa-modifier
+    id="swipedownMod"
+    fa-origin="[.5, 1]"
+    fa-align="[0.5, 1]"
+    fa-translate="[0,-8.5,0]"
+  >
+
+  <fa-image-surface 
+    class="menu-layer"
+    fa-pipe-to="menuPipe"
+    fa-image-url="/images/assets/swipedown.png"
+    fa-size="[371/2,8.5]"
+    >
+
+  </fa-image-surface>
+  
   </fa-modifier>
   </fa-modifier>
+
+
   
 <!--    <fa-animation event="startEvent" duration="2000">
    <animate  targetModSelector="#backgroundMod"
