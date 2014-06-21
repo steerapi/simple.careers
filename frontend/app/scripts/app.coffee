@@ -490,7 +490,7 @@ app = angular
   	'$stateProvider'
     '$urlRouterProvider'
   	($locationProvider, RestangularProvider, $stateProvider, $urlRouterProvider, config) ->
-      $locationProvider.html5Mode(true);
+      $locationProvider.html5Mode(false);
       # $locationProvider
       #   .html5Mode(false)
       #   .hashPrefix('!');

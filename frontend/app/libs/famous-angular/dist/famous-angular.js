@@ -29,6 +29,7 @@ var requirements = [
   "famous/inputs/GenericSync",
   "famous/inputs/MouseSync",
   "famous/inputs/PinchSync",
+  "famous/inputs/ScrollSync",
   "famous/inputs/RotateSync",
   "famous/inputs/TouchSync",
   "famous/surfaces/ContainerSurface",
@@ -987,6 +988,53 @@ angular.module('famous.angular')
     };
   }]);
 
+/**
+ * @ngdoc directive
+ * @name faClick
+ * @module famous.angular
+ * @restrict A
+ * @param {expression} faClick {@link https://docs.angularjs.org/guide/expression Expression} to evaluate upon
+ * click. ({@link https://docs.angularjs.org/guide/expression#-event- Event object is available as `$event`})
+ * @description
+ * This directive allows you to specify custom behavior when an element is clicked.
+ *
+ * @usage
+ * ```html
+ * <ANY fa-click="expression">
+ *
+ * </ANY>
+ * ```
+ * @example
+ * Example:
+ * ```javascript
+ * $scope.myClickHandler = function(){
+ *   console.log('clicked') // clicked
+ * }
+ * ```
+ * ```html
+ * <fa-surface fa-click="myClickHandler()">Click me</fa-surface>
+ * ```
+
+ */
+
+angular.module('famous.angular')
+  .directive('scRenderNode', ["$parse", "$famousDecorator",function ($parse, $famousDecorator) {
+    return {
+      restrict: 'A',
+      scope: '=',
+      compile: function() {
+        return { 
+          pre: function(scope, element, attrs) {
+            var isolate = $famousDecorator.ensureIsolate(scope);
+            var ngModelGet = $parse(attrs.scRenderNode),
+                ngModelSet = ngModelGet.assign;
+           ngModelSet(scope,isolate.renderNode);
+          }
+        }
+      }
+    };
+  }]);
+  
 /**
  * @ngdoc directive
  * @name faClick

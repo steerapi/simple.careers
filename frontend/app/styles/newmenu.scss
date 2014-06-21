@@ -31,6 +31,12 @@ body {
   filter: $filter;
 }
 
+@mixin box-shadow($filter) { 
+  -webkit-box-shadow: $filter;
+  -moz-box-shadow: $filter;
+  box-shadow: $filter;
+}
+
 .menu-background{
 //  position: absolute;
 //  top: 0px;
@@ -249,11 +255,11 @@ li.list-item:before {
 }
 .card-background{
   position: relative;
-  background: #fff;
-  border: 1px solid #E1E1E1;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  height: 568px;
+//  background: #fff;
+//  border: 1px solid #E1E1E1;
+  width:320px;
+//  overflow-y: scroll;
+//  overflow-x: hidden;
 }
 
 .card-hero{
@@ -263,6 +269,7 @@ li.list-item:before {
   width: 320px;
   height: 225px;
   overflow: hidden;
+  z-index: 250;
 }
 .card-title{
   position: absolute;
@@ -288,9 +295,19 @@ li.list-item:before {
   left: 0px;
   top: 135px;
 }
+.card-detail{
+  z-index: 240;
+  width: 320px;
+}
 .card-top{
   height: 225px;
 }
 .logo{
-  z-index: 270;
+  z-index: 270 !important;
+}
+.back-cover{
+  border-radius: 10px 10px 0px 0px;
+//  @include filter(blur(5px) brightness(0.6));
+  @include box-shadow(inset 0 0 10px black);
+  z-index: 250;
 }

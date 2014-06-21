@@ -9,33 +9,18 @@
     
   <fa-view
   >        
-      <!-- <fa-modifier
-        fa-origin="[0, 0]"
-        fa-align="[0, 0]"
-        fa-translate="[18/2, 86/2]"
-      >
-
-      <fa-image-surface
-        class="job-layer"
-        fa-pipe-to="paperPipe"
-        fa-image-url="/images/assets/card.png"
-        fa-size="[300,470]"
-        >
-      </fa-image-surface>
-      </fa-modifier> -->
-
 
       <fa-modifier
+        id="backCoverMod"
         fa-origin="[0, 0]"
         fa-align="[0, 0]"
-        fa-translate="[0, 0]"
       >
 
       <fa-scroll-view fa-start-index="0" fa-pipe-from="heroPipe"
         fa-options="options.heroScrollView">
         
         <fa-image-surface 
-          class="apply-layer"
+          class="back-cover"
           fa-image-url="/images/assets/hero.png"
           fa-size="[undefined,undefined]"
           fa-pipe-to="heroPipe"
@@ -49,9 +34,9 @@
  
       </fa-modifier>
       
-      <fa-modifier
+      <!-- <fa-modifier
         fa-translate="paperListPos.get()"
-      >
+      > -->
       <fa-modifier
         fa-origin="[0, 0]"
         fa-align="[0, 0]"
@@ -62,7 +47,7 @@
         fa-scale="paperScale.get()"
       >
       
-        <fa-scroll-view fa-start-index="0" fa-pipe-from="paperListPipe"
+        <fa-scroll-view fa-start-index="0" fa-pipe-from="paperSlideListPipe"
           fa-options="options.paperListScrollView">
           
         <fa-view
@@ -70,17 +55,31 @@
         >  
         
           <fa-modifier
+            fa-origin="[0, 0]"
+            fa-align="[0, 0]"
+          >
+
+          <fa-surface 
+            fa-background-color="'white'"
+            fa-size="[320,undefined]"
+            fa-pipe-to="paperHeroListPipe"
+            >
+
+          </fa-surface>
+
+          </fa-modifier>
+        
+          <fa-modifier
             id="heroMod"
             fa-origin="[0, 0]"
             fa-align="[0, 0]"
-            fa-translate="[0, 0]"
           >
 
           <fa-image-surface 
-            class="job-layer"
+            class="card-hero"
             fa-image-url="/images/assets/hero.png"
             fa-size="[320,225]"
-            fa-pipe-to="paperListPipe"
+            fa-pipe-to="paperHeroListPipe"
             >
 
           </fa-image-surface>
@@ -95,7 +94,7 @@
           >
 
           <fa-surface 
-            fa-pipe-to="paperListPipe"
+            fa-pipe-to="paperHeroListPipe"
             class="title-grad apply-layer"
             fa-size="[320,90]"
             >
@@ -112,10 +111,10 @@
 
           <fa-surface 
             class="title apply-layer"
-            fa-pipe-to="paperListPipe"
+            fa-pipe-to="paperHeroListPipe"
             fa-size="[undefined,20.5]"
             >
-            Front End Engineer
+            Front End Engineer *{{closeMode}}
           </fa-surface>
           </fa-modifier>
   
@@ -128,7 +127,7 @@
 
           <fa-surface 
             class="subtitle apply-layer"
-            fa-pipe-to="paperListPipe"
+            fa-pipe-to="paperHeroListPipe"
             fa-size="[undefined,15.5]"
             >
             Famo.us • San Francisco
@@ -144,7 +143,7 @@
 
           <fa-image-surface 
             class="logo"
-            fa-pipe-to="paperListPipe"
+            fa-pipe-to="paperHeroListPipe"
             fa-image-url="/images/assets/logosq.png"
             fa-size="[65,65]"
             >
@@ -152,19 +151,27 @@
           </fa-image-surface>
 
           </fa-modifier>
-        
+          <fa-modifier
+            fa-translate="paperListPos.get()"
+          >
             <fa-modifier
               id="innerListMod"
             >
             <fa-modifier
-              
               fa-translate="[0,225]"
+              fa-size="[320,568-140]"
             >
+            <fa-scroll-view fa-start-index="0" fa-pipe-from="paperScrollListPipe"
+              sc-render-node="scrollListNode"
+              ng-controller="DetailScrollCtrl"
+          fa-options="options.detailListScrollView">
             <fa-surface 
-              class="apply-layer"
+              class="card-detail"
+              fa-background-color="'white'"
               fa-pipe-to="innerPaperListPipe"
+              fa-size="[320,200]"
               >
-              <div class="card-background">
+              <!-- <div class="card-background"> -->
               <!-- <div class="card-top">
               <img class="card-hero" src="/images/assets/hero.png"></img>
               <div class="card-title-grad title-grad">
@@ -172,11 +179,19 @@
               <img class="card-logo" src="/images/assets/logosq.png"></img>
               <span class="card-title title">Front End Engineer</span>
               <span class="card-subtitle subtitle">Famo.us | San  Francisco</span>
-              </div> -->
-              
+              </div> -->              
               <div class="desc">
                 Famo.us is a free and open source JavaScript development framework back by a host of cloud services. {{card}}
               </div>
+              <!-- </div> -->
+              </fa-surface>
+              <fa-surface 
+              class="card-detail"
+              fa-background-color="'white'"
+              fa-pipe-to="innerPaperListPipe"
+              fa-size="[320,200]"
+              >
+              <!-- <div class="card-background"> -->
               <div class="hline"> </div>
               <div class="detail">
                 <ul>
@@ -185,6 +200,13 @@
                   </li>
                 </ul>
               </div>
+              
+              <fa-surface 
+              class="card-detail"
+              fa-background-color="'white'"
+              fa-pipe-to="innerPaperListPipe"
+              fa-size="[320,200]"
+              >
               <div class="hline"> </div>
     
               <div class="score-header">Compatibility Score</div>
@@ -195,71 +217,109 @@
                 <div class="back-score">
                 </div>
               </div>
+              </fa-surface>
+              <fa-surface 
+              class="card-detail"
+              fa-background-color="'white'"
+              fa-pipe-to="innerPaperListPipe"
+              fa-size="[320,200]"
+              >
+              <div class="hline"> </div>
+              <div class="desc">
+                Famo.us is a free and open source JavaScript development framework back by a host of cloud services. {{card}}
+              </div>
+              </fa-surface>
+              <fa-surface 
+              class="card-detail"
+              fa-background-color="'white'"
+              fa-pipe-to="innerPaperListPipe"
+              fa-size="[320,200]"
+              >
+              <div class="hline"> </div>
+              <div class="desc">
+                Famo.us is a free and open source JavaScript development framework back by a host of cloud services. {{card}}
+              </div>
+              <fa-surface 
+              class="card-detail"
+              fa-background-color="'white'"
+              fa-pipe-to="innerPaperListPipe"
+              fa-size="[320,200]"
+              >
+              <div class="hline"> </div>
+              <div class="desc">
+                Famo.us is a free and open source JavaScript development framework back by a host of cloud services. {{card}}
+              </div>
+              </fa-surface>
+              <fa-surface 
+              class="card-detail"
+              fa-background-color="'white'"
+              fa-pipe-to="innerPaperListPipe"
+              fa-size="[320,200]"
+              >
+              <div class="hline"> </div>
+              <div class="desc">
+                Famo.us is a free and open source JavaScript development framework back by a host of cloud services. {{card}}
+              </div>
               
-              <div class="hline"> </div>
-              <div class="desc">
-                Famo.us is a free and open source JavaScript development framework back by a host of cloud services. {{card}}
-              </div>
-              <div class="hline"> </div>
-              <div class="desc">
-                Famo.us is a free and open source JavaScript development framework back by a host of cloud services. {{card}}
-              </div>
-              <div class="hline"> </div>
-              <div class="desc">
-                Famo.us is a free and open source JavaScript development framework back by a host of cloud services. {{card}}
-              </div>
-              <div class="hline"> </div>
-              <div class="desc">
-                Famo.us is a free and open source JavaScript development framework back by a host of cloud services. {{card}}
-              </div>
-              
-              </div>
+              <!-- </div> -->
               
             </fa-surface>
-            </fa-modifier>
-            </fa-modifier>
+            </fa-scroll-view>
             
+            </fa-modifier>
+            </fa-modifier>
+          </fa-modifier> 
       
         </fa-view>
+
         </fa-scroll-view>
+        
         </fa-modifier>
         </fa-modifier>
-        </fa-modifier>
+        <!-- </fa-modifier> -->
   </fa-view>
   
+  
+  <fa-animation timeline="scrollYScale">
+    <animate  targetModSelector="#heroMod"
+              field="translate"
+              startValue="[0,0,0]"
+              endValue="[0,-140,0]"
+               />
+  </fa-animation>
   <fa-animation timeline="scrollYScale">
     <animate  targetModSelector="#titleMod"
               field="translate"
               startValue="[0,0,0]"
-              endValue="[0,-160,0]"
+              endValue="[0,-140,0]"
                />
   </fa-animation>
   <fa-animation timeline="scrollYScale">
     <animate  targetModSelector="#subtitleMod"
               field="translate"
               startValue="[0,0,0]"
-              endValue="[0,-160,0]"
+              endValue="[0,-140,0]"
                />
   </fa-animation>
   <fa-animation timeline="scrollYScale">
     <animate  targetModSelector="#gradMod"
               field="translate"
               startValue="[0,0,0]"
-              endValue="[0,-160,0]"
+              endValue="[0,-140,0]"
                />
   </fa-animation>  
   <fa-animation timeline="scrollYScale">
     <animate  targetModSelector="#logoMod"
               field="translate"
               startValue="[0,0,0]"
-              endValue="[0,-160,0]"
+              endValue="[0,-140,0]"
                />
   </fa-animation>
   <fa-animation timeline="scrollYScale">
     <animate  targetModSelector="#innerListMod"
               field="translate"
               startValue="[0,0,0]"
-              endValue="[0,-160,0]"
+              endValue="[0,-140,0]"
                />
   </fa-animation>
   

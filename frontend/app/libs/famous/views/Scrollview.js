@@ -139,6 +139,7 @@ define(function(require, exports, module) {
     }
 
     function _handleMove(event) {
+        this._eventOutput.emit('scroll', event);
         var velocity = -event.velocity;
         var delta = -event.delta;
 

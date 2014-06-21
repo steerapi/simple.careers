@@ -16,15 +16,43 @@ Utils.map = (value, inputMin, inputMax, outputMin, outputMax, clamp) ->
 
 Utils.mapNorm = (value, start, end) ->
   Utils.map value, 0, 1, start, end
-  
-class PaperCtrl extends Ctrl
+
+class DetailScrollCtrl extends Ctrl
   @$inject: ['$scope', '$stateParams', '$state', "Restangular", "$timeout", "$famous"]
-  
   constructor: (@scope, @stateParams, @state, @Restangular, @timeout, @famous) ->
     super @scope
     Transitionable = @famous["famous/transitions/Transitionable"]
     GenericSync = @famous["famous/inputs/GenericSync"]
     MouseSync = @famous["famous/inputs/MouseSync"]
+    ScrollSync = @famous["famous/inputs/ScrollSync"]
+    TouchSync = @famous["famous/inputs/TouchSync"]
+    RotateSync = @famous["famous/inputs/RotateSync"]
+    PinchSync = @famous["famous/inputs/PinchSync"]
+    Surface = @famous["famous/core/Surface"]
+    Engine = @famous["famous/core/Engine"]
+    Transform = @famous["famous/core/Transform"]
+    EventHandler = @famous["famous/core/EventHandler"]
+    @scope.options = 
+      detailListScrollView:
+        paginated: false
+        direction: 1
+    @timeout =>
+      @scope.$emit "scrollReady", @scope.scrollListNode
+    
+      
+angular.module('simplecareersApp').controller('DetailScrollCtrl', DetailScrollCtrl)
+
+class PaperCtrl extends Ctrl
+  @$inject: ['$scope', '$stateParams', '$state', "Restangular", "$timeout", "$famous"]
+  
+  pageChange: =>
+    alert 'change!'
+  constructor: (@scope, @stateParams, @state, @Restangular, @timeout, @famous) ->
+    super @scope
+    Transitionable = @famous["famous/transitions/Transitionable"]
+    GenericSync = @famous["famous/inputs/GenericSync"]
+    MouseSync = @famous["famous/inputs/MouseSync"]
+    ScrollSync = @famous["famous/inputs/ScrollSync"]
     TouchSync = @famous["famous/inputs/TouchSync"]
     RotateSync = @famous["famous/inputs/RotateSync"]
     PinchSync = @famous["famous/inputs/PinchSync"]
@@ -47,13 +75,22 @@ class PaperCtrl extends Ctrl
       paperListScrollView:
         paginated: true
         direction: 0
-        speedLimit: 5
+        speedLimit: 1
         margin: 10000
+        rails: true
+      detailListScrollView:
+        paginated: false
+        direction: 1
               
     @scope.paperPipe = new EventHandler();
-    @scope.paperListPipe = @_paperListPipe = new EventHandler();
-    @scope.innerPaperListPipe = @_innerPaperListPipe = new EventHandler();
-    @scope.innerPaperListPipe.pipe @scope.paperListPipe
+    
+    @scope.paperScrollListPipe = new EventHandler();
+    @scope.paperSlideListPipe = new EventHandler();
+    # scale
+    
+    @scope.paperHeroListPipe = new EventHandler();
+    @scope.innerPaperListPipe = new EventHandler();
+    @scope.innerPaperListPipe.pipe @scope.paperSlideListPipe
     
     applySync = new GenericSync(['mouse', 'touch'])
     # @scope.paperListPipe.pipe applySync
@@ -102,38 +139,71 @@ class PaperCtrl extends Ctrl
     @initScale = 0.7
     @scope.paperScale = new Transitionable([@initScale, @initScale ])
     @scope.paperListPos = new Transitionable([0,0])
-    @scope.paperListPipe.pipe pullSync
-    pullSync.on "start", (e) =>
+    # @scrollHeight = 0
+    # move = (e)=>
+    #   if $(e.srcElement).hasClass('card-background')
+    #     @scrollHeight = $(e.srcElement).height()
+    #   else
+    #     @scrollHeight = $(e.srcElement).parents('.card-background').height()
+    #
+    # @scope.paperListPipe.on "touchmove", move
+    # @scope.paperListPipe.on "mousemove", move
+
+    @scope.innerPaperListPipe.pipe pullSync
+    @scope.paperHeroListPipe.pipe pullSync
+
     endPullSync = (e) =>
       paperScale = @scope.paperScale.get()
       if Math.abs(paperScale[1] - 1.0) < Math.abs(paperScale[1] - @initScale)
         @scope.paperScale.set [1,1],{duration : 300,curve : 'inSine'},=>
+          @scope.innerPaperListPipe.unpipe pullSync
+          @scope.innerPaperListPipe.pipe @scope.paperScrollListPipe
           @paperDragging = false
-          @timeout =>
-            @scope.innerPaperListPipe = undefined
+          # @timeout =>
+          #   @scope.innerPaperListPipe = undefined
       else
         @scope.paperScale.set [@initScale,@initScale],{duration : 300,curve : 'inSine'},=>
+          @scope.innerPaperListPipe.pipe pullSync
+          @scope.innerPaperListPipe.unpipe @scope.paperScrollListPipe
           @paperDragging = false
-          @timeout =>
-            @scope.innerPaperListPipe = @_innerPaperListPipe
-          
+          # @timeout =>
+          #   @scope.innerPaperListPipe = @_innerPaperListPipe
+    
     pullSync.on "end", endPullSync
+    @scope.$on "scrollReady", (e,scroll)=>
+      @scope.scrollListNode = scroll
+      @scope.scrollListNode.on "scroll", (e)=>
+        if @scope.scrollListNode.getPosition() <= 0 and e.velocity > 0
+          @scope.innerPaperListPipe.unpipe @scope.paperScrollListPipe
+          @scope.innerPaperListPipe.pipe pullSync
+        else
+          @scope.innerPaperListPipe.pipe @scope.paperScrollListPipe
+          @scope.innerPaperListPipe.unpipe pullSync
+          
+        
     pullSync.on "update", (e) =>
       paperScale = @scope.paperScale.get()
       paperPos = @scope.paperListPos.get()
-      console.log paperPos[1]
-      # if paperScale[1] < 1
-      scale = 1-e.delta[1]/568
-      @scope.paperScale.set [paperScale[1]*scale,paperScale[1]*scale]
-      # else
-      #   if paperPos[1] <= 0
-      #     @scope.paperListPos.set [0,paperPos[1]+e.delta[1]]
-      #   else
-      #     @scope.paperListPos.set [0,0]
-      #     scale = 1-e.delta[1]/568
-      #     @scope.paperScale.set [paperScale[1]*scale,paperScale[1]*scale]
-        
-    @scope.paperListPipe.on "mouseleave", endPullSync
+      # console.log paperPos[1]
+      if paperScale[1] < 1
+        scale = 1-e.delta[1]/568
+        @scope.paperScale.set [paperScale[1]*scale,paperScale[1]*scale]
+        # @scope.closeMode = true
+      else
+        # @scope.innerPaperListPipe.pipe @scope.detailPaperListPipe
+        if paperPos[1] <= 0
+          next = paperPos[1]+e.delta[1]
+          @scope.closeMode = false
+          @scope.paperListPos.set [0,next]
+          if next <= 0
+            @scope.paperListPos.set [0,paperPos[1]]
+        else
+          @scope.paperListPos.set [0,0]
+          scale = 1-e.delta[1]/568
+          @scope.paperScale.set [paperScale[1]*scale,paperScale[1]*scale]
+#   @scope.closeMode = true
+      #
+    # pullSync.on "mouseleave", endPullSync
   scrollYScale: =>
     return (@scope.paperScale.get()[0]-@initScale)/(1-@initScale)
 angular.module('simplecareersApp').controller('PaperCtrl', PaperCtrl)
